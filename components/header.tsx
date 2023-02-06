@@ -14,7 +14,7 @@ export default function Header() {
                 src={Logo}
                 alt="2DO Logo"
               />
-              <span className="pl-2 mt-4 text-xl font-semibold">2DO</span>
+              <span className="pl-2 mt-4 text-xl font-semibold">TwoDue</span>
             </a>
           </div>
           <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">

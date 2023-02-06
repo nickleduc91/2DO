@@ -8,7 +8,7 @@ const About = () => {
         <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
           <div className="tracking-wide">
             <h2 className="mb-4 text-4xl tracking-tight font-bold text-cyan-500">
-              Why 2DO?
+              Why TwoDue?
             </h2>
             <p className="mb-4 text-2xl text-gray-700">
               This website was created as a little side project during my hunt

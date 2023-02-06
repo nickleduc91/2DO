@@ -1,1 +1,1 @@
-Welcome to my 2do app!
+Welcome to my TwoDue app!
