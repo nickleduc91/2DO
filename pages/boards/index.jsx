@@ -1,4 +1,3 @@
-import { useSession, signIn, signOut, getSession } from "next-auth/react";
 import Header from "../../components/header";
 import BoardsTable from "../../components/boardsList";
 import { unstable_getServerSession } from "next-auth/next";
