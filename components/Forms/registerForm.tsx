@@ -2,6 +2,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
+import Spinner from "../spinner";
 
 interface IFormInput {
   firstName: String;
@@ -13,13 +14,21 @@ interface IFormInput {
 const RegisterForm = () => {
   const { register, handleSubmit } = useForm<IFormInput>();
   const router = useRouter();
-  const [error, setError] = useState("");
+  const [pageState, setPageState] = useState({
+    error: "",
+    processing: false,
+  });
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     if (!data.username || !data.password || !data.firstName || !data.lastName) {
-      setError("Please fill out all fields");
+      setPageState((old) => ({
+        ...old,
+        processing: false,
+        error: "Please fill out all fields",
+      }));
       return;
     }
+    setPageState((old) => ({ ...old, processing: true, error: "" }));
     const credentials = {
       username: data.username,
       password: data.password,
@@ -32,10 +41,13 @@ const RegisterForm = () => {
       redirect: false,
     }).then((response) => {
       if (response?.ok) {
-        setError("");
         router.push("/boards");
       } else {
-        setError(response?.error ?? "error");
+        setPageState((old) => ({
+          ...old,
+          processing: false,
+          error: response?.error ?? "error",
+        }));
       }
     });
   };
@@ -80,11 +92,11 @@ const RegisterForm = () => {
                   placeholder="Password"
                 />
               </div>
-              {error && (
+              {pageState.error && (
                 <div className="text-red-500 mb-2">
-                  {error == "CredentialsSignin"
+                  {pageState.error == "CredentialsSignin"
                     ? "Username is already taken"
-                    : error}
+                    : pageState.error}
                 </div>
               )}
               <div className="text-center lg:text-left">
@@ -92,7 +104,14 @@ const RegisterForm = () => {
                   type="submit"
                   className="inline-block px-7 py-3 bg-cyan-500 text-white font-medium text-sm leading-snug uppercase rounded-xl shadow-md hover:bg-cyan-700 hover:shadow-lg focus:bg-cyan-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-800 active:shadow-lg transition duration-150 ease-in-out"
                 >
-                  Create Account
+                  <div className="flex flex-row">
+                    Create Account
+                    {pageState.processing && (
+                      <div className="pl-2">
+                        <Spinner />
+                      </div>
+                    )}
+                  </div>
                 </button>
                 <p className="text-sm font-semibold mt-2 pt-1 mb-0">
                   Have an account?<br></br>

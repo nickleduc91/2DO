@@ -2,6 +2,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { signIn } from "next-auth/react";
+import Spinner from "../spinner";
 
 interface IFormInput {
   username: String;
@@ -103,7 +104,14 @@ const loginForm = () => {
                   type="submit"
                   className="inline-block px-7 py-3 bg-cyan-500 text-white font-medium text-sm leading-snug uppercase rounded-xl shadow-md hover:bg-cyan-600 hover:shadow-lg focus:bg-cyan-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-700 active:shadow-lg transition duration-150 ease-in-out"
                 >
-                  Login
+                  <div className="flex flex-row">
+                    Login
+                    {pageState.processing && (
+                      <div className="pl-2">
+                        <Spinner />
+                      </div>
+                    )}
+                  </div>
                 </button>
                 <p className="text-sm font-semibold mt-2 pt-1 mb-0">
                   Don't have an account?<br></br>
