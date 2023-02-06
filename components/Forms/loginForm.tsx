@@ -106,11 +106,9 @@ const loginForm = () => {
                 >
                   <div className="flex flex-row">
                     Login
-                    {pageState.processing && (
-                      <div className="pl-2">
-                        <Spinner />
-                      </div>
-                    )}
+                    <div className="pl-2">
+                      <Spinner display={pageState.processing} bgColour='text-white' fillColour='fill-blue-600'/>
+                    </div>
                   </div>
                 </button>
                 <p className="text-sm font-semibold mt-2 pt-1 mb-0">

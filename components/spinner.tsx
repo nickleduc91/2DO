@@ -1,9 +1,9 @@
-const Spinner = () => {
-  return (
+const Spinner = ({ display, fillColour, bgColour }: any) => {
+  return display ? (
     <div role="status">
       <svg
         aria-hidden="true"
-        className="mb-0.5 inline w-4 h-4 text-white animate-spin fill-blue-600"
+        className={`mb-0.5 inline w-4 h-4 ${bgColour} animate-spin ${fillColour}`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -19,7 +19,7 @@ const Spinner = () => {
       </svg>
       <span className="sr-only">Loading...</span>
     </div>
-  );
+  ) : null;
 };
 
 export default Spinner;

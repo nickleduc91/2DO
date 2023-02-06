@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import React, { useState } from "react";
 import axios from "axios";
 import BoardCard from "./Cards/boardCard";
+import Spinner from "./spinner";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -10,11 +11,13 @@ function classNames(...classes: string[]) {
 const BoardsTable = ({ user, boards }: any) => {
   const { register, handleSubmit, reset } = useForm();
   const [boardsData, setBoards] = useState(boards);
+  const [processing, setProcessing] = useState(false);
 
   const onSubmit = async ({ boardName, boardDescription }: any) => {
     if (!boardName || /^\s*$/.test(boardName)) {
       return;
     }
+    setProcessing(true)
     const newBoard = {
       name: boardName,
       description: boardDescription,
@@ -29,6 +32,7 @@ const BoardsTable = ({ user, boards }: any) => {
       },
     });
     setBoards([board.data, ...boardsData]);
+    setProcessing(false)
     reset();
   };
 
@@ -56,6 +60,7 @@ const BoardsTable = ({ user, boards }: any) => {
           className="sm:pl-4  flex sm:items-center"
           onSubmit={handleSubmit(onSubmit)}
         >
+          <Spinner display={processing} bgColour='text-gray-300' fillColour='fill-cyan-500'/>
           <button
             className="ri-add-line ri-2x hover:text-cyan-500"
             type="submit"
