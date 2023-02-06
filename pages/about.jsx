@@ -2,12 +2,13 @@ import Header from "../components/header";
 import Image from "next/image";
 import Org from "../public/org.jpg";
 import DisOrg from "../public/disorg.jpg";
+import Footer from '../components/footer'
 
 const About = () => {
   return (
     <div>
       <Header />
-      <section>
+      <section className="-mb-20">
         <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
           <div className="tracking-wide">
             <h2 className="mb-4 text-4xl tracking-tight font-bold text-cyan-500">
@@ -50,6 +51,7 @@ const About = () => {
           </div>
         </div>
       </section>
+      <Footer/>
     </div>
   );
 };
