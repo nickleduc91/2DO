@@ -13,10 +13,6 @@ interface IFormInput {
 const RegisterForm = () => {
   const { register, handleSubmit } = useForm<IFormInput>();
   const router = useRouter();
-  const [pageState, setPageState] = useState({
-    error: "",
-    processing: false,
-  });
   const [error, setError] = useState("");
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {

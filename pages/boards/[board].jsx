@@ -3,7 +3,6 @@ import Header from "../../components/header";
 import TodoList from "../../components/todoList";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
-import { resetServerContext } from "react-beautiful-dnd";
 
 const Board = ({ board }) => {
   return (
@@ -30,7 +29,6 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  resetServerContext()
   const id = context.params.board;
   //fetch for boards based off ids
   const board = await fetch(`http://localhost:3000/api/boards/${id}`);
