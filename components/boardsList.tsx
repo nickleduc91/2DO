@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import React, { useState } from "react";
 import axios from "axios";
-import { useRouter } from "next/router";
 import BoardCard from "./Cards/boardCard";
 
 function classNames(...classes: string[]) {
@@ -11,9 +10,8 @@ function classNames(...classes: string[]) {
 const BoardsTable = ({ user, boards }: any) => {
   const { register, handleSubmit, reset } = useForm();
   const [boardsData, setBoards] = useState(boards);
-  const router = useRouter();
 
-  const onSubmit = async({ boardName, boardDescription }: any) => {
+  const onSubmit = async ({ boardName, boardDescription }: any) => {
     if (!boardName || /^\s*$/.test(boardName)) {
       return;
     }
@@ -30,7 +28,7 @@ const BoardsTable = ({ user, boards }: any) => {
         newBoard,
       },
     });
-    setBoards([...boardsData, board.data]);
+    setBoards([board.data, ...boardsData]);
     reset();
   };
 
@@ -38,6 +36,7 @@ const BoardsTable = ({ user, boards }: any) => {
     const updatedBoards = boardsData.filter(
       (item: any) => item._id != board._id
     );
+    setBoards(updatedBoards);
     axios({
       method: "post",
       url: "/api/boards/removeBoard",
@@ -45,7 +44,6 @@ const BoardsTable = ({ user, boards }: any) => {
         id: board._id,
       },
     });
-    setBoards(updatedBoards);
   };
 
   return (
