@@ -1,4 +1,7 @@
 import Header from "../components/header";
+import Image from "next/image";
+import Org from "../public/org.jpg";
+import DisOrg from "../public/disorg.jpg";
 
 const About = () => {
   return (
@@ -13,16 +16,17 @@ const About = () => {
             <p className="mb-4 text-2xl text-gray-700">
               This website was created as a little side project during my hunt
               for a co-op placement within my third year of university. I ended
-              up being really hooked on to this idea and ended up creating a
-              full website out of it. I hope you guys enjoy and find this
-              useful!
+              up being really hooked onto this idea and started to create a full
+              website out of it. I hope you guys enjoy and find this useful!
             </p>
             <p className="mb-4 text-2xl text-gray-700">
               As a user, you can create different boards which relate to
-              different tasks in your every day life such as for school. And
+              different tasks in your every day life, such as for school. And
               then within these boards, you can create different tasks that
               relate to that subject. You can then move, complete, edit, or
-              delete the task when ever you feel like it!
+              delete the task when ever you feel like it! And guess what, all
+              your info gets saved automatically so you won't have to worry
+              about losing any information!
             </p>
             <p className="text-2xl text-gray-700">
               If you have any tips or ideas to improve on this project, don't
@@ -31,15 +35,17 @@ const About = () => {
             </p>
           </div>
           <div className="grid grid-cols-2 gap-4 mt-8">
-            <img
+            <Image
               className="w-full rounded-lg"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-2.png"
+              src={Org}
               alt="office content 1"
+              width={600}
             />
-            <img
+            <Image
               className="mt-4 w-full lg:mt-10 rounded-lg"
-              src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/content/office-long-1.png"
+              src={DisOrg}
               alt="office content 2"
+              width={600}
             />
           </div>
         </div>
