@@ -1,5 +1,4 @@
-import Head from "next/head";
-import RegisterForm from "../components/forms/registerForm";
+import RegisterForm from "../components/Forms/registerForm";
 import Header from "../components/header";
 import Footer from "../components/footer";
 
