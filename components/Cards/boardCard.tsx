@@ -17,7 +17,7 @@ const BoardCard = ({ board, handleRemoveBoard }: any) => {
       <div className="col-span-2 h-52 flex flex-col justify-between bg-white rounded-xl shadow-xl mb-6 py-5 px-4">
         <div className="">
           <div className="flex flex-row relative">
-            <h4 className="text-gray-900 text-3xl font-medium mb-5">
+            <h4 className="truncate text-gray-900 text-3xl font-medium mb-5">
               {board.name}
             </h4>
             <i

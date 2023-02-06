@@ -13,7 +13,7 @@ const BoardsTable = ({ user, boards }: any) => {
   const [boardsData, setBoards] = useState(boards);
   const router = useRouter();
 
-  const onSubmit = ({ boardName, boardDescription }: any) => {
+  const onSubmit = async({ boardName, boardDescription }: any) => {
     if (!boardName || /^\s*$/.test(boardName)) {
       return;
     }
@@ -23,15 +23,14 @@ const BoardsTable = ({ user, boards }: any) => {
       tasks: [],
       userId: user._id,
     };
-    setBoards([...boardsData, newBoard]);
-    axios({
+    const board = await axios({
       method: "post",
       url: "/api/boards/addBoard",
       data: {
         newBoard,
       },
     });
-    router.reload();
+    setBoards([...boardsData, board.data]);
     reset();
   };
 
