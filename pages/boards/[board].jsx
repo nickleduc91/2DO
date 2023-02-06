@@ -30,7 +30,7 @@ export async function getServerSideProps(context) {
   }
   const id = context.params.board;
   //fetch for boards based off ids
-  const board = await fetch(`/api/boards/${id}`);
+  const board = await fetch(`${process.env.URL}/api/boards/${id}`);
   const boardData = await board.json();
 
   return {

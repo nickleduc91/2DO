@@ -6,7 +6,7 @@ export default async function handler(req, res) {
   let bodyObject = req.body;
   await db
     .collection("boards")
-    .update(
+    .updateOne(
       { _id: ObjectId(bodyObject.boardId) },
       { $push: { tasks: bodyObject.newTask } }
     );
