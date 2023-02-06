@@ -49,16 +49,6 @@ const BoardsTable = ({ user, boards }: any) => {
     setBoards(updatedBoards);
   };
 
-  const getCompletedCount = (board: any) => {
-    let completed = 0;
-    board.tasks.map((task: any) => {
-      if (task.completed) {
-        completed++;
-      }
-    });
-    return completed;
-  };
-
   return (
     <div className="mx-auto w-full max-w-5xl bg-white">
       <div className="flex justify-center pt-12 pb-12">
