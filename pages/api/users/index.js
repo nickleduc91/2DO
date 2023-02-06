@@ -1,9 +1,8 @@
-import clientPromise from "../../../lib/mongodb";
+import { connectToDatabase } from "../../../lib/mongodb";
 
 export default async (req, res) => {
   try {
-    const client = await clientPromise;
-    const db = client.db("test");
+    const {db} = await connectToDatabase()
     const query = req.query;
     const { username } = query;
     let users;
@@ -14,7 +13,7 @@ export default async (req, res) => {
     } else {
       users = await db.collection("users").find({}).toArray();
     }
-    res.json({ status: 200, data: users });;
+    res.json({ data: users });;
   } catch (e) {
     throw new Error(e).message;
   }

@@ -1,9 +1,7 @@
-import clientPromise from "../../../lib/mongodb";
-import { ObjectId } from "mongodb";
+import { connectToDatabase } from "../../../lib/mongodb";
 
 export default async function handler(req, res) {
-  const client = await clientPromise;
-  const db = client.db("test");
+  const {db} = await connectToDatabase()
   let bodyObject = req.body;
   await db.collection("boards").insertOne(bodyObject.newBoard);
   res.json("Added new Board");

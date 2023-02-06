@@ -1,5 +1,5 @@
 import NextAuth from "next-auth";
-import clientPromise from "../../../lib/mongodb";
+import { connectToDatabase } from "../../../lib/mongodb";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions = {
@@ -15,8 +15,7 @@ export const authOptions = {
       name: "Credentials",
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
-        const client = await clientPromise;
-        const db = client.db("test");
+        const { db } = await connectToDatabase();
         if (!credentials.register) {
           const user = await db.collection("users").findOne({
             username: credentials.username,
@@ -54,9 +53,10 @@ export const authOptions = {
       return token;
     },
     session: async ({ session, token }) => {
-      session.user['username'] = token.user.username;
+      session.user["username"] = token.user.username;
       return session;
     },
   },
+  secret: process.env.SECRET // SECRET env variable 
 };
 export default NextAuth(authOptions);
