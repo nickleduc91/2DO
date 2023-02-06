@@ -27,13 +27,13 @@ export async function getServerSideProps(context) {
     };
   }
   const user = await fetch(
-    `http://localhost:3000/api/users?username=${session.user.username}`
+    `${process.env.URL}/api/users?username=${session.user.username}`
   );
   const userData = await user.json();
 
   //fetch for boards based off ids
   const boards = await fetch(
-    `http://localhost:3000/api/boards?userId=${userData.data._id}`
+    `${process.env.URL}/api/boards?userId=${userData.data._id}`
   );
   const boardsData = await boards.json();
 

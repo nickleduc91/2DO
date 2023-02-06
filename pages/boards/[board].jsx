@@ -1,4 +1,3 @@
-import { useSession, signIn, signOut, getSession } from "next-auth/react";
 import Header from "../../components/header";
 import TodoList from "../../components/todoList";
 import { unstable_getServerSession } from "next-auth/next";
@@ -31,7 +30,7 @@ export async function getServerSideProps(context) {
   }
   const id = context.params.board;
   //fetch for boards based off ids
-  const board = await fetch(`http://localhost:3000/api/boards/${id}`);
+  const board = await fetch(`${process.env.URL}/api/boards/${id}`);
   const boardData = await board.json();
 
   return {
