@@ -7,7 +7,7 @@ import Footer from "../components/footer";
 const Home = () => {
   return (
     <div>
-      <section className="mb-40">
+      <section className="mb-36">
         <Header />
         <div className="px-6 py-12 md:px-12 text-center lg:text-left">
           <div className="container mx-auto xl:px-32">
