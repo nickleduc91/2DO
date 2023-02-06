@@ -13,7 +13,7 @@ const Home = () => {
           <div className="container mx-auto xl:px-32">
             <div className="ml-24 grid lg:grid-cols-2 gap-24 flex items-center">
               <div className="mt-12 lg:mt-0">
-                <h1 className="text-5xl md:text-6xl xl:text-7xl font-bold tracking-tight mb-12">
+                <h1 className="text-5xl md:text-5xl xl:text-6xl font-bold tracking-tight mb-12">
                   The best tool for <br />
                   <span className="text-cyan-500">organizing tasks</span>
                 </h1>
