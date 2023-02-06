@@ -1,5 +1,5 @@
 import Header from "../../components/header";
-import BoardsTable from "../../components/boardsList";
+import BoardsList from "../../components/boardsList";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
 
@@ -7,7 +7,7 @@ const BoardsPage = ({ user, boards }) => {
   return (
     <div>
       <Header />
-      <BoardsTable user={user} boards={boards} />
+      <BoardsList user={user} boards={boards} />
     </div>
   );
 };

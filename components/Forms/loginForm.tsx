@@ -53,9 +53,9 @@ const loginForm = () => {
     <section className="h-screen -mb-24">
       <div className="px-6 h-full">
         <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6 -mt-20">
-          <div className="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
-            <h1 className="text-center text-cyan-500 text-5xl pb-5 font-semibold">
-              Welcome back!
+          <div className="xl:ml-20 xl:w-4/12 lg:w-4/12 md:w-4/12 mb-12 md:mb-0">
+            <h1 className="text-center text-cyan-500 text-5xl pb-7 font-semibold">
+              Welcome Back!
             </h1>
             <form onSubmit={handleSubmit(onSubmit)}>
               {/* <!-- Email input --> */}
@@ -63,7 +63,7 @@ const loginForm = () => {
                 <input
                   type="text"
                   {...register("username")}
-                  className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-500 bg-white bg-clip-padding border border-solid border-gray-300 rounded-xl transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-cyan-500 focus:outline-none"
+                  className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border-b-2 border-cyan-500 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-cyan-700 focus:outline-none"
                   placeholder="Username"
                 />
               </div>
@@ -72,7 +72,7 @@ const loginForm = () => {
                 <input
                   {...register("password")}
                   type="password"
-                  className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-500 bg-white bg-clip-padding border border-solid border-gray-300 rounded-xl transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-cyan-500 focus:outline-none"
+                  className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border-b-2 border-cyan-500 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-cyan-700 focus:outline-none"
                   placeholder="Password"
                 />
               </div>
@@ -81,7 +81,7 @@ const loginForm = () => {
                   {simplifyError(pageState.error)}
                 </div>
               )}
-              <div className="flex justify-between items-center mb-6">
+              <div className="flex justify-between items-center mb-6 pt-2">
                 <div className="form-group form-check">
                   <input
                     type="checkbox"
