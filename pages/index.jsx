@@ -23,7 +23,7 @@ const Home = ({ isSession }) => {
                   className="inline-block px-7 py-3 mr-2 bg-cyan-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-cyan-800 hover:shadow-lg focus:bg-cyan-800 focus:shadow-lg focus:outline-none focus:ring-0 active:cyan-800 active:shadow-lg transition duration-150 ease-in-out"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
-                  href={session ? "/boards" : "/register"}
+                  href={isSession ? "/boards" : "/register"}
                   role="button"
                 >
                   {isSession ? "Resume" : "Get Started"}
