@@ -51,9 +51,9 @@ const ProfileForm = ({ user }: any) => {
   };
 
   return (
-    <div className="flex justify-center mx-auto w-full max-w-5xl bg-white pt-12 pb-12">
+    <div className="flex justify-center mx-auto w-full max-w-5xl bg-black pt-12 pb-12">
       <div>
-        <h3 className="text-4xl mb-12 font-semibold">Account Settings</h3>
+        <h3 className="text-4xl mb-12 font-semibold text-white">Account Settings</h3>
         <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
           {fields.map((field: any, index: number) => (
             <div key={index}>
@@ -63,7 +63,7 @@ const ProfileForm = ({ user }: any) => {
               <input
                 type="text"
                 {...register(field.register)}
-                className="placeholder-black mb-12 border-b-2 ml-4 form-control block w-60 px-4 py-2 text-lg bg-white bg-clip-padding transition ease-in-out m-0 focus:bg-white focus:border-cyan-500 focus:outline-none"
+                className="placeholder-white mb-12 text-white bg-black border-b-2 ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
                 placeholder={field.placeholder}
               />
             </div>

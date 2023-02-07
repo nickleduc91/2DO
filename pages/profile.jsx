@@ -6,7 +6,7 @@ import ProfileForm from '../components/Forms/profileForm'
 const Profile = ({ user }) => {
 
   return (
-    <div>
+    <div className="bg-black pb-60">
       <Header />
       <ProfileForm user={user}/>
     </div>
