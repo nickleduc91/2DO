@@ -4,7 +4,7 @@ import Footer from "../components/footer";
 
 const Register = () => {
   return (
-    <div>
+    <div className="bg-black pb-12">
       <Header />
       <RegisterForm />
       <Footer />

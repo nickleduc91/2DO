@@ -5,7 +5,7 @@ import { authOptions } from "pages/api/auth/[...nextauth]";
 
 const Board = ({ board }) => {
   return (
-    <div>
+    <div className="bg-black pb-60">
       <Header />
       <TodoList board={board} />
     </div>

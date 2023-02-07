@@ -51,7 +51,7 @@ const BoardsTable = ({ userId, boards }: any) => {
   };
 
   return (
-    <div className="mx-auto w-full max-w-5xl bg-white">
+    <div className="mx-auto w-full max-w-5xl bg-black pb-72 h-full">
       <div className="flex justify-center pt-12 pb-12">
         <h1 className="font-semibold text-4xl text-cyan-500 text-center mr-12">
           My Boards
@@ -62,24 +62,24 @@ const BoardsTable = ({ userId, boards }: any) => {
         >
           <Spinner
             display={processing}
-            bgColour="text-gray-300"
+            bgColour="text-white"
             fillColour="fill-cyan-500"
           />
           <button
-            className="ri-add-line ri-2x hover:text-cyan-500"
+            className="text-white ri-add-line ri-2x hover:text-cyan-500"
             type="submit"
           ></button>
           <input
             type="text"
             {...register("boardName")}
-            className="border-b-2 ml-4 form-control block w-60 px-4 py-2 text-lg bg-white bg-clip-padding transition ease-in-out m-0 focus:bg-white focus:border-cyan-500 focus:outline-none"
+            className="text-white bg-black border-b-2 ml-4 form-control block w-60 px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
             placeholder={"Board name"}
           />
 
           <input
             type="text"
             {...register("boardDescription")}
-            className="ml-12 border-b-2 ml-4 form-control block w-60 px-4 py-2 text-lg bg-white bg-clip-padding transition ease-in-out m-0 focus:bg-white focus:border-cyan-500 focus:outline-none"
+            className="ml-12 border-b-2 ml-4 form-control block w-60 px-4 py-2 text-lg text-white bg-black bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
             placeholder={"Board description"}
           />
         </form>

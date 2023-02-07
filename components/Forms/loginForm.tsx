@@ -64,7 +64,7 @@ const loginForm = () => {
                 <input
                   type="text"
                   {...register("username")}
-                  className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border-b-2 border-gray-400 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-cyan-500 focus:outline-none"
+                  className="text-white bg-black border-b-2 ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
                   placeholder="Username"
                 />
               </div>
@@ -73,7 +73,7 @@ const loginForm = () => {
                 <input
                   {...register("password")}
                   type="password"
-                  className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border-b-2 border-gray-400 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-cyan-500 focus:outline-none"
+                  className="text-white bg-black border-b-2 ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
                   placeholder="Password"
                 />
               </div>
@@ -82,23 +82,8 @@ const loginForm = () => {
                   {simplifyError(pageState.error)}
                 </div>
               )}
-              <div className="flex justify-between items-center mb-6 pt-2">
-                <div className="form-group form-check">
-                  <input
-                    type="checkbox"
-                    className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-cyan-500 checked:border-cyan-500 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
-                    id="exampleCheck2"
-                  />
-                  <label className="form-check-label inline-block text-gray-800">
-                    Remember me
-                  </label>
-                </div>
-                <a href="#!" className="text-gray-800">
-                  Forgot password?
-                </a>
-              </div>
 
-              <div className="text-center lg:text-left">
+              <div className="pt-12 text-center lg:text-left">
                 <button
                   disabled={pageState.processing}
                   type="submit"
@@ -111,7 +96,7 @@ const loginForm = () => {
                     </div>
                   </div>
                 </button>
-                <p className="text-sm font-semibold mt-2 pt-1 mb-0">
+                <p className="text-gray-400 text-sm font-semibold mt-2 pt-1 mb-0">
                   Don't have an account?<br></br>
                   <a
                     href="/register"

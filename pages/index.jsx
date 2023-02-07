@@ -7,8 +7,8 @@ import { useSession } from "next-auth/react";
 const Home = () => {
   const { data: session } = useSession();
   return (
-    <div>
-      <section className="mb-32">
+    <div className="bg-black pb-56">
+      <section className="text-white pb-24">
         <Header />
         <div className="px-6 py-12 md:px-12 text-center lg:text-left">
           <div className="container mx-auto xl:px-32">

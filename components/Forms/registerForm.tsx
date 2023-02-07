@@ -64,12 +64,12 @@ const RegisterForm = () => {
               <div className="mb-6 grid grid-cols-2 gap-7">
                 <input
                   {...register("firstName")}
-                  className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border-b-2 border-gray-400 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-cyan-500 focus:outline-none"
+                  className="text-white bg-black border-b-2 ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
                   placeholder="First Name"
                 />
                 <input
                   {...register("lastName")}
-                  className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border-b-2 border-gray-400 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-cyan-500 focus:outline-none"
+                  className="text-white bg-black border-b-2 ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
                   placeholder="Last Name"
                 />
               </div>
@@ -78,7 +78,7 @@ const RegisterForm = () => {
               <div className="mb-6">
                 <input
                   {...register("username")}
-                  className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border-b-2 border-gray-400 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-cyan-500 focus:outline-none"
+                  className="text-white bg-black border-b-2 ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
                   placeholder="Username"
                 />
               </div>
@@ -88,7 +88,7 @@ const RegisterForm = () => {
                 <input
                   {...register("password")}
                   type="password"
-                  className="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border-b-2 border-gray-400 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-cyan-500 focus:outline-none"
+                  className="text-white bg-black border-b-2 ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
                   placeholder="Password"
                 />
               </div>
@@ -111,7 +111,7 @@ const RegisterForm = () => {
                     </div>
                   </div>
                 </button>
-                <p className="text-sm font-semibold mt-2 pt-1 mb-0">
+                <p className="text-sm font-semibold mt-2 pt-1 mb-0 text-gray-400">
                   Have an account?<br></br>
                   <a
                     href="/login"

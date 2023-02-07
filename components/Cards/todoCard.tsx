@@ -30,7 +30,10 @@ const TodoCard = ({
 
   return (
     <li
-      className="rounded-xl bg-white shadow-lg mb-2"
+      className={classNames(
+        task.completed ? "" : "",
+        "rounded-xl bg-zinc-900 shadow-lg mb-7 shadow-xl"
+      )}
       ref={setNodeRef}
       style={style}
       {...attributes}
@@ -43,10 +46,10 @@ const TodoCard = ({
           <i
             className={classNames(
               task.completed
-                ? "text-cyan-500 hover:text-black ri-checkbox-circle-line"
+                ? "text-cyan-500 hover:text-white ri-checkbox-circle-line"
                 : task.edit
                 ? ""
-                : "hover:text-cyan-500 ri-checkbox-blank-circle-line",
+                : "hover:text-cyan-500 ri-checkbox-blank-circle-line text-white",
               "ri-2x mr-4 flex"
             )}
             onClick={() =>
@@ -56,7 +59,7 @@ const TodoCard = ({
           {!task?.edit ? (
             <p
               className={classNames(
-                task.completed ? "text-cyan-500" : "",
+                task.completed ? "text-cyan-500" : "text-white",
                 "text-lg tracking-tight pl-4"
               )}
             >
@@ -70,13 +73,13 @@ const TodoCard = ({
               )}
             >
               <button
-                className="ri-add-line ri-2x hover:text-cyan-500"
+                className="ri-add-line ri-2x hover:text-cyan-500 text-white"
                 type="submit"
               ></button>
               <input
                 type="text"
                 {...register("editedTask")}
-                className="ml-4 form-control block w-full px-4 py-2 text-lg bg-white bg-clip-padding transition ease-in-out m-0 focus:bg-white focus:border-cyan-500 focus:outline-none text-gray-400"
+                className="text-white bg-zinc-900 border-b-2 ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-zinc-900 focus:border-cyan-500 focus:outline-none"
                 placeholder={task.name}
               />
             </form>
@@ -87,8 +90,10 @@ const TodoCard = ({
           {!task.completed && (
             <i
               className={classNames(
-                task.completed ? "text-cyan-500" : "hover:text-cyan-500",
-                task.edit ? "text-cyan-500 hover:text-black" : "",
+                task.completed
+                  ? "text-cyan-500"
+                  : "hover:text-cyan-500 text-white",
+                task.edit ? "text-cyan-500 hover:text-white" : "",
                 "ri-pencil-line ri-xl mr-4"
               )}
               onClick={() => handleEditTask(task.id, task.edit)}
@@ -97,17 +102,21 @@ const TodoCard = ({
           <i
             className={classNames(
               task.completed
-                ? "text-cyan-500 hover:text-black"
-                : "hover:text-cyan-500",
+                ? "text-cyan-500 hover:text-white"
+                : "hover:text-cyan-500 text-white",
               "ri-delete-bin-2-line ri-xl mr-4"
             )}
             onClick={() => handleRemoveTask(task.id)}
           ></i>
-          <i className={classNames(
-                task.completed ? "text-cyan-500" : "hover:text-cyan-500",
-                task.edit ? "text-cyan-500 hover:text-black" : "",
-                "ri-menu-line ri-xl mr-4"
-              )}></i>
+          <i
+            className={classNames(
+              task.completed
+                ? "text-cyan-500"
+                : "hover:text-cyan-500 text-white",
+              task.edit ? "text-cyan-500 hover:text-white" : "",
+              "ri-menu-line ri-xl mr-4"
+            )}
+          ></i>
         </div>
       </div>
     </li>

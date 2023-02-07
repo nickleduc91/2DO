@@ -10,7 +10,7 @@ export default function Header() {
         <div className="flex justify-start lg:w-0 lg:flex-1">
           <a className="flex flex-row" href="/">
             <Image className="h-14 w-auto" src={Logo} alt="2DO Logo" />
-            <span className="pl-2 mt-4 text-xl font-semibold">TwoDue</span>
+            <span className="text-cyan-500 pl-2 mt-4 text-xl font-semibold">TwoDue</span>
           </a>
         </div>
         <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
@@ -45,7 +45,7 @@ export default function Header() {
             <div>
               <a
                 href="/login"
-                className="whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900"
+                className="whitespace-nowrap text-base font-medium text-gray-300 hover:text-cyan-500"
               >
                 Sign in
               </a>
