@@ -53,7 +53,7 @@ export const authOptions = {
       return token;
     },
     session: async ({ session, token }) => {
-      session.user["username"] = token.user.username;
+      session.user["id"] = token.user._id;
       return session;
     },
   },

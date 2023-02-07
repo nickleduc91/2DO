@@ -3,11 +3,11 @@ import BoardsList from "../../components/boardsList";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
 
-const BoardsPage = ({ user, boards }) => {
+const BoardsPage = ({ userId, boards }) => {
   return (
     <div>
       <Header />
-      <BoardsList user={user} boards={boards} />
+      <BoardsList userId={userId} boards={boards} />
     </div>
   );
 };
@@ -26,20 +26,16 @@ export async function getServerSideProps(context) {
       },
     };
   }
-  const user = await fetch(
-    `${process.env.URL}/api/users?username=${session.user.username}`
-  );
-  const userData = await user.json();
 
-  //fetch for boards based off ids
+  //fetch for boards based off id
   const boards = await fetch(
-    `${process.env.URL}/api/boards?userId=${userData.data._id}`
+    `${process.env.URL}/api/boards?userId=${session.user.id}`
   );
   const boardsData = await boards.json();
 
   return {
     props: {
-      user: userData.data,
+      userId: session.user.id,
       boards: boardsData.data,
     },
   };

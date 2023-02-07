@@ -8,7 +8,7 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-const BoardsTable = ({ user, boards }: any) => {
+const BoardsTable = ({ userId, boards }: any) => {
   const { register, handleSubmit, reset } = useForm();
   const [boardsData, setBoards] = useState(boards);
   const [processing, setProcessing] = useState(false);
@@ -22,7 +22,7 @@ const BoardsTable = ({ user, boards }: any) => {
       name: boardName,
       description: boardDescription,
       tasks: [],
-      userId: user._id,
+      userId: userId
     };
     const board = await axios({
       method: "post",
