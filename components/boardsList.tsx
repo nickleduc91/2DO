@@ -31,7 +31,7 @@ const BoardsTable = ({ user, boards }: any) => {
         newBoard,
       },
     });
-    setBoards([board.data, ...boardsData]);
+    setBoards([...boardsData, board.data]);
     setProcessing(false)
     reset();
   };
