@@ -1,10 +1,11 @@
-import Head from "next/head";
 import Image from "next/image";
 import Header from "../components/header";
 import Logo from "../public/list.png";
 import Footer from "../components/footer";
+import { useSession } from "next-auth/react";
 
 const Home = () => {
+  const { data: session } = useSession();
   return (
     <div>
       <section className="mb-32">
@@ -17,15 +18,17 @@ const Home = () => {
                   The best tool for <br />
                   <span className="text-cyan-500">organizing tasks.</span>
                 </h1>
+
                 <a
                   className="inline-block px-7 py-3 mr-2 bg-cyan-500 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-cyan-800 hover:shadow-lg focus:bg-cyan-800 focus:shadow-lg focus:outline-none focus:ring-0 active:cyan-800 active:shadow-lg transition duration-150 ease-in-out"
                   data-mdb-ripple="true"
                   data-mdb-ripple-color="light"
-                  href="/register"
+                  href={session ? "/boards" : "/register"}
                   role="button"
                 >
-                  Get started
+                  {session ? "Resume" : "Get Started"}
                 </a>
+
                 <a
                   className="inline-block px-7 py-3 bg-transparent text-cyan-500 font-medium text-sm leading-snug uppercase rounded hover:text-cyan-800 hover:bg-gray-100 focus:bg-gray-100 focus:outline-none focus:ring-0 active:bg-gray-200 transition duration-150 ease-in-out"
                   data-mdb-ripple="true"

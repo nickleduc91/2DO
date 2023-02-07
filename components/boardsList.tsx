@@ -17,12 +17,12 @@ const BoardsTable = ({ userId, boards }: any) => {
     if (!boardName || /^\s*$/.test(boardName)) {
       return;
     }
-    setProcessing(true)
+    setProcessing(true);
     const newBoard = {
       name: boardName,
       description: boardDescription,
       tasks: [],
-      userId: userId
+      userId: userId,
     };
     const board = await axios({
       method: "post",
@@ -32,7 +32,7 @@ const BoardsTable = ({ userId, boards }: any) => {
       },
     });
     setBoards([...boardsData, board.data]);
-    setProcessing(false)
+    setProcessing(false);
     reset();
   };
 
@@ -57,10 +57,14 @@ const BoardsTable = ({ userId, boards }: any) => {
           My Boards
         </h1>
         <form
-          className="sm:pl-4  flex sm:items-center"
+          className="sm:pl-4 flex sm:items-center"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <Spinner display={processing} bgColour='text-gray-300' fillColour='fill-cyan-500'/>
+          <Spinner
+            display={processing}
+            bgColour="text-gray-300"
+            fillColour="fill-cyan-500"
+          />
           <button
             className="ri-add-line ri-2x hover:text-cyan-500"
             type="submit"
