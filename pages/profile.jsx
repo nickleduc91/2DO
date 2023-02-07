@@ -1,14 +1,15 @@
 import Header from "../components/header";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
-import ProfileForm from '../components/Forms/profileForm'
+import ProfileForm from "../components/Forms/profileForm";
 
 const Profile = ({ user }) => {
-
+  let isSession;
+  user ? (isSession = true) : (isSession = false);
   return (
     <div className="bg-black pb-60">
-      <Header />
-      <ProfileForm user={user}/>
+      <Header isSession={isSession} />
+      <ProfileForm user={user} />
     </div>
   );
 };

@@ -3,13 +3,15 @@ import Header from "../components/header";
 import Logo from "../public/list.png";
 import Footer from "../components/footer";
 import { useSession } from "next-auth/react";
+import { unstable_getServerSession } from "next-auth/next";
+import { authOptions } from "pages/api/auth/[...nextauth]";
 
-const Home = () => {
+const Home = ({ isSession }) => {
   const { data: session } = useSession();
   return (
     <div className="bg-black pb-56">
       <section className="text-white pb-28">
-        <Header />
+        <Header isSession={isSession} />
         <div className="px-6 py-12 md:px-12 text-center lg:text-left">
           <div className="container mx-auto xl:px-32">
             <div className="ml-24 grid lg:grid-cols-2 gap-24 flex items-center">
@@ -50,5 +52,22 @@ const Home = () => {
     </div>
   );
 };
+
+export async function getServerSideProps(context) {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+
+  let isSession;
+  session ? (isSession = true) : (isSession = false);
+
+  return {
+    props: {
+      isSession,
+    },
+  };
+}
 
 export default Home;

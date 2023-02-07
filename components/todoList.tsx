@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
@@ -22,12 +21,7 @@ interface IFormInput {
   editedTask: string;
 }
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
-
 const Tasks = ({ board }: any) => {
-  const router = useRouter();
   const { register, handleSubmit, reset } = useForm<IFormInput>();
   const [tasks, setTask] = useState(board.tasks);
 

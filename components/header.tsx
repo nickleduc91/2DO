@@ -1,36 +1,59 @@
-import { useSession, signOut } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import Image from "next/image";
 import Logo from "../public/todo-image.png";
+import { useRouter } from "next/router";
 
-export default function Header() {
-  const { data: session } = useSession();
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(" ");
+}
+
+export default function Header({ isSession }: any) {
+  const router = useRouter();
+
   return (
     <div className="mx-auto max-w-7xl px-6">
-      <div className="flex items-center justify-between py-4 md:justify-start md:space-x-10 border-b-2 border-cyan-500">
+      <div className="flex items-center justify-between py-4 md:justify-start md:space-x-10">
         <div className="flex justify-start lg:w-0 lg:flex-1">
           <a className="flex flex-row" href="/">
             <Image className="h-14 w-auto" src={Logo} alt="2DO Logo" />
-            <span className="text-cyan-500 pl-2 mt-4 text-xl font-semibold">TwoDue</span>
+            <span className="text-cyan-500 pl-2 mt-4 text-xl font-semibold">
+              TwoDue
+            </span>
           </a>
         </div>
         <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
-          {session ? (
+          {isSession ? (
             <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0 space-x-8">
               <a
                 href="/boards"
-                className="whitespace-nowrap text-base font-medium text-cyan-500 hover:text-cyan-600"
+                className={classNames(
+                  router.pathname == "/boards"
+                    ? "border-b-2 border-cyan-500"
+                    : "border-b-2 border-white",
+                  "whitespace-nowrap text-base font-medium text-white hover:text-cyan-600 hover:border-cyan-500"
+                )}
               >
                 Boards
               </a>
               <a
                 href="/profile"
-                className="whitespace-nowrap text-base font-medium text-cyan-500 hover:text-cyan-600"
+                className={classNames(
+                  router.pathname == "/profile"
+                    ? "border-b-2 border-cyan-500"
+                    : "border-b-2 border-white",
+                  "whitespace-nowrap text-base font-medium text-white hover:text-cyan-500 hover:border-cyan-500"
+                )}
               >
                 Profile
               </a>
               <a
                 href="/about"
-                className="whitespace-nowrap text-base font-medium text-cyan-500 hover:text-cyan-600"
+                className={classNames(
+                  router.pathname == "/about"
+                    ? "border-b-2 border-cyan-500"
+                    : "border-b-2 border-white",
+                  "whitespace-nowrap text-base font-medium text-white hover:text-cyan-500 hover:border-cyan-500"
+                )}
               >
                 About
               </a>
