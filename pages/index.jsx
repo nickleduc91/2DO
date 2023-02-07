@@ -2,12 +2,10 @@ import Image from "next/image";
 import Header from "../components/header";
 import Logo from "../public/list.png";
 import Footer from "../components/footer";
-import { useSession } from "next-auth/react";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
 
 const Home = ({ isSession }) => {
-  const { data: session } = useSession();
   return (
     <div className="bg-black pb-56">
       <section className="text-white pb-28">
@@ -28,7 +26,7 @@ const Home = ({ isSession }) => {
                   href={session ? "/boards" : "/register"}
                   role="button"
                 >
-                  {session ? "Resume" : "Get Started"}
+                  {isSession ? "Resume" : "Get Started"}
                 </a>
 
                 <a
