@@ -25,7 +25,7 @@ const BoardCard = ({ board, handleRemoveBoard }: any) => {
               onClick={() => handleRemoveBoard(board)}
             ></i>
           </div>
-          <p className="text-gray-800 text-md">{board.description}</p>
+          <p className="text-gray-300 text-md">{board.description}</p>
         </div>
         <div>
           <div className="flex items-center justify-between text-gray-800">
