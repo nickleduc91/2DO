@@ -107,7 +107,7 @@ const RegisterForm = () => {
                   <div className="flex flex-row">
                     Create Account
                     <div className="pl-2">
-                      <Spinner display={pageState.processing} bgColour='text-white' fillColour='fill-blue-600' />
+                      <Spinner display={pageState.processing} bgColour='text-white' fillColour='fill-cyan-700' />
                     </div>
                   </div>
                 </button>

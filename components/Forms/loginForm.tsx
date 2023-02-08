@@ -87,12 +87,12 @@ const loginForm = () => {
                 <button
                   disabled={pageState.processing}
                   type="submit"
-                  className="inline-block px-7 py-3 bg-cyan-500 text-white font-medium text-sm leading-snug uppercase rounded-xl shadow-md hover:bg-cyan-600 hover:shadow-lg focus:bg-cyan-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-700 active:shadow-lg transition duration-150 ease-in-out"
+                  className="inline-block px-7 py-3 bg-cyan-500 text-white font-medium text-sm leading-snug uppercase rounded-xl shadow-md hover:bg-cyan-700 hover:shadow-lg focus:bg-cyan-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-cyan-700 active:shadow-lg transition duration-150 ease-in-out"
                 >
                   <div className="flex flex-row">
                     Login
                     <div className="pl-2">
-                      <Spinner display={pageState.processing} bgColour='text-white' fillColour='fill-blue-600'/>
+                      <Spinner display={pageState.processing} bgColour='text-white' fillColour='fill-cyan-700'/>
                     </div>
                   </div>
                 </button>

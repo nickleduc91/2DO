@@ -2,13 +2,12 @@ import Header from "../components/header";
 import Image from "next/image";
 import Org from "../public/org.jpg";
 import DisOrg from "../public/disorg.jpg";
-import Footer from "../components/footer";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
 
 const About = ({ isSession }) => {
   return (
-    <div className="bg-black pb-56">
+    <div className="bg-black pb-48">
       <Header isSession={isSession} />
       <section className="-mb-4">
         <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-8 lg:px-6">
@@ -53,7 +52,6 @@ const About = ({ isSession }) => {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   );
 };
