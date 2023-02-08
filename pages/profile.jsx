@@ -3,13 +3,13 @@ import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
 import ProfileForm from "../components/Forms/profileForm";
 
-const Profile = ({ user }) => {
+const Profile = ({ user, boards }) => {
   let isSession;
   user ? (isSession = true) : (isSession = false);
   return (
     <div className="bg-black pb-60">
       <Header isSession={isSession} />
-      <ProfileForm user={user} />
+      <ProfileForm user={user} boards={boards} />
     </div>
   );
 };
@@ -29,6 +29,11 @@ export async function getServerSideProps(context) {
     };
   }
 
+  const boards = await fetch(
+    `${process.env.URL}/api/boards?userId=${session.user.id}`
+  );
+  const boardsData = await boards.json();
+
   //fetch user
   const user = await fetch(`${process.env.URL}/api/users/${session.user.id}`);
   const userData = await user.json();
@@ -36,6 +41,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       user: userData,
+      boards: boardsData.data
     },
   };
 }

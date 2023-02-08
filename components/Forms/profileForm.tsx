@@ -2,7 +2,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import React, { useState } from "react";
 
-const ProfileForm = ({ user }: any) => {
+const ProfileForm = ({ user, boards }: any) => {
   const { register, handleSubmit } = useForm();
   const [fields, setFields] = useState([
     { placeholder: user.username, register: "username", header: "Username" },
@@ -49,11 +49,32 @@ const ProfileForm = ({ user }: any) => {
     }
     setFields(fields);
   };
+  const getTotalTasks = () => {
+    let total = 0;
+    boards.map((board: any) => {
+      total += board.tasks.length;
+    });
+    return total;
+  };
+
+  const getTotalTasksStatus = () => {
+    let totalCompleted = 0;
+    let totalUncompleted = 0;
+    boards.map((board: any) => {
+      board.tasks.map((task: any) => {
+        if (task.completed) {
+          totalCompleted++;
+        } else {
+          totalUncompleted++;
+        }
+      });
+    });
+    return { completed: totalCompleted, uncompleted: totalUncompleted };
+  };
 
   return (
-    <div className="flex justify-center mx-auto w-full max-w-5xl bg-black pt-12 pb-12">
+    <div className="flex justify-center mx-auto w-full max-w-5xl bg-black pt-12 pb-12 grid grid-cols-2 text-white">
       <div>
-        <h3 className="text-4xl mb-12 font-semibold text-white">Account Settings</h3>
         <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
           {fields.map((field: any, index: number) => (
             <div key={index}>
@@ -63,7 +84,7 @@ const ProfileForm = ({ user }: any) => {
               <input
                 type="text"
                 {...register(field.register)}
-                className="placeholder-white mb-12 text-white bg-black border-b-2 ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
+                className="w-64 placeholder-white mb-12 text-white bg-black border-b-2 ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
                 placeholder={field.placeholder}
               />
             </div>
@@ -76,6 +97,54 @@ const ProfileForm = ({ user }: any) => {
             Save
           </button>
         </form>
+      </div>
+      <div className="ml-24">
+        <section className="mb-32 text-gray-800 text-center">
+          <div className="pt-24 grid lg:gap-x-20 md:grid-cols-2">
+            <div className="mb-12 md:mb-0">
+              <div className="p-4 bg-cyan-500 rounded-md shadow-lg inline-block mb-6">
+                <i className="ri-artboard-line text-white ri-xl"></i>
+              </div>
+              <h3 className="text-2xl font-bold text-cyan-500 mb-4">
+                {boards.length}
+              </h3>
+              <h5 className="text-lg font-medium text-white">Total Boards</h5>
+            </div>
+
+            <div className="mb-12 md:mb-0">
+              <div className="p-4 bg-cyan-500 rounded-md shadow-lg inline-block mb-6">
+                <i className="ri-task-line text-white ri-xl"></i>
+              </div>
+              <h3 className="text-2xl font-bold text-cyan-500 mb-4">
+                {getTotalTasks()}
+              </h3>
+              <h5 className="text-lg font-medium text-white">Total Tasks</h5>
+            </div>
+
+            <div className="mt-12 mb-12 md:mb-0">
+              <div className="p-4 bg-cyan-500 rounded-md shadow-lg inline-block mb-6">
+                <i className="ri-task-fill text-white ri-xl"></i>
+              </div>
+              <h3 className="text-2xl font-bold text-cyan-500 mb-4">
+                {getTotalTasksStatus().completed}
+              </h3>
+              <h5 className="text-lg font-medium text-white">
+                Tasks Completed
+              </h5>
+            </div>
+            <div className="mt-12 mb-12 md:mb-0">
+              <div className="p-4 bg-cyan-500 rounded-md shadow-lg inline-block mb-6">
+                <i className="ri-edit-box-line text-white ri-xl"></i>
+              </div>
+              <h3 className="text-2xl font-bold text-cyan-500 mb-4">
+                {getTotalTasksStatus().uncompleted}
+              </h3>
+              <h5 className="text-lg font-medium text-white">
+                Tasks Uncompleted
+              </h5>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );
