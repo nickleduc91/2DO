@@ -140,7 +140,7 @@ const ProfileForm = ({ user, boards }: any) => {
                 {getTotalTasksStatus().uncompleted}
               </h3>
               <h5 className="text-lg font-medium text-white">
-                Tasks Uncompleted
+                Tasks Incompleted
               </h5>
             </div>
           </div>
