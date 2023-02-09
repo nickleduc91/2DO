@@ -102,7 +102,7 @@ const ProfileForm = ({ user, boards }: any) => {
                 }
                 {...register(field.register)}
                 className="w-64 placeholder-white mb-12 text-white bg-black border-b-2 ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
-                value={field.placeholder}
+                placeholder={field.placeholder}
               />
             </div>
           ))}
