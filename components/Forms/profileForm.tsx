@@ -81,25 +81,8 @@ const ProfileForm = ({ user, boards }: any) => {
             <div key={index}>
               <p className="font-semibold text-xl text-cyan-500">
                 {field.header}
-                {field.header == "Password" && (
-                  <button
-                    type="submit"
-                    className="w-16 ml-6 cursor-pointer inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-cyan-500 px-2 py-0.5 text-base font-medium text-white shadow-sm hover:bg-cyan-800"
-                    disabled={disable}
-                    onClick={() => {
-                      setShowPassword(!showPassword);
-                    }}
-                  >
-                    {showPassword ? "Hide" : "Show"}
-                  </button>
-                )}
               </p>
               <input
-                type={
-                  field.header == "Password" && showPassword == false
-                    ? "password"
-                    : "text"
-                }
                 {...register(field.register)}
                 className="w-64 placeholder-white mb-12 text-white bg-black border-b-2 ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
                 placeholder={field.placeholder}
