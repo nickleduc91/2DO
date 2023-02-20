@@ -7,7 +7,7 @@ import { authOptions } from "pages/api/auth/[...nextauth]";
 
 const Home = ({ isSession }) => {
   return (
-    <div className="bg-black pb-56">
+    <div className="bg-black">
       <section className="text-white pb-28">
         <Header isSession={isSession} />
         <div className="px-6 py-12 md:px-12 text-center lg:text-left">
