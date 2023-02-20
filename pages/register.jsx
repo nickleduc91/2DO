@@ -1,13 +1,11 @@
 import RegisterForm from "../components/Forms/registerForm";
 import Header from "../components/header";
-import Footer from "../components/footer";
 
 const Register = () => {
   return (
-    <div className="bg-black pb-12">
+    <div className="bg-black">
       <Header />
       <RegisterForm />
-      <Footer />
     </div>
   );
 };

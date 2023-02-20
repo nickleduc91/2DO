@@ -51,10 +51,10 @@ const loginForm = () => {
       });
   };
   return (
-    <section className="h-screen -mb-24">
+    <section className="h-screen">
       <div className="px-6 h-full">
         <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6 -mt-20">
-          <div className="xl:ml-20 xl:w-4/12 lg:w-4/12 md:w-4/12 mb-12 md:mb-0">
+          <div className="xl:ml-20 xl:w-4/12 lg:w-4/12 md:w-4/12">
             <h1 className="text-center text-cyan-500 text-5xl pb-7 font-semibold">
               Welcome Back!
             </h1>
@@ -92,7 +92,11 @@ const loginForm = () => {
                   <div className="flex flex-row">
                     Login
                     <div className="pl-2">
-                      <Spinner display={pageState.processing} bgColour='text-white' fillColour='fill-cyan-700'/>
+                      <Spinner
+                        display={pageState.processing}
+                        bgColour="text-white"
+                        fillColour="fill-cyan-700"
+                      />
                     </div>
                   </div>
                 </button>

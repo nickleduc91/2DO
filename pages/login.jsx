@@ -1,15 +1,13 @@
 import LoginForm from "../components/Forms/loginForm";
 import Header from "../components/header";
-import Footer from "../components/footer";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
 
 const Login = () => {
   return (
-    <div className="bg-black pb-24">
+    <div className="bg-black">
       <Header />
       <LoginForm />
-      <Footer />
     </div>
   );
 };

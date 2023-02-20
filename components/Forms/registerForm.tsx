@@ -53,7 +53,7 @@ const RegisterForm = () => {
   };
 
   return (
-    <section className="h-screen -mb-24">
+    <section className="h-screen">
       <div className="px-6 h-full">
         <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6 -mt-20">
           <div className="xl:ml-20 xl:w-4/12 lg:w-4/12 md:w-4/12 mb-12 md:mb-0">
