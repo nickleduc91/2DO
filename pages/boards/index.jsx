@@ -5,7 +5,7 @@ import { authOptions } from "pages/api/auth/[...nextauth]";
 
 const BoardsPage = ({ userId, boards }) => {
   return (
-    <div className="bg-black h-screen">
+    <div className="bg-black">
       <Header isSession={true} />
       <BoardsList userId={userId} boards={boards} />
     </div>

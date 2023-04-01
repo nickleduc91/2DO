@@ -51,8 +51,8 @@ const BoardsTable = ({ userId, boards }: any) => {
   };
 
   return (
-    <div className="mx-auto w-full max-w-5xl bg-black">
-      <div className="flex justify-center pt-12 pb-12">
+    <div className="mx-auto w-full max-w-5xl min-h-screen">
+      <div className="md:flex justify-center pt-12 pb-12">
         <h1 className="font-semibold text-4xl text-cyan-500 text-center mr-12">
           My Boards
         </h1>
@@ -69,19 +69,19 @@ const BoardsTable = ({ userId, boards }: any) => {
             className="text-white ri-add-line ri-2x hover:text-cyan-500"
             type="submit"
           ></button>
-          <input
-            type="text"
-            {...register("boardName")}
-            className="text-white bg-black border-b-2 ml-4 form-control block w-60 px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
-            placeholder={"Board name"}
-          />
+            <input
+              type="text"
+              {...register("boardName")}
+              className="text-white bg-black border-b-2 ml-4 form-control block w-48 md:w-60 px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
+              placeholder={"Board name"}
+            />
 
-          <input
-            type="text"
-            {...register("boardDescription")}
-            className="ml-12 border-b-2 ml-4 form-control block w-60 px-4 py-2 text-lg text-white bg-black bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
-            placeholder={"Board description"}
-          />
+            <input
+              type="text"
+              {...register("boardDescription")}
+              className="ml-12 border-b-2 ml-4 form-control block w-48 md:w-60 px-4 py-2 text-lg text-white bg-black bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
+              placeholder={"Board description"}
+            />
         </form>
       </div>
 

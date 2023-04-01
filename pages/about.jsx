@@ -7,7 +7,7 @@ import { authOptions } from "pages/api/auth/[...nextauth]";
 
 const About = ({ isSession }) => {
   return (
-    <div className="bg-black pb-48">
+    <div className="bg-black min-h-screen">
       <Header isSession={isSession} />
       <section className="-mb-4">
         <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-8 lg:px-6">

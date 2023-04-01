@@ -39,7 +39,7 @@ const TodoCard = ({
       {...listeners}
     >
       <div
-        className={`py-5 px-4 flex justify-between border-l-4 border-transparent bg-transparent`}
+        className="py-2 md:py-5 px-4 flex justify-between border-l-4 border-transparent bg-transparent"
       >
         <div className="sm:pl-4 pr-8 flex sm:items-center w-full">
           <i
@@ -59,7 +59,7 @@ const TodoCard = ({
             <p
               className={classNames(
                 task.completed ? "text-cyan-500" : "text-white",
-                "text-lg tracking-tight pl-4"
+                "text-lg tracking-tight pl-4 truncate"
               )}
             >
               {task.name}
@@ -93,7 +93,7 @@ const TodoCard = ({
                   ? "text-cyan-500"
                   : "hover:text-cyan-500 text-white",
                 task.edit ? "text-cyan-500 hover:text-white" : "",
-                "ri-pencil-line ri-xl mr-4"
+                "ri-pencil-line ri-xl mr-4 mb-1"
               )}
               onClick={() => handleEditTask(task.id, task.edit)}
             ></i>
@@ -103,7 +103,7 @@ const TodoCard = ({
               task.completed
                 ? "text-cyan-500 hover:text-white"
                 : "hover:text-cyan-500 text-white",
-              "ri-delete-bin-2-line ri-xl mr-4"
+              "ri-delete-bin-2-line ri-xl mr-4 mb-1"
             )}
             onClick={() => handleRemoveTask(task.id)}
           ></i>
@@ -113,7 +113,7 @@ const TodoCard = ({
                 ? "text-cyan-500"
                 : "hover:text-cyan-500 text-white",
               task.edit ? "text-cyan-500 hover:text-white" : "",
-              "ri-menu-line ri-xl mr-4"
+              "ri-menu-line ri-xl mr-4 mb-1"
             )}
           ></i>
         </div>

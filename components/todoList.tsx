@@ -146,7 +146,7 @@ const Tasks = ({ board }: any) => {
   );
 
   return (
-    <div className="mx-auto w-full max-w-5xl bg-black pb-96">
+    <div className="mx-auto w-full max-w-5xl min-h-screen">
       <h1 className="pt-12 pb-2 font-semibold text-4xl text-cyan-500 text-center">
         {board.name}
       </h1>
@@ -165,7 +165,7 @@ const Tasks = ({ board }: any) => {
             <input
               type="text"
               {...register("newTask")}
-              className="text-white bg-black border-b-2 ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
+              className="text-white bg-black border-b-2 border-t-black ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
               placeholder="New task"
             />
           </form>
