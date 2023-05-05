@@ -146,7 +146,7 @@ const Tasks = ({ board }: any) => {
   );
 
   return (
-    <div className="mx-auto w-full max-w-5xl min-h-screen">
+    <div className="mx-auto w-full max-w-5xl">
       <h1 className="pt-12 pb-2 font-semibold text-4xl text-cyan-500 text-center">
         {board.name}
       </h1>

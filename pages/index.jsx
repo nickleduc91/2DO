@@ -10,9 +10,9 @@ const Home = ({ isSession }) => {
     <div className="bg-black min-h-screen">
       <section className="text-white md:pb-24">
         <Header isSession={isSession} />
-        <div className="px-6 py-12 md:px-12 text-center lg:text-left">
+        <div className="md:px-6 py-12 md:px-12 text-center lg:text-left">
           <div className="container mx-auto xl:px-32">
-            <div className="ml-24 grid lg:grid-cols-2 gap-24 flex items-center">
+            <div className="md:ml-24 md:grid md:grid-cols-2 md:gap-24 flex items-center">
               <div className="mt-12 lg:mt-0">
                 <h1 className="text-5xl md:text-5xl xl:text-6xl font-bold tracking-tight mb-12">
                   The best tool for <br />

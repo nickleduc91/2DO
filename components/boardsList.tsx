@@ -51,8 +51,8 @@ const BoardsTable = ({ userId, boards }: any) => {
   };
 
   return (
-    <div className="mx-auto w-full max-w-5xl min-h-screen">
-      <div className="md:flex justify-center pt-12 pb-12">
+    <div className="mx-auto w-full max-w-5xl">
+      <div className="md:flex justify-center">
         <h1 className="font-semibold text-4xl text-cyan-500 text-center mr-12">
           My Boards
         </h1>

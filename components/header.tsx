@@ -4,8 +4,7 @@ import Logo from "../public/todo-image.png";
 import { useRouter } from "next/router";
 
 import { Fragment } from "react";
-import { Popover, Transition, Menu } from "@headlessui/react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
+import { Transition, Menu } from "@headlessui/react";
 
 const headers = [
   {
@@ -138,89 +137,4 @@ export default function Header({ isSession }: any) {
       </div>
     </div>
   );
-}
-
-{
-  /* <Popover.Group as="nav" className="space-x-10 md:flex">
-                  <Popover className="relative">
-                    {({ open }) => (
-                      <>
-                        <Popover.Button
-                          className={classNames(
-                            open ? 'text-gray-500' : 'text-gray-700',
-                            'font-dm group inline-flex items-center rounded-md block py-2 pr-6 pl-3 text-gray-700 hover:bg-gray-50 md:hover:bg-transparent md:hover:text-primary-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700',
-                          )}
-                        >
-                          <span>Socials</span>
-                          <ChevronDownIcon
-                            className={classNames(
-                              open ? 'text-indigo-600' : 'text-gray-400',
-                              'ml-2 h-5 w-5 group-hover:text-indigo-500',
-                            )}
-                            aria-hidden="true"
-                          />
-                        </Popover.Button>
-
-                        <Transition
-                          as={Fragment}
-                          enter="transition ease-out duration-200"
-                          enterFrom="opacity-0 translate-y-1"
-                          enterTo="opacity-100 translate-y-0"
-                          leave="transition ease-in duration-150"
-                          leaveFrom="opacity-100 translate-y-0"
-                          leaveTo="opacity-0 translate-y-1"
-                        >
-                          <Popover.Panel className="absolute z-10 -ml-4 mt-3 max-w-md transform px-2 sm:px-0 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2">
-                            <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
-                              <div className="relative grid gap-6 bg-gray-400 px-5 py-6 sm:gap-8 sm:p-8">
-                                {socials.map((item) => (
-                                  <a
-                                    key={item.name}
-                                    href={item.href}
-                                    className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-200"
-                                    target="_blank"
-                                  >
-                                    <i
-                                      className={item.icon}
-                                      aria-hidden="true"
-                                    />
-                                    <div className="ml-4">
-                                      <p className="text-base font-medium text-gray-900">
-                                        {item.name}
-                                      </p>
-                                    </div>
-                                  </a>
-                                ))}
-                                <a
-                                  className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-200"
-                                  onClick={copyToClipboard}
-                                  href="mailto:nickleduc@cmail.carleton.ca"
-                                >
-                                  <i
-                                    className="ri-mail-send-line ri-xl mt-1 text-indigo-600"
-                                    aria-hidden="true"
-                                  />
-
-                                  <div className="ml-4">
-                                    <p className="text-base font-medium text-gray-900">
-                                    nickleduc@cmail.carleton.ca
-                                    </p>
-                                    <p
-                                      className={classNames(
-                                        isCopied ? '' : 'hidden',
-                                        'flex transition-opacity ease-in duration-700 opacity-100 text-indigo-600',
-                                      )}
-                                    >
-                                      Copied to clipboard!
-                                    </p>
-                                  </div>
-                                </a>
-                              </div>
-                            </div>
-                          </Popover.Panel>
-                        </Transition>
-                      </>
-                    )}
-                  </Popover>
-                </Popover.Group> */
 }

@@ -2,12 +2,14 @@ import Header from "../../components/header";
 import TodoList from "../../components/todoList";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
+import Footer from "../../components/footer";
 
 const Board = ({ board }) => {
   return (
-    <div className="bg-black">
+    <div className="bg-black min-h-screen">
       <Header isSession={true} />
       <TodoList board={board} />
+      <Footer />
     </div>
   );
 };

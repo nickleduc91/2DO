@@ -1,18 +1,10 @@
 const Footer = () => {
   return (
-    <footer className="p-4 bg-black shadow md:flex md:items-center md:justify-between md:p-6 mt-12">
-      <div className="text-lg items-center mt-3 text-md text-white sm:mt-0">
-        Made by{" "}
-        <a
-          className="text-cyan-500 hover:text-cyan-700"
-          href={"https://nickleduc91.github.io/"}
-          target={"_blank"}
-        >
-          {" "}
-          Nicholas Leduc
-        </a>
-      </div>
-    </footer>
+    <div className="sticky top-[100vh] pb-6 pl-6">
+      <a href='https://nickleduc.vercel.app/' target='_blank' className="items-center text-md text-gray-400 sm:mt-0">
+        Made by <span className="text-cyan-500 hover:text-cyan-700"> Nicholas Leduc <span className="ri-links-line"></span></span>
+      </a>
+    </div>
   );
 };
 

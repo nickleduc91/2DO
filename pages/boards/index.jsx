@@ -2,12 +2,14 @@ import Header from "../../components/header";
 import BoardsList from "../../components/boardsList";
 import { unstable_getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
+import Footer from "../../components/footer";
 
 const BoardsPage = ({ userId, boards }) => {
   return (
-    <div className="bg-black">
+    <div className="bg-black min-h-screen">
       <Header isSession={true} />
       <BoardsList userId={userId} boards={boards} />
+      <Footer />
     </div>
   );
 };
