@@ -1,5 +1,5 @@
 import Header from "../components/header";
-import { unstable_getServerSession } from "next-auth/next";
+import { getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
 import ProfileForm from "../components/Forms/profileForm";
 
@@ -15,7 +15,7 @@ const Profile = ({ user, boards }) => {
 };
 
 export async function getServerSideProps(context) {
-  const session = await unstable_getServerSession(
+  const session = await getServerSession(
     context.req,
     context.res,
     authOptions

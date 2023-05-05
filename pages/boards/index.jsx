@@ -1,6 +1,6 @@
 import Header from "../../components/header";
 import BoardsList from "../../components/boardsList";
-import { unstable_getServerSession } from "next-auth/next";
+import { getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
 import Footer from "../../components/footer";
 
@@ -15,7 +15,7 @@ const BoardsPage = ({ userId, boards }) => {
 };
 
 export async function getServerSideProps(context) {
-  const session = await unstable_getServerSession(
+  const session = await getServerSession(
     context.req,
     context.res,
     authOptions

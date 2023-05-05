@@ -2,7 +2,7 @@ import Image from "next/image";
 import Header from "../components/header";
 import Logo from "../public/list.png";
 import Footer from "../components/footer";
-import { unstable_getServerSession } from "next-auth/next";
+import { getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
 
 const Home = ({ isSession }) => {
@@ -52,7 +52,7 @@ const Home = ({ isSession }) => {
 };
 
 export async function getServerSideProps(context) {
-  const session = await unstable_getServerSession(
+  const session = await getServerSession(
     context.req,
     context.res,
     authOptions

@@ -2,7 +2,7 @@ import Header from "../components/header";
 import Image from "next/image";
 import Org from "../public/org.jpg";
 import DisOrg from "../public/disorg.jpg";
-import { unstable_getServerSession } from "next-auth/next";
+import { getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
 
 const About = ({ isSession }) => {
@@ -57,7 +57,7 @@ const About = ({ isSession }) => {
 };
 
 export async function getServerSideProps(context) {
-  const session = await unstable_getServerSession(
+  const session = await getServerSession(
     context.req,
     context.res,
     authOptions

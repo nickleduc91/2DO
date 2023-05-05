@@ -1,6 +1,6 @@
 import LoginForm from "../components/Forms/loginForm";
 import Header from "../components/header";
-import { unstable_getServerSession } from "next-auth/next";
+import { getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
 
 const Login = () => {
@@ -15,7 +15,7 @@ const Login = () => {
 export default Login;
 
 export async function getServerSideProps(context) {
-  const session = await unstable_getServerSession(
+  const session = await getServerSession(
     context.req,
     context.res,
     authOptions
