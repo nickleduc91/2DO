@@ -1,6 +1,6 @@
-const Spinner = ({ display, fillColour, bgColour }: any) => {
+const Spinner = ({ display, fillColour, bgColour, classValue }: any) => {
   return display ? (
-    <div role="status">
+    <div role="status" className={classValue}>
       <svg
         aria-hidden="true"
         className={`mb-0.5 inline w-4 h-4 ${bgColour} animate-spin ${fillColour}`}

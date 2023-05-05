@@ -64,6 +64,7 @@ const BoardsTable = ({ userId, boards }: any) => {
             display={processing}
             bgColour="text-white"
             fillColour="fill-cyan-500"
+            classValue="pt-3"
           />
           <button
             className="text-white ri-add-line ri-2x hover:text-cyan-500"
@@ -91,7 +92,7 @@ const BoardsTable = ({ userId, boards }: any) => {
         className={classNames(
           boardsData.length == 1
             ? "flex justify-center"
-            : "md:grid grid-cols-2 place-items-center",
+            : "md:grid md:grid-cols-2 place-items-center",
           "pt-12"
         )}
       >
