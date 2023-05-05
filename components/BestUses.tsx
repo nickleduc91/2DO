@@ -37,7 +37,7 @@ const BestUses = () => {
       <div className="pt-20 text-center">
         <h3 className="text-3xl md:text-3xl xl:text-4xl font-bold tracking-tight mb-8">
           Productive Uses for
-          <span className="text-cyan-500"> TwoDue.</span>
+          <span className="text-cyan-500"> TwoDue</span>
         </h3>
         <ImageCarousel icons={icons} />
       </div>
