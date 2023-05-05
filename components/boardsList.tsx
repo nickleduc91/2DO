@@ -91,7 +91,7 @@ const BoardsTable = ({ userId, boards }: any) => {
         className={classNames(
           boardsData.length == 1
             ? "flex justify-center"
-            : "grid grid-cols-2 place-items-center",
+            : "md:grid grid-cols-2 place-items-center",
           "pt-12"
         )}
       >
