@@ -4,6 +4,7 @@ import Org from "../public/org.jpg";
 import DisOrg from "../public/disorg.jpg";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
+import Footer from "../components/footer";
 
 const About = ({ isSession }) => {
   return (
@@ -30,11 +31,19 @@ const About = ({ isSession }) => {
               your info gets saved automatically so you won't have to worry
               about losing any information!
             </p>
-            <p className="text-2xl text-white">
+            <p className="text-2xl text-white mb-4">
               If you have any tips or ideas to improve on this project, don't
               hesistate to contact me via email at{" "}
               <span className="text-cyan-500">nickleduc@cmail.carleton.ca</span>
             </p>
+            <a
+              href="https://github.com/nickleduc91/twodue"
+              target="_blank"
+              className="text-2xl text-cyan-500 hover:text-cyan-700"
+            >
+              Git Hub Repository for this project{" "}
+              <span className="text-cyan-500 ri-links-line hover:text-cyan-700"></span>
+            </a>
           </div>
           <div className="grid grid-cols-2 gap-4 mt-8">
             <Image
@@ -52,16 +61,13 @@ const About = ({ isSession }) => {
           </div>
         </div>
       </section>
+      <Footer />
     </div>
   );
 };
 
 export async function getServerSideProps(context) {
-  const session = await getServerSession(
-    context.req,
-    context.res,
-    authOptions
-  );
+  const session = await getServerSession(context.req, context.res, authOptions);
 
   let isSession;
   session ? (isSession = true) : (isSession = false);

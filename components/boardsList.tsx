@@ -51,7 +51,7 @@ const BoardsTable = ({ userId, boards }: any) => {
   };
 
   return (
-    <div className="mx-auto w-full max-w-5xl">
+    <div className="mx-auto w-full max-w-5xl pt-16">
       <div className="flex justify-center">
         <h1 className="font-semibold text-4xl text-cyan-500 text-center mt-5 md:mr-12 md:mt-0">
           My Boards
