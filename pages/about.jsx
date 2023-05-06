@@ -12,7 +12,7 @@ const About = ({ isSession, user }) => {
       <Header isSession={isSession} user={user} />
       <section className="-mb-4 font-medium">
         <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-8 lg:px-6">
-          <div className="tracking-wide">
+          <div className="tracking-tight">
             <h2 className="mb-4 text-4xl tracking-tight font-bold text-cyan-500">
               Why TwoDue?
             </h2>

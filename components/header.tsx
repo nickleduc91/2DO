@@ -64,14 +64,14 @@ export default function Header({ isSession, user }: any) {
         </div>
         <div className="hidden items-center justify-end md:flex md:flex-1 lg:w-0">
           {isSession ? (
-            <div className="items-center justify-end md:flex md:flex-1 lg:w-0 space-x-8">
+            <div className="bg-white dark:bg-slate-800 rounded-full py-3 px-6">
               <a
                 href="/boards"
                 className={classNames(
                   router.pathname == "/boards"
                     ? "border-b-2 border-cyan-500"
-                    : "border-b-2 border-black dark:border-white",
-                  "text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out hover:text-cyan-500 dark:hover:text-cyan-500 hover:border-cyan-500 dark:hover:border-cyan-500"
+                    : "border-b-2 border-white dark:border-slate-800",
+                  "mr-8 text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out hover:text-cyan-500 dark:hover:text-cyan-500 hover:border-cyan-500 dark:hover:border-cyan-500"
                 )}
               >
                 Boards
@@ -81,8 +81,8 @@ export default function Header({ isSession, user }: any) {
                 className={classNames(
                   router.pathname == "/profile"
                     ? "border-b-2 border-cyan-500"
-                    : "border-b-2 border-black dark:border-white",
-                  "text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out hover:text-cyan-500 dark:hover:text-cyan-500 hover:border-cyan-500 dark:hover:border-cyan-500"
+                    : "border-b-2 border-white dark:border-slate-800",
+                  "mr-8 text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out hover:text-cyan-500 dark:hover:text-cyan-500 hover:border-cyan-500 dark:hover:border-cyan-500"
                 )}
               >
                 Profile
@@ -92,8 +92,8 @@ export default function Header({ isSession, user }: any) {
                 className={classNames(
                   router.pathname == "/about"
                     ? "border-b-2 border-cyan-500"
-                    : "border-b-2 border-black dark:border-white",
-                  "text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out hover:text-cyan-500 dark:hover:text-cyan-500 hover:border-cyan-500 dark:hover:border-cyan-500"
+                    : "border-b-2 border-white dark:border-slate-800",
+                  "mr-3 text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out hover:text-cyan-500 dark:hover:text-cyan-500 hover:border-cyan-500 dark:hover:border-cyan-500"
                 )}
               >
                 About
@@ -106,16 +106,32 @@ export default function Header({ isSession, user }: any) {
               </span>
             </div>
           ) : (
-            <div>
+            <div className="bg-white dark:bg-slate-800 rounded-full py-3 px-6">
+              <a
+                href="/about"
+                className={classNames(
+                  router.pathname == "/about"
+                    ? "border-b-2 border-cyan-500"
+                    : "border-b-2 border-white dark:border-slate-800",
+                  "mr-8 text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out hover:text-cyan-500 dark:hover:text-cyan-500 hover:border-cyan-500 dark:hover:border-cyan-500"
+                )}
+              >
+                About
+              </a>
               <a
                 href="/login"
-                className="whitespace-nowrap text-base font-medium text-black dark:text-white hover:text-cyan-500 dark:hover:text-cyan-500"
+                className={classNames(
+                  router.pathname == "/login"
+                    ? "border-b-2 border-cyan-500"
+                    : "border-b-2 border-white dark:border-slate-800",
+                  "text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out hover:text-cyan-500 dark:hover:text-cyan-500 hover:border-cyan-500 dark:hover:border-cyan-500"
+                )}
               >
                 Sign in
               </a>
               <a
                 href="/register"
-                className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-cyan-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-cyan-700"
+                className="ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-cyan-500 px-4 py-2 text-lg font-medium text-white shadow-sm hover:bg-cyan-700"
               >
                 Sign Up
               </a>
@@ -125,7 +141,7 @@ export default function Header({ isSession, user }: any) {
             onClick={handleThemeSwitch}
             className={classNames(
               theme == "light" ? "ri-sun-line" : "ri-moon-line",
-              "hover:text-cyan-500 dark:hover:text-cyan-500 ri-xl ml-8 text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out "
+              "hover:text-cyan-500 dark:hover:text-cyan-500 ri-xl ml-4 text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out "
             )}
           ></button>
         </div>

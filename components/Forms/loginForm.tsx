@@ -64,7 +64,7 @@ const loginForm = () => {
                 <input
                   type="text"
                   {...register("username")}
-                  className="text-white dark:text-white bg-white dark:bg-slate-900 border-b-2 border-black dark:border-white ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
+                  className="text-white dark:text-white bg-gray-100 dark:bg-slate-900 border-b-2 border-black dark:border-white ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
                   placeholder="Username"
                 />
               </div>
@@ -73,7 +73,7 @@ const loginForm = () => {
                 <input
                   {...register("password")}
                   type="password"
-                  className="text-white dark:text-white bg-white dark:bg-slate-900 border-b-2 border-black dark:border-white ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
+                  className="text-white dark:text-white bg-gray-100 dark:bg-slate-900 border-b-2 border-black dark:border-white ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
                   placeholder="Password"
                 />
               </div>

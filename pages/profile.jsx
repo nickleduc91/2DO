@@ -7,7 +7,7 @@ const Profile = ({ user, boards }) => {
   let isSession;
   user ? (isSession = true) : (isSession = false);
   return (
-    <div className="bg-white dark:bg-slate-900 h-screen">
+    <div className="bg-gray-100 dark:bg-slate-900 h-screen">
       <Header isSession={isSession} user={user} />
       <ProfileForm user={user} boards={boards} />
     </div>

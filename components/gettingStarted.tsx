@@ -32,7 +32,7 @@ const GettingStarted = ({ isSession }: any) => {
               Learn more
             </a>
           </div>
-          <div className="mb-12 lg:mb-0 mt-8">
+          <div className="mb-12 lg:mb-0 mt-8  w-72 py-12">
             <Image className="pb-1" src={Logo} alt="" width={325}  />
           </div>
         </div>

@@ -3,7 +3,7 @@ import Header from "../components/header";
 
 const Register = () => {
   return (
-    <div className="bg-white dark:bg-slate-900">
+    <div className="bg-gray-100 dark:bg-slate-900">
       <Header user={{}} />
       <RegisterForm />
     </div>

@@ -5,7 +5,7 @@ import { authOptions } from "pages/api/auth/[...nextauth]";
 
 const Login = ({ user }) => {
   return (
-    <div className="bg-white dark:bg-slate-900">
+    <div className="bg-gray-100 dark:bg-slate-900">
       <Header user={user} />
       <LoginForm />
     </div>
