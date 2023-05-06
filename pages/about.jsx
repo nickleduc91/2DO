@@ -6,23 +6,23 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
 import Footer from "../components/footer";
 
-const About = ({ isSession }) => {
+const About = ({ isSession, user }) => {
   return (
-    <div className="bg-black min-h-screen">
-      <Header isSession={isSession} />
+    <div className="bg-white dark:bg-slate-900 min-h-screen">
+      <Header isSession={isSession} user={user} />
       <section className="-mb-4">
         <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-8 lg:px-6">
           <div className="tracking-wide">
             <h2 className="mb-4 text-4xl tracking-tight font-bold text-cyan-500">
               Why TwoDue?
             </h2>
-            <p className="mb-4 text-2xl text-white">
+            <p className="mb-4 text-2xl text-black dark:text-white">
               This website was created as a little side project during my hunt
               for a co-op placement within my third year of university. I ended
               up being really hooked onto this idea and started to create a full
               website out of it. I hope you guys enjoy and find this useful!
             </p>
-            <p className="mb-4 text-2xl text-white">
+            <p className="mb-4 text-2xl text-black dark:text-white">
               As a user, you can create different boards which relate to
               different tasks in your every day life, such as for school. And
               then within these boards, you can create different tasks that
@@ -31,7 +31,7 @@ const About = ({ isSession }) => {
               your info gets saved automatically so you won't have to worry
               about losing any information!
             </p>
-            <p className="text-2xl text-white mb-4">
+            <p className="text-2xl text-black dark:text-white mb-4">
               If you have any tips or ideas to improve on this project, don't
               hesistate to contact me via email at{" "}
               <span className="text-cyan-500">nickleduc@cmail.carleton.ca</span>
@@ -72,9 +72,14 @@ export async function getServerSideProps(context) {
   let isSession;
   session ? (isSession = true) : (isSession = false);
 
+    //fetch user
+    const user = await fetch(`${process.env.URL}/api/users/${session.user.id}`);
+    const userData = await user.json();
+
   return {
     props: {
       isSession,
+      user: userData
     },
   };
 }

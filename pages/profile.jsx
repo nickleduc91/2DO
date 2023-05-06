@@ -7,19 +7,15 @@ const Profile = ({ user, boards }) => {
   let isSession;
   user ? (isSession = true) : (isSession = false);
   return (
-    <div className="bg-black h-screen">
-      <Header isSession={isSession} />
+    <div className="bg-white dark:bg-slate-900 h-screen">
+      <Header isSession={isSession} user={user} />
       <ProfileForm user={user} boards={boards} />
     </div>
   );
 };
 
 export async function getServerSideProps(context) {
-  const session = await getServerSession(
-    context.req,
-    context.res,
-    authOptions
-  );
+  const session = await getServerSession(context.req, context.res, authOptions);
   if (!session) {
     return {
       redirect: {
@@ -41,7 +37,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       user: userData,
-      boards: boardsData.data
+      boards: boardsData.data,
     },
   };
 }

@@ -41,6 +41,7 @@ export const authOptions = {
               firstName: credentials.firstName,
               lastName: credentials.lastName,
             },
+            theme: "dark"
           });
           return user.ops[0];
         }

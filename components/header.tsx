@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 
 import { Fragment } from "react";
 import { Transition, Menu } from "@headlessui/react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const headers = [
   {
@@ -25,8 +27,29 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Header({ isSession }: any) {
+export default function Header({ isSession, user }: any) {
   const router = useRouter();
+  const [theme, setTheme] = useState(user.theme ?? "dark");
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
+
+  const handleThemeSwitch = async () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+    await axios({
+      method: "post",
+      url: "/api/theme",
+      data: {
+        theme: theme === "dark" ? "light" : "dark",
+        userId: user._id,
+      },
+    });
+  };
 
   return (
     <div className="mx-auto max-w-7xl px-6">
@@ -47,8 +70,8 @@ export default function Header({ isSession }: any) {
                 className={classNames(
                   router.pathname == "/boards"
                     ? "border-b-2 border-cyan-500"
-                    : "border-b-2 border-white",
-                  "text-base font-medium text-white transition duration-200 ease-in-out hover:text-cyan-500 hover:border-cyan-500"
+                    : "border-b-2 border-black dark:border-white",
+                  "text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out hover:text-cyan-500 dark:hover:text-cyan-500 hover:border-cyan-500 dark:hover:border-cyan-500"
                 )}
               >
                 Boards
@@ -58,8 +81,8 @@ export default function Header({ isSession }: any) {
                 className={classNames(
                   router.pathname == "/profile"
                     ? "border-b-2 border-cyan-500"
-                    : "border-b-2 border-white",
-                  "text-base font-medium text-white transition duration-200 ease-in-out hover:text-cyan-500 hover:border-cyan-500"
+                    : "border-b-2 border-black dark:border-white",
+                  "text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out hover:text-cyan-500 dark:hover:text-cyan-500 hover:border-cyan-500 dark:hover:border-cyan-500"
                 )}
               >
                 Profile
@@ -69,8 +92,8 @@ export default function Header({ isSession }: any) {
                 className={classNames(
                   router.pathname == "/about"
                     ? "border-b-2 border-cyan-500"
-                    : "border-b-2 border-white",
-                  "text-base font-medium text-white transition duration-200 ease-in-out hover:text-cyan-500 hover:border-cyan-500"
+                    : "border-b-2 border-black dark:border-white",
+                  "text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out hover:text-cyan-500 dark:hover:text-cyan-500 hover:border-cyan-500 dark:hover:border-cyan-500"
                 )}
               >
                 About
@@ -86,7 +109,7 @@ export default function Header({ isSession }: any) {
             <div>
               <a
                 href="/login"
-                className="whitespace-nowrap text-base font-medium text-gray-300 hover:text-cyan-500"
+                className="whitespace-nowrap text-base font-medium text-black dark:text-white hover:text-cyan-500 dark:hover:text-cyan-500"
               >
                 Sign in
               </a>
@@ -98,6 +121,13 @@ export default function Header({ isSession }: any) {
               </a>
             </div>
           )}
+          <button
+            onClick={handleThemeSwitch}
+            className={classNames(
+              theme == "light" ? "ri-sun-line" : "ri-moon-line",
+              "hover:text-cyan-500 dark:hover:text-cyan-500 ri-xl ml-8 text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out "
+            )}
+          ></button>
         </div>
         <div className="visible md:invisible">
           <Menu as="div" className="relative inline-block text-left">

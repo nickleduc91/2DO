@@ -147,10 +147,10 @@ const Tasks = ({ board }: any) => {
 
   return (
     <div className="mx-auto w-full max-w-5xl">
-      <h1 className="pt-12 pb-2 font-semibold text-4xl text-cyan-500 text-center">
+      <h1 className="pt-12 pb-2 font-semibold text-4xl text-cyan-500 text-center pb-12">
         {board.name}
       </h1>
-      <div className="rounded-xl bg-black shadow-lg mb-8">
+      <div className="rounded-xl shadow-xl bg-white dark:bg-slate-800 mb-8">
         <div
           className={`py-5 px-4 flex justify-between border-l-4 border-transparent bg-transparent`}
         >
@@ -159,13 +159,13 @@ const Tasks = ({ board }: any) => {
             onSubmit={handleSubmit(onSubmit)}
           >
             <button
-              className="ri-add-line ri-2x hover:text-cyan-500 text-white"
+              className="ri-add-line ri-2x hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white"
               type="submit"
             ></button>
             <input
               type="text"
               {...register("newTask")}
-              className="text-white bg-black border-b-2 border-t-black ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
+              className="dark:bg-slate-800 text-black dark:text-white border-b-2 border-black dark:border-white ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
               placeholder="New task"
             />
           </form>

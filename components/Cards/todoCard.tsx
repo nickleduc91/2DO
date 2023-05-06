@@ -31,7 +31,7 @@ const TodoCard = ({
     <li
       className={classNames(
         task.completed ? "" : "",
-        "rounded-xl bg-zinc-900 shadow-lg mb-7 shadow-xl"
+        "rounded-xl border border-gray-100 dark:border-slate-800 shadow-xl bg-white dark:bg-slate-800 mb-7"
       )}
       ref={setNodeRef}
       style={style}
@@ -45,10 +45,10 @@ const TodoCard = ({
           <i
             className={classNames(
               task.completed
-                ? "text-cyan-500 hover:text-white ri-checkbox-circle-line"
+                ? "text-cyan-500 hover:text-black dark:hover:text-white ri-checkbox-circle-line"
                 : task.edit
                 ? ""
-                : "hover:text-cyan-500 ri-checkbox-blank-circle-line text-white",
+                : "hover:text-cyan-500 dark:hover:text-cyan-500 ri-checkbox-blank-circle-line text-black dark:text-white",
               "ri-2x mr-4 flex"
             )}
             onClick={() =>
@@ -58,7 +58,7 @@ const TodoCard = ({
           {!task?.edit ? (
             <p
               className={classNames(
-                task.completed ? "text-cyan-500" : "text-white",
+                task.completed ? "text-cyan-500" : "text-black dark:text-white",
                 "text-lg tracking-tight pl-4 truncate"
               )}
             >
@@ -72,13 +72,13 @@ const TodoCard = ({
               )}
             >
               <button
-                className="ri-add-line ri-2x hover:text-cyan-500 text-white"
+                className="ri-add-line ri-2x hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white"
                 type="submit"
               ></button>
               <input
                 type="text"
                 {...register("editedTask")}
-                className="text-white bg-zinc-900 border-b-2 ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-zinc-900 focus:border-cyan-500 focus:outline-none"
+                className="dark:bg-slate-800 text-black dark:text-white bg-white border-b-2 ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 focus:outline-none"
                 placeholder={task.name}
               />
             </form>
@@ -91,8 +91,8 @@ const TodoCard = ({
               className={classNames(
                 task.completed
                   ? "text-cyan-500"
-                  : "hover:text-cyan-500 text-white",
-                task.edit ? "text-cyan-500 hover:text-white" : "",
+                  : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
+                task.edit ? "text-cyan-500 hover:text-cyan-500" : "",
                 "ri-pencil-line ri-xl mr-4 mb-1"
               )}
               onClick={() => handleEditTask(task.id, task.edit)}
@@ -101,8 +101,8 @@ const TodoCard = ({
           <i
             className={classNames(
               task.completed
-                ? "text-cyan-500 hover:text-white"
-                : "hover:text-cyan-500 text-white",
+                ? "text-cyan-500 hover:text-black dark:hover:text-white"
+                : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
               "ri-delete-bin-2-line ri-xl mr-4 mb-1"
             )}
             onClick={() => handleRemoveTask(task.id)}
@@ -110,9 +110,9 @@ const TodoCard = ({
           <i
             className={classNames(
               task.completed
-                ? "text-cyan-500"
-                : "hover:text-cyan-500 text-white",
-              task.edit ? "text-cyan-500 hover:text-white" : "",
+                ? "text-cyan-500 hover:text-black dark:hover:text-white"
+                : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
+              task.edit ? "text-cyan-500 hover:text-black dark:hover:text-white" : "",
               "ri-menu-line ri-xl mr-4 mb-1"
             )}
           ></i>

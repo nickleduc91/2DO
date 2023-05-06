@@ -67,21 +67,21 @@ const BoardsTable = ({ userId, boards }: any) => {
             classValue="pt-3"
           />
           <button
-            className="text-white ri-add-line ri-2x hover:text-cyan-500"
+            className="text-black dark:text-white ri-add-line ri-2x hover:text-cyan-500"
             type="submit"
           ></button>
           <div className="flex flex-col md:flex-row">
             <input
               type="text"
               {...register("boardName")}
-              className="text-white bg-black border-b-2 ml-4 form-control block w-44 md:w-60 px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
+              className="dark:bg-slate-900 text-black dark:text-white border-b-2 border-black dark:border-white ml-4 form-control block w-44 md:w-60 px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
               placeholder={"Board name"}
             />
 
             <input
               type="text"
               {...register("boardDescription")}
-              className="md:ml-12 border-b-2 ml-4 form-control block w-44 md:w-48 md:w-60 px-4 py-2 text-lg text-white bg-black bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
+              className="dark:bg-slate-900 md:ml-12 border-b-2 border-black dark:border-white ml-4 form-control block w-44 md:w-48 md:w-60 px-4 py-2 text-lg text-black dark:text-white bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
               placeholder={"Board description"}
             />
           </div>

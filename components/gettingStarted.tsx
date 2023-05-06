@@ -7,7 +7,7 @@ const GettingStarted = ({ isSession }: any) => {
       <div className="container mx-auto xl:px-32">
         <div className="md:ml-24 md:grid md:grid-cols-2 md:gap-24 flex items-center">
           <div className="mt-12 lg:mt-0">
-            <h1 className="text-white text-5xl md:text-5xl xl:text-6xl font-bold tracking-tight mb-12">
+            <h1 className="text-black dark:text-white text-5xl md:text-5xl xl:text-6xl font-bold tracking-tight mb-12">
               The best tool for <br />
               <span className="text-cyan-500">organizing tasks.</span>
             </h1>
@@ -33,7 +33,7 @@ const GettingStarted = ({ isSession }: any) => {
             </a>
           </div>
           <div className="mb-12 lg:mb-0 mt-10">
-            <Image src={Logo} alt="" width={325}  />
+            <Image className="pb-12" src={Logo} alt="" width={325}  />
           </div>
         </div>
       </div>

@@ -74,7 +74,7 @@ const ProfileForm = ({ user, boards }: any) => {
   };
 
   return (
-    <div className="flex justify-center mx-auto w-full max-w-5xl bg-black pt-12 pb-12 grid grid-cols-2 text-white">
+    <div className="flex justify-center mx-auto w-full max-w-5xl pt-12 pb-12 grid grid-cols-2 text-black dark:text-white">
       <div className="ml-12">
         <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
           {fields.map((field: any, index: number) => (
@@ -84,7 +84,7 @@ const ProfileForm = ({ user, boards }: any) => {
               </p>
               <input
                 {...register(field.register)}
-                className="w-64 placeholder-white mb-12 text-white bg-black border-b-2 ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:bg-black focus:border-cyan-500 focus:outline-none"
+                className="font-medium bg-white dark:bg-slate-900 w-64 placeholder-black dark:placeholder-white mb-12 text-black dark:text-white border-b-2 border-black dark:border-white ml-4 form-control block w-full px-4 py-2 text-xl bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
                 placeholder={field.placeholder}
               />
             </div>
@@ -99,7 +99,7 @@ const ProfileForm = ({ user, boards }: any) => {
         </form>
       </div>
       <div className="ml-24">
-        <section className="mb-32 text-gray-800 text-center">
+        <section className="mb-32 text-center">
           <div className="pt-24 grid lg:gap-x-20 md:grid-cols-2">
             <div className="mb-12 md:mb-0">
               <div className="p-4 bg-cyan-500 rounded-md shadow-lg inline-block mb-6">
@@ -108,7 +108,7 @@ const ProfileForm = ({ user, boards }: any) => {
               <h3 className="text-2xl font-bold text-cyan-500 mb-4">
                 {boards.length}
               </h3>
-              <h5 className="text-lg font-medium text-white">Total Boards</h5>
+              <h5 className="text-lg font-medium text-black dark:text-white">Total Boards</h5>
             </div>
 
             <div className="mb-12 md:mb-0">
@@ -118,7 +118,7 @@ const ProfileForm = ({ user, boards }: any) => {
               <h3 className="text-2xl font-bold text-cyan-500 mb-4">
                 {getTotalTasks()}
               </h3>
-              <h5 className="text-lg font-medium text-white">Total Tasks</h5>
+              <h5 className="text-lg font-medium text-black dark:text-white">Total Tasks</h5>
             </div>
 
             <div className="mt-12 mb-12 md:mb-0">
@@ -128,7 +128,7 @@ const ProfileForm = ({ user, boards }: any) => {
               <h3 className="text-2xl font-bold text-cyan-500 mb-4">
                 {getTotalTasksStatus().completed}
               </h3>
-              <h5 className="text-lg font-medium text-white">
+              <h5 className="text-lg font-medium text-black dark:text-white">
                 Tasks Completed
               </h5>
             </div>
@@ -139,7 +139,7 @@ const ProfileForm = ({ user, boards }: any) => {
               <h3 className="text-2xl font-bold text-cyan-500 mb-4">
                 {getTotalTasksStatus().uncompleted}
               </h3>
-              <h5 className="text-lg font-medium text-white">
+              <h5 className="text-lg font-medium text-black dark:text-white">
                 Tasks Incompleted
               </h5>
             </div>

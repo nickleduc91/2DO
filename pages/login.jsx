@@ -3,10 +3,10 @@ import Header from "../components/header";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
 
-const Login = () => {
+const Login = ({ user }) => {
   return (
-    <div className="bg-black">
-      <Header />
+    <div className="bg-white dark:bg-slate-900">
+      <Header user={user} />
       <LoginForm />
     </div>
   );
@@ -15,13 +15,15 @@ const Login = () => {
 export default Login;
 
 export async function getServerSideProps(context) {
-  const session = await getServerSession(
-    context.req,
-    context.res,
-    authOptions
-  );
+  const session = await getServerSession(context.req, context.res, authOptions);
   if (session) {
+    //fetch user
+    const user = await fetch(`${process.env.URL}/api/users/${session.user.id}`);
+    const userData = await user.json();
     return {
+      props: {
+        user: userData,
+      },
       redirect: {
         destination: "/boards",
         permanent: false,
@@ -29,6 +31,8 @@ export async function getServerSideProps(context) {
     };
   }
   return {
-    props: {},
+    props: {
+      user: {},
+    },
   };
 }

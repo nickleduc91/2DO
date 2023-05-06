@@ -14,18 +14,18 @@ const BoardCard = ({ board, handleRemoveBoard }: any) => {
   };
   return (
     <div className="mx-auto w-full max-w-md py-4 px-4 justify-center items-center animate-wiggle">
-      <div className="col-span-2 h-52 flex flex-col justify-between bg-zinc-900 rounded-lg shadow-xl mb-6 py-5 px-4">
+      <div className="col-span-2 h-52 flex flex-col justify-between rounded-xl border border-gray-100 dark:bg-slate-800 dark:border-slate-800 shadow-xl mb-6 py-5 px-4 border-r">
         <div className="">
           <div className="flex flex-row relative">
             <h4 className="truncate text-cyan-500 text-3xl font-medium mb-5">
               {board.name}
             </h4>
             <i
-              className="ri-delete-bin-2-line ri-xl ml-28 hover:text-cyan-500 absolute top-0 right-0 text-white"
+              className="ri-delete-bin-2-line ri-xl ml-28 hover:text-cyan-500 dark:hover:text-cyan-500 absolute top-0 right-0 text-black dark:text-white"
               onClick={() => handleRemoveBoard(board)}
             ></i>
           </div>
-          <p className="text-gray-300 text-md">{board.description}</p>
+          <p className="text-gray-300 dark:text-white text-md">{board.description}</p>
         </div>
         <div>
           <div className="flex items-center justify-between text-gray-800">
@@ -34,7 +34,7 @@ const BoardCard = ({ board, handleRemoveBoard }: any) => {
                 getCompletedCount(board) == board.tasks.length &&
                   board.tasks.length > 0
                   ? "text-cyan-500"
-                  : "text-white",
+                  : "text-black dark:text-white",
                 "text-md font-semibold"
               )}
             >

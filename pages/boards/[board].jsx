@@ -4,10 +4,10 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
 import Footer from "../../components/footer";
 
-const Board = ({ board }) => {
+const Board = ({ board, user }) => {
   return (
-    <div className="bg-black min-h-screen">
-      <Header isSession={true} />
+    <div className="bg-white dark:bg-slate-900 min-h-screen">
+      <Header isSession={true} user={user} />
       <TodoList board={board} />
       <Footer />
     </div>
@@ -17,11 +17,7 @@ const Board = ({ board }) => {
 export default Board;
 
 export async function getServerSideProps(context) {
-  const session = await getServerSession(
-    context.req,
-    context.res,
-    authOptions
-  );
+  const session = await getServerSession(context.req, context.res, authOptions);
   if (!session) {
     return {
       redirect: {
@@ -35,9 +31,14 @@ export async function getServerSideProps(context) {
   const board = await fetch(`${process.env.URL}/api/boards/${id}`);
   const boardData = await board.json();
 
+  //fetch user
+  const user = await fetch(`${process.env.URL}/api/users/${session.user.id}`);
+  const userData = await user.json();
+
   return {
     props: {
       board: boardData,
+      user: userData,
     },
   };
 }
