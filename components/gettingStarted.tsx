@@ -33,7 +33,7 @@ const GettingStarted = ({ isSession }: any) => {
             </a>
           </div>
           <div className="mb-12 lg:mb-0 mt-10">
-            <Image className="pb-6" src={Logo} alt="" width={325}  />
+            <Image className="pb-3" src={Logo} alt="" width={325}  />
           </div>
         </div>
       </div>
