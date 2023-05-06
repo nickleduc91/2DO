@@ -38,7 +38,7 @@ const icons = [
 const BestUses = () => {
   return (
     <div className="text-gray-400">
-      <div className="pt-14 text-center">
+      <div className="text-center">
         <h3 className="text-black dark:text-white text-3xl md:text-3xl xl:text-4xl font-bold tracking-tight mb-2">
           Productive Uses for
           <span className="text-cyan-500"> TwoDue</span>
