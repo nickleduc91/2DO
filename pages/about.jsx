@@ -72,14 +72,17 @@ export async function getServerSideProps(context) {
   let isSession;
   session ? (isSession = true) : (isSession = false);
 
+  let userData = {}
+  if (isSession) {
     //fetch user
     const user = await fetch(`${process.env.URL}/api/users/${session.user.id}`);
-    const userData = await user.json();
+    userData = await user.json();
+  }
 
   return {
     props: {
       isSession,
-      user: userData
+      user: userData,
     },
   };
 }

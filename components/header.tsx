@@ -29,7 +29,7 @@ function classNames(...classes: string[]) {
 
 export default function Header({ isSession, user }: any) {
   const router = useRouter();
-  const [theme, setTheme] = useState(user.theme ?? "dark");
+  const [theme, setTheme] = useState(user.theme ?? "light");
 
   useEffect(() => {
     if (theme === "dark") {
