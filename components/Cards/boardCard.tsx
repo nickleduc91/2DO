@@ -14,7 +14,7 @@ const BoardCard = ({ board, handleRemoveBoard }: any) => {
   };
   return (
     <div className="mx-auto w-full max-w-md py-4 px-4 justify-center items-center animate-wiggle">
-      <div className="col-span-2 h-52 flex flex-col justify-between rounded-xl border border-gray-100 dark:bg-slate-800 dark:border-slate-800 shadow-xl mb-6 py-5 px-4 border-r">
+      <div className="col-span-2 h-52 flex flex-col justify-between rounded-3xl bg-white dark:bg-slate-800 shadow-xl mb-6 py-5 px-4">
         <div className="">
           <div className="flex flex-row relative">
             <h4 className="truncate text-cyan-500 text-3xl font-medium mb-5">

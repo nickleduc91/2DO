@@ -6,7 +6,7 @@ import Footer from "../../components/footer";
 
 const BoardsPage = ({ user, boards }) => {
   return (
-    <div className="bg-white dark:bg-slate-900 min-h-screen">
+    <div className="bg-gray-100 dark:bg-slate-900 min-h-screen">
       <Header isSession={true} user={user} />
       <BoardsList userId={user.id} boards={boards} />
       <Footer />

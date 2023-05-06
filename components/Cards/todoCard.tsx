@@ -31,7 +31,7 @@ const TodoCard = ({
     <li
       className={classNames(
         task.completed ? "" : "",
-        "rounded-xl border border-gray-100 dark:border-slate-800 shadow-xl bg-white dark:bg-slate-800 mb-7"
+        "rounded-full border border-gray-100 dark:border-slate-800 shadow-lg bg-white dark:bg-slate-800 mb-7"
       )}
       ref={setNodeRef}
       style={style}
