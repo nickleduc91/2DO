@@ -3,7 +3,7 @@ import Logo from "../public/list.png";
 
 const GettingStarted = ({ isSession }: any) => {
   return (
-    <div className="md:px-6 py-12 md:px-12 text-center lg:text-left">
+    <div className="md:px-6 py-9 md:px-12 text-center lg:text-left">
       <div className="container mx-auto xl:px-32">
         <div className="md:ml-24 md:grid md:grid-cols-2 md:gap-24 flex items-center">
           <div className="mt-12 lg:mt-0">
