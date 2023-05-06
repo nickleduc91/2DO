@@ -28,6 +28,10 @@ const icons = [
   {
       icon: "ri-file-paper-2-line ri-4x",
       name: "Planning"
+  },
+  {
+    icon: "ri-instagram-line ri-4x",
+    name: "Social Media"
   }
 ];
 

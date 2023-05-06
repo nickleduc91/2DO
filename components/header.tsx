@@ -129,8 +129,8 @@ export default function Header({ isSession, user }: any) {
             )}
           ></button>
         </div>
-        <div className="visible md:invisible">
-          <Menu as="div" className="relative inline-block text-left">
+        <div className="visible md:invisible flex-row">
+          <Menu as="div" className="flex-row relative inline-block text-left">
             <div>
               <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white">
                 <i className="ri-menu-line ri-2x hover:text-cyan-500"></i>
@@ -163,6 +163,13 @@ export default function Header({ isSession, user }: any) {
               </Menu.Items>
             </Transition>
           </Menu>
+          <button
+            onClick={handleThemeSwitch}
+            className={classNames(
+              theme == "light" ? "ri-sun-line" : "ri-moon-line",
+              "flex-row hover:text-cyan-500 dark:hover:text-cyan-500 ri-xl ml-4 text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out "
+            )}
+          ></button>
         </div>
       </div>
     </div>
