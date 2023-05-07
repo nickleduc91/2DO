@@ -78,7 +78,7 @@ const TodoCard = ({
               <input
                 type="text"
                 {...register("editedTask")}
-                className="dark:bg-slate-800 text-black dark:text-white bg-white border-b-2 ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 focus:outline-none"
+                className="bg-transparent text-black dark:text-white bg-white border-b-2 ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 focus:outline-none"
                 placeholder={task.name}
               />
             </form>

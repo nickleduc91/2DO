@@ -165,7 +165,7 @@ const Tasks = ({ board }: any) => {
             <input
               type="text"
               {...register("newTask")}
-              className="dark:bg-slate-800 text-black dark:text-white border-b-2 border-black dark:border-white ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
+              className="bg-transparent text-black dark:text-white border-b-2 border-black dark:border-white ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
               placeholder="New task"
             />
           </form>

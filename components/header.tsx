@@ -70,7 +70,7 @@ export default function Header({ isSession, user }: any) {
                 className={classNames(
                   router.pathname == "/boards"
                     ? "border-b-2 border-cyan-500"
-                    : "border-b-2 border-white dark:border-slate-800",
+                    : "border-b-2 border-transparent",
                   "mr-8 text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out hover:text-cyan-500 dark:hover:text-cyan-500 hover:border-cyan-500 dark:hover:border-cyan-500"
                 )}
               >
@@ -81,7 +81,7 @@ export default function Header({ isSession, user }: any) {
                 className={classNames(
                   router.pathname == "/profile"
                     ? "border-b-2 border-cyan-500"
-                    : "border-b-2 border-white dark:border-slate-800",
+                    : "border-b-2 border-transparent",
                   "mr-8 text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out hover:text-cyan-500 dark:hover:text-cyan-500 hover:border-cyan-500 dark:hover:border-cyan-500"
                 )}
               >
@@ -92,7 +92,7 @@ export default function Header({ isSession, user }: any) {
                 className={classNames(
                   router.pathname == "/about"
                     ? "border-b-2 border-cyan-500"
-                    : "border-b-2 border-white dark:border-slate-800",
+                    : "border-b-2 border-transparent",
                   "mr-3 text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out hover:text-cyan-500 dark:hover:text-cyan-500 hover:border-cyan-500 dark:hover:border-cyan-500"
                 )}
               >
@@ -112,7 +112,7 @@ export default function Header({ isSession, user }: any) {
                 className={classNames(
                   router.pathname == "/about"
                     ? "border-b-2 border-cyan-500"
-                    : "border-b-2 border-white dark:border-slate-800",
+                    : "border-b-2 border-transparent",
                   "mr-8 text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out hover:text-cyan-500 dark:hover:text-cyan-500 hover:border-cyan-500 dark:hover:border-cyan-500"
                 )}
               >
@@ -123,7 +123,7 @@ export default function Header({ isSession, user }: any) {
                 className={classNames(
                   router.pathname == "/login"
                     ? "border-b-2 border-cyan-500"
-                    : "border-b-2 border-white dark:border-slate-800",
+                    : "border-b-2 border-transparent",
                   "text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out hover:text-cyan-500 dark:hover:text-cyan-500 hover:border-cyan-500 dark:hover:border-cyan-500"
                 )}
               >
@@ -140,7 +140,7 @@ export default function Header({ isSession, user }: any) {
           <button
             onClick={handleThemeSwitch}
             className={classNames(
-              theme == "light" ? "ri-sun-line" : "ri-moon-line",
+              theme == "light" ? "ri-moon-line" : "ri-sun-line",
               "hover:text-cyan-500 dark:hover:text-cyan-500 ri-xl ml-4 text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out "
             )}
           ></button>

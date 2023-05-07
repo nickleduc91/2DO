@@ -84,7 +84,7 @@ const ProfileForm = ({ user, boards }: any) => {
               </p>
               <input
                 {...register(field.register)}
-                className="font-medium bg-gray-100 dark:bg-slate-900 w-64 placeholder-black dark:placeholder-white mb-12 text-black dark:text-white border-b-2 border-black dark:border-white ml-4 form-control block w-full px-4 py-2 text-xl bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
+                className="font-medium bg-transparent w-64 placeholder-black dark:placeholder-white mb-12 text-black dark:text-white border-b-2 border-black dark:border-white ml-4 form-control block w-full px-4 py-2 text-xl bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
                 placeholder={field.placeholder}
               />
             </div>
