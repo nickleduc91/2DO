@@ -8,7 +8,7 @@ const BoardsPage = ({ user, boards }) => {
   return (
     <div className="bg-gray-100 dark:bg-slate-900 min-h-screen">
       <Header isSession={true} user={user} />
-      <BoardsList userId={user.id} boards={boards} />
+      <BoardsList userId={user._id} boards={boards} />
       <Footer />
     </div>
   );
