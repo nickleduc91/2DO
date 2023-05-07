@@ -7,7 +7,7 @@ const Footer = () => {
         className="items-center text-lg text-black dark:text-white sm:mt-0"
       >
         Made by{" "}
-        <span className="text-cyan-400 hover:text-cyan-700">
+        <span className="text-cyan-500 hover:text-cyan-700">
           {" "}
           Nicholas Leduc <span className="ri-links-line"></span>
         </span>
