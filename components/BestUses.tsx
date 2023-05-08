@@ -26,20 +26,20 @@ const icons = [
     name: "Scheduling",
   },
   {
-      icon: "ri-file-paper-2-line ri-4x",
-      name: "Planning"
+    icon: "ri-file-paper-2-line ri-4x",
+    name: "Planning",
   },
   {
     icon: "ri-instagram-line ri-4x",
-    name: "Social Media"
-  }
+    name: "Social Media",
+  },
 ];
 
 const BestUses = () => {
   return (
     <div className="text-gray-400">
-      <div className="flex flex-col items-center">
-        <h3 className="bg-white dark:bg-slate-800 py-4 px-12 rounded-full text-black dark:text-white text-3xl md:text-3xl xl:text-4xl font-bold tracking-tight">
+      <div>
+        <h3 className="text-center text-black dark:text-white text-3xl md:text-3xl xl:text-4xl font-bold tracking-tight">
           Productive Uses for
           <span className="text-cyan-500"> TwoDue</span>
         </h3>
