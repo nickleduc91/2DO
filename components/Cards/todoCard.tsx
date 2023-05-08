@@ -29,19 +29,14 @@ const TodoCard = ({
 
   return (
     <li
-      className={classNames(
-        task.completed ? "" : "",
-        "rounded-full border border-gray-100 dark:border-slate-800 shadow-lg bg-white dark:bg-slate-800 mb-7"
-      )}
+      className="rounded-full shadow-lg bg-white dark:bg-slate-800 mb-7"
       ref={setNodeRef}
       style={style}
       {...attributes}
       {...listeners}
     >
-      <div
-        className="py-2 md:py-5 px-4 flex justify-between border-l-4 border-transparent bg-transparent"
-      >
-        <div className="sm:pl-4 pr-8 flex sm:items-center w-full">
+      <div className="py-2 md:py-5 px-4 flex justify-between border-l-4 border-transparent bg-transparent">
+        <div className="sm:pl-4 pr-8 flex sm:items-center w-56 md:w-10/12">
           <i
             className={classNames(
               task.completed
@@ -59,7 +54,7 @@ const TodoCard = ({
             <p
               className={classNames(
                 task.completed ? "text-cyan-500" : "text-black dark:text-white",
-                "text-lg tracking-tight pl-4 truncate"
+                "text-lg tracking-tight pl-4 truncate mt-2 md:mt-0"
               )}
             >
               {task.name}
@@ -112,7 +107,9 @@ const TodoCard = ({
               task.completed
                 ? "text-cyan-500 hover:text-black dark:hover:text-white"
                 : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
-              task.edit ? "text-cyan-500 hover:text-black dark:hover:text-white" : "",
+              task.edit
+                ? "text-cyan-500 hover:text-black dark:hover:text-white"
+                : "",
               "ri-menu-line ri-xl mr-4 mb-1"
             )}
           ></i>
