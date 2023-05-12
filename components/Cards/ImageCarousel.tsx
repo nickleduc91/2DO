@@ -5,11 +5,11 @@ import "react-multi-carousel/lib/styles.css";
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 4000, min: 3000 },
-    items: 3,
+    items: 4,
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 3,
+    items: 4,
   },
   tablet: {
     breakpoint: { max: 1024, min: 640 },
@@ -47,12 +47,15 @@ export const ImageCarousel = ({ icons }: CarouselProps) => {
           responsive={responsive}
         >
           {icons.map((item, index) => (
-            <div key={index} className="pointer-events-none flex flex-col items-center justify-center">
-              <div className="flex">
+            <div
+              key={index}
+              className="pointer-events-none flex flex-col items-center justify-center"
+            >
+              <div className="flex text-cyan-500">
                 <i className={item.icon}></i>
               </div>
               <div className="flex pt-8">
-                <p className="-mt-12 text-cyan-400 font-bold text-2xl uppercase">
+                <p className="-mt-12 text-xl font-bold leading-5 text-black">
                   {item.name}
                 </p>
               </div>

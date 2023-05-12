@@ -37,12 +37,36 @@ const icons = [
 
 const BestUses = () => {
   return (
-    <div className="text-gray-400">
-      <div>
-        <h3 className="text-center text-black dark:text-white text-3xl md:text-3xl xl:text-4xl font-bold tracking-tight">
-          Productive Uses for
-          <span className="text-cyan-500"> TwoDue</span>
-        </h3>
+    <div className="pt-24 text-gray-400 px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+      <div className="mb-10 md:mx-auto sm:text-center md:mb-12">
+        <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 dark:text-white sm:text-4xl md:mx-auto">
+          <span className="relative inline-block">
+            <svg
+              viewBox="0 0 52 24"
+              fill="currentColor"
+              className="fill-cyan-500 absolute top-0 left-0 z-0 hidden w-32 -mt-8 -ml-20 text-blue-gray-100 lg:w-32 lg:-ml-28 lg:-mt-10 sm:block"
+            >
+              <defs>
+                <pattern
+                  id="ea469ae8-e6ec-4aca-8875-fc402da4d16e"
+                  x="0"
+                  y="0"
+                  width=".135"
+                  height=".30"
+                >
+                  <circle cx="1" cy="1" r=".7" />
+                </pattern>
+              </defs>
+              <rect
+                fill="url(#ea469ae8-e6ec-4aca-8875-fc402da4d16e)"
+                width="52"
+                height="24"
+              />
+            </svg>
+            <span className="relative">Productive</span>
+          </span>{" "}
+          uses for <span className="text-cyan-500">TwoDue</span>
+        </h2>
         <ImageCarousel icons={icons} />
       </div>
     </div>
