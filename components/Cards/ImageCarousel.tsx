@@ -55,7 +55,7 @@ export const ImageCarousel = ({ icons }: CarouselProps) => {
                 <i className={item.icon}></i>
               </div>
               <div className="flex pt-8">
-                <p className="-mt-12 text-xl font-bold leading-5 text-black">
+                <p className="-mt-12 text-xl font-sans leading-5 text-black">
                   {item.name}
                 </p>
               </div>
