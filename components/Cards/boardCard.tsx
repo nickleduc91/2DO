@@ -19,7 +19,7 @@ const BoardCard = ({ board, handleRemoveBoard }: any) => {
     }
     return (getCompletedCount(board) / board.tasks.length) * 100;
   };
-  console.log(board.tasks.length, getCompletedCount(board));
+
   return (
     <div className="mx-auto w-full max-w-md py-4 px-4 justify-center items-center animate-wiggle">
       <div className="h-52 flex flex-col justify-between rounded-3xl bg-white dark:bg-slate-800 shadow-xl mb-6 py-5 px-4">

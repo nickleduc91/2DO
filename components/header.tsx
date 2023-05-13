@@ -1,6 +1,4 @@
 import { signOut } from "next-auth/react";
-import Image from "next/image";
-import Logo from "../public/todo-image.png";
 import { useRouter } from "next/router";
 
 import { Fragment } from "react";
