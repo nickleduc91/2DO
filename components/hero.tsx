@@ -23,7 +23,7 @@ const Hero = ({ isSession }: any) => {
                       fill="currentColor"
                     />
                   </svg>
-                  Organizaing Tasks.
+                  Organizing Tasks.
                 </span>
               </h1>
               <p className="mx-auto mt-12 max-w-md leading-7 text-gray-600 dark:text-gray-200">
