@@ -9,7 +9,6 @@ export default async (req, res) => {
     const board = await db.collection("boards").findOne({
       _id: ObjectId(id),
     });
-
     res.status(200).json(board);
   } catch (e) {
     res.status(500).send("Internal server error");

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import TodoCard from "./Cards/todoCard";
+import Sidebar from "./sideBar";
 
 import {
   DndContext,
@@ -21,7 +22,7 @@ interface IFormInput {
   editedTask: string;
 }
 
-const Tasks = ({ board }: any) => {
+const Tasks = ({ board, task }: any) => {
   const { register, handleSubmit, reset } = useForm<IFormInput>();
   const [tasks, setTask] = useState(board.tasks);
 
@@ -29,7 +30,10 @@ const Tasks = ({ board }: any) => {
     if (!newTask || /^\s*$/.test(newTask)) {
       return;
     }
-    setTask([{ name: newTask, completed: false, id: Date.now() }, ...tasks]);
+    setTask([
+      { name: newTask, completed: false, id: Date.now(), subTasks: [] },
+      ...tasks,
+    ]);
     axios({
       method: "post",
       url: "/api/tasks/addTask",
@@ -38,6 +42,8 @@ const Tasks = ({ board }: any) => {
           name: newTask,
           completed: false,
           id: Date.now(),
+          description: null,
+          subTasks: [],
         },
         boardId: board._id,
       },
@@ -80,16 +86,6 @@ const Tasks = ({ board }: any) => {
         boardId: board._id,
         tasks: updatedTasks,
       },
-    });
-    setTask(updatedTasks);
-  };
-
-  const editTask = (id: any, edit: boolean) => {
-    const updatedTasks = tasks.map((task: any) => {
-      if (task.id == id) {
-        task["edit"] = !edit;
-      }
-      return task;
     });
     setTask(updatedTasks);
   };
@@ -137,6 +133,7 @@ const Tasks = ({ board }: any) => {
     }
   };
 
+
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -147,13 +144,12 @@ const Tasks = ({ board }: any) => {
 
   return (
     <div className="mx-auto w-full max-w-5xl">
-      <h1 className="pt-12 pb-2 font-semibold text-4xl text-cyan-500 text-center pb-12">
+      {task ? <Sidebar board={board} task={task} /> : null}
+      <h1 className="pt-5 pb-4 font-semibold text-4xl text-cyan-500 text-center">
         {board.name}
       </h1>
       <div className="rounded-xl shadow-xl bg-white dark:bg-slate-800 mb-8">
-        <div
-          className={`py-5 px-4 flex justify-between border-l-4 border-transparent bg-transparent`}
-        >
+        <div className="py-4 px-4 flex justify-between border-l-4 border-transparent bg-transparent">
           <form
             className="sm:pl-4 pr-8 flex sm:items-center w-full"
             onSubmit={handleSubmit(onSubmit)}
@@ -187,8 +183,10 @@ const Tasks = ({ board }: any) => {
                 task={task}
                 handleRemoveTask={removeTask}
                 handleCompleteTask={completeTask}
-                handleEditTask={editTask}
                 handleSubmitEditedTask={submitEditedTask}
+                boardId={board._id}
+                cardClass="md:py-3.5 px-4 flex justify-between border-transparent bg-transparent"
+                isSubTask={false}
               />
             ))}
           </ul>
