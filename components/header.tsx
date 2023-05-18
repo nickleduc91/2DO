@@ -169,7 +169,7 @@ export default function Header({ isSession, user }: any) {
             >
               <Menu.Items className="absolute right-0 mt-2 w-28 origin-top-right rounded-md bg-zinc-900 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 {headers.map((item: any) => (
-                  <Menu.Item>
+                  <Menu.Item key={item.href}>
                     {({ active }) => (
                       <a
                         href={item.href}

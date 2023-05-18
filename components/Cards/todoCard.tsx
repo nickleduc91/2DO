@@ -1,6 +1,10 @@
-import { useForm } from "react-hook-form";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import React, { useState } from "react";
+import { Fragment } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { Transition, Menu } from "@headlessui/react";
 
 interface IFormInput {
   newTask: string;
@@ -15,10 +19,10 @@ const TodoCard = ({
   task,
   handleRemoveTask,
   handleCompleteTask,
-  handleEditTask,
-  handleSubmitEditedTask,
+  cardClass,
+  isSubTask,
 }: any) => {
-  const { register, handleSubmit } = useForm<IFormInput>();
+  const router = useRouter();
 
   const { setNodeRef, attributes, listeners, transition, transform } =
     useSortable({ id: task.id });
@@ -28,94 +32,146 @@ const TodoCard = ({
   };
 
   return (
-    <li
-      className="rounded-full shadow-lg bg-white dark:bg-slate-800 mb-7"
-      ref={setNodeRef}
-      style={style}
-      {...attributes}
-      {...listeners}
-    >
-      <div className="py-2 md:py-5 px-4 flex justify-between border-l-4 border-transparent bg-transparent">
-        <div className="sm:pl-4 pr-8 flex sm:items-center w-56 md:w-10/12">
-          <i
+    <div>
+      <li
+        className={classNames(
+          isSubTask
+            ? "py-1 border-b-2 mb-3 w-full mx-auto"
+            : "py-1 rounded-full shadow-lg bg-white dark:bg-slate-800 mb-3 w-full mx-auto"
+        )}
+        ref={setNodeRef}
+        style={style}
+        {...attributes}
+        {...listeners}
+      >
+        <div className={cardClass}>
+          <div
             className={classNames(
-              task.completed
-                ? "text-cyan-500 hover:text-black dark:hover:text-white ri-checkbox-circle-line"
-                : task.edit
-                ? ""
-                : "hover:text-cyan-500 dark:hover:text-cyan-500 ri-checkbox-blank-circle-line text-black dark:text-white",
-              "ri-2x mr-4 flex"
+              isSubTask ? "w-44 xs:w-72 sm:w-full md:w-48 lg:w-80 xl:w-9/12" : "w-60 xs:w-9/12 sm:w-10/12 md:w-8/12 lg:w-9/12 xl:w-4/5",
+              "sm:pl-4 flex sm:items-center"
             )}
-            onClick={() =>
-              handleCompleteTask(task.id, task.completed, task.edit)
-            }
-          ></i>
-          {!task?.edit ? (
-            <p
-              className={classNames(
-                task.completed ? "text-cyan-500" : "text-black dark:text-white",
-                "text-lg tracking-tight pl-4 truncate mt-2 md:mt-0"
-              )}
-            >
-              {task.name}
-            </p>
-          ) : (
-            <form
-              className="sm:pl-4 pr-8 flex sm:items-center w-full"
-              onSubmit={handleSubmit((data) =>
-                handleSubmitEditedTask(data, task.id)
-              )}
-            >
-              <button
-                className="ri-add-line ri-2x hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white"
-                type="submit"
-              ></button>
-              <input
-                type="text"
-                {...register("editedTask")}
-                className="bg-transparent text-black dark:text-white bg-white border-b-2 ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 focus:outline-none"
-                placeholder={task.name}
-              />
-            </form>
-          )}
-        </div>
-
-        <div className="pr-4 flex flex-row justify-between items-end mb-3">
-          {!task.completed && (
+          >
             <i
               className={classNames(
                 task.completed
-                  ? "text-cyan-500"
-                  : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
-                task.edit ? "text-cyan-500 hover:text-cyan-500" : "",
-                "ri-pencil-line ri-xl mr-4 mb-1"
+                  ? "text-cyan-500 hover:text-black dark:hover:text-white ri-checkbox-circle-line"
+                  : task.edit
+                  ? ""
+                  : "hover:text-cyan-500 dark:hover:text-cyan-500 ri-checkbox-blank-circle-line text-black dark:text-white",
+                "ri-xl mr-4 flex pt-3.5 md:pt-0"
               )}
-              onClick={() => handleEditTask(task.id, task.edit)}
+              onClick={() =>
+                handleCompleteTask(task.id, task.completed, task.edit)
+              }
             ></i>
-          )}
-          <i
-            className={classNames(
-              task.completed
-                ? "text-cyan-500 hover:text-black dark:hover:text-white"
-                : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
-              "ri-delete-bin-2-line ri-xl mr-4 mb-1"
+            <div className="w-full">
+              <p
+                className={classNames(
+                  task.completed
+                    ? "text-cyan-500"
+                    : "text-black dark:text-white",
+                  isSubTask ? "text-md" : "text-lg",
+                  "tracking-tight pl-4 truncate mt-2 md:mt-0 font-normal "
+                )}
+              >
+                {task.name}
+              </p>
+            </div>
+          </div>
+
+          <div className="border-l-2 border-gray-500 md:pr-4 flex flex-row justify-between items-end pb-3 pl-2 md:pl-6 h-11 hidden md:flex">
+            {!isSubTask ? (
+              <Link
+                className={classNames(
+                  task.completed
+                    ? "text-cyan-500 hover:text-black dark:hover:text-white"
+                    : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
+                  "ri-git-merge-line ri-lg mr-2 md:mr-4"
+                )}
+                href={`${router.asPath}/${task.id}`}
+              ></Link>
+            ) : null}
+
+            <i
+              className={classNames(
+                task.completed
+                  ? "text-cyan-500 hover:text-black dark:hover:text-white"
+                  : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
+                "ri-delete-bin-2-line ri-xl mr-2 md:mr-4"
+              )}
+              onClick={() => handleRemoveTask(task.id)}
+            ></i>
+            <i
+              className={classNames(
+                task.completed
+                  ? "text-cyan-500 hover:text-black dark:hover:text-white"
+                  : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
+                task.edit
+                  ? "text-cyan-500 hover:text-black dark:hover:text-white"
+                  : "",
+                "ri-drag-move-2-fill ri-xl mr-2 md:mr-4"
+              )}
+            ></i>
+          </div>
+          <div className="md:hidden border-l-2 border-gray-500 -mr-3 md:pr-4 flex flex-row justify-between items-end pb-1.5 md:pl-6 h-11">
+            {!isSubTask ? (
+              <Menu
+                as="div"
+                className="flex-row relative inline-block text-left"
+              >
+                <Menu.Button className="inline-flex w-full justify-center rounded-md text-cyan-500 px-4 py-2 text-sm font-medium -mt-2">
+                  <i
+                    className={classNames(
+                      task.completed ? "text-cyan-500" : "text-black",
+                      "ri-menu-line ri-xl"
+                    )}
+                  ></i>
+                </Menu.Button>
+
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-200"
+                  enterFrom="opacity-0 translate-y-1"
+                  enterTo="opacity-100 translate-y-0"
+                  leave="transition ease-in duration-150"
+                  leaveFrom="opacity-100 translate-y-0"
+                  leaveTo="opacity-0 translate-y-1"
+                >
+                  <Menu.Items className="absolute right-0 w-28 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-40">
+                    <Menu.Item>
+                      <Link
+                        className="font-medium group flex w-full items-center rounded-md px-2 py-2 text-sm"
+                        href={`${router.asPath}/${task.id}`}
+                      >
+                        Open
+                      </Link>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <button
+                        className="font-medium group flex w-full items-center rounded-md px-2 py-2 text-sm"
+                        onClick={() => handleRemoveTask(task.id)}
+                      >
+                        Delete
+                      </button>
+                    </Menu.Item>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
+            ) : (
+              <i
+                className={classNames(
+                  task.completed
+                    ? "text-cyan-500 hover:text-black dark:hover:text-white"
+                    : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
+                  "ri-delete-bin-2-line ri-xl pr-1 pb-2 pl-2"
+                )}
+                onClick={() => handleRemoveTask(task.id)}
+              ></i>
             )}
-            onClick={() => handleRemoveTask(task.id)}
-          ></i>
-          <i
-            className={classNames(
-              task.completed
-                ? "text-cyan-500 hover:text-black dark:hover:text-white"
-                : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
-              task.edit
-                ? "text-cyan-500 hover:text-black dark:hover:text-white"
-                : "",
-              "ri-menu-line ri-xl mr-4 mb-1"
-            )}
-          ></i>
+          </div>
         </div>
-      </div>
-    </li>
+      </li>
+    </div>
   );
 };
 

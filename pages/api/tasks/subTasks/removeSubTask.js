@@ -1,4 +1,4 @@
-import { connectToDatabase } from "../../../lib/mongodb";
+import { connectToDatabase } from "../../../../lib/mongodb";
 import { ObjectId } from "mongodb";
 
 export default async function handler(req, res) {
@@ -6,10 +6,13 @@ export default async function handler(req, res) {
   let bodyObject = req.body;
 
   await db.collection("boards").updateOne(
-    { _id: ObjectId(bodyObject.boardId) },
+    {
+      _id: ObjectId(bodyObject.boardId),
+      "tasks.id": bodyObject.parentId,
+    },
     {
       $set: {
-        tasks: bodyObject.tasks,
+        "tasks.$.subTasks": bodyObject.tasks
       },
     }
   );
