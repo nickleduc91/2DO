@@ -162,7 +162,7 @@ const Sidebar = ({ board, task }: any) => {
       <Transition
         appear={true}
         show={showSidebar}
-        className={` max-w-4xl top-0 right-0 w-[95vw] md:w-[55vw] bg-white border-l-8 border-gray-200 px-8 pt-4  text-white fixed h-full z-40`}
+        className={` max-w-4xl top-0 right-0 w-[95vw] md:w-[55vw] bg-white dark:bg-slate-800 border-l-8 border-gray-200 dark:border-gray-700 px-8 pt-4  text-white fixed h-full z-40`}
         enter="transform transition ease-in-out duration-670 "
         enterFrom="translate-x-full"
         enterTo="translate-x-0"
@@ -189,13 +189,12 @@ const Sidebar = ({ board, task }: any) => {
             </button>
           </div>
           <input
-            className="resize-none text-center text-cyan-500 font-semibold text-3xl w-full rounded-3xl bg-clip-padding transition ease-in-out bg-transparent focus:outline-none focus:border-cyan-500 border-2 border-transparent hover:border-cyan-500 py-2"
+            className="resize-none text-center text-cyan-500 font-semibold text-3xl w-full rounded-3xl bg-clip-padding transition ease-in-out bg-transparent focus:outline-none focus:border-cyan-500 border-2 border-transparent hover:border-cyan-500 py-4"
             placeholder="Task Name"
             defaultValue={taskName}
             onChange={handleTaskNameChange}
           />
-          <div className="">
-            <h4 className="text-center text-lg font-semibold">Description</h4>
+          <div className="pt-8">
             <textarea
               placeholder="add a description here ..."
               defaultValue={taskDescription}
@@ -205,9 +204,8 @@ const Sidebar = ({ board, task }: any) => {
             />
           </div>
           <div className="w-full">
-            <h4 className="text-center text-lg font-semibold">Sub-Tasks</h4>
-            <div className="dark:bg-slate-800 mb-8">
-              <div className="pl-4 py-5 flex justify-between border-transparent bg-transparent">
+            <div className="pb-4">
+              <div className="pl-4 py-8 flex justify-between border-transparent bg-transparent">
                 <form
                   className="pr-8 flex sm:items-center w-full"
                   onSubmit={handleSubmit(onSubmit)}

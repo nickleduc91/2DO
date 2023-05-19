@@ -36,18 +36,18 @@ const TodoCard = ({
       <li
         className={classNames(
           isSubTask
-            ? "py-1 border-b-2 mb-3 w-full mx-auto"
-            : "py-1 rounded-full shadow-lg bg-white dark:bg-slate-800 mb-3 w-full mx-auto"
+            ? "border-b-2 mb-3 w-full mx-auto"
+            : "rounded-full shadow-lg bg-white dark:bg-slate-800 mb-3 w-full mx-auto"
         )}
         ref={setNodeRef}
         style={style}
-        {...attributes}
-        {...listeners}
       >
         <div className={cardClass}>
           <div
             className={classNames(
-              isSubTask ? "w-44 xs:w-72 sm:w-full md:w-48 lg:w-80 xl:w-9/12" : "w-60 xs:w-9/12 sm:w-10/12 md:w-8/12 lg:w-9/12 xl:w-4/5",
+              isSubTask
+                ? "w-44 xs:w-72 sm:w-full md:w-48 lg:w-80 xl:w-9/12"
+                : "w-60 xs:w-9/12 sm:w-10/12 md:w-8/12 lg:w-9/12 xl:w-4/5",
               "sm:pl-4 flex sm:items-center"
             )}
           >
@@ -64,19 +64,33 @@ const TodoCard = ({
                 handleCompleteTask(task.id, task.completed, task.edit)
               }
             ></i>
-            <div className="w-full">
-              <p
-                className={classNames(
-                  task.completed
-                    ? "text-cyan-500"
-                    : "text-black dark:text-white",
-                  isSubTask ? "text-md" : "text-lg",
-                  "tracking-tight pl-4 truncate mt-2 md:mt-0 font-normal "
-                )}
-              >
-                {task.name}
-              </p>
-            </div>
+            {isSubTask ? (
+              <div className="w-full">
+                <p
+                  className={classNames(
+                    task.completed
+                      ? "text-cyan-500"
+                      : "text-black dark:text-white",
+                    "text-md tracking-tight pl-4 truncate mt-2 md:mt-0 font-normal"
+                  )}
+                >
+                  {task.name}
+                </p>
+              </div>
+            ) : (
+              <a className="w-full" href={`${router.asPath}/${task.id}`}>
+                <p
+                  className={classNames(
+                    task.completed
+                      ? "text-cyan-500"
+                      : "text-black dark:text-white",
+                    "text-lg tracking-tight pl-4 truncate mt-2 md:mt-0 font-normal border-b-2 border-transparent hover:border-cyan-500 cursor-pointer"
+                  )}
+                >
+                  {task.name}
+                </p>
+              </a>
+            )}
           </div>
 
           <div className="border-l-2 border-gray-500 md:pr-4 flex flex-row justify-between items-end pb-3 pl-2 md:pl-6 h-11 hidden md:flex">
@@ -111,6 +125,8 @@ const TodoCard = ({
                   : "",
                 "ri-drag-move-2-fill ri-xl mr-2 md:mr-4"
               )}
+              {...attributes}
+              {...listeners}
             ></i>
           </div>
           <div className="md:hidden border-l-2 border-gray-500 -mr-3 md:pr-4 flex flex-row justify-between items-end pb-1.5 md:pl-6 h-11">

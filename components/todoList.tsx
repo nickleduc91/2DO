@@ -10,6 +10,7 @@ import {
   useSensor,
   useSensors,
   PointerSensor,
+  DragOverlay
 } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -133,7 +134,6 @@ const Tasks = ({ board, task }: any) => {
     }
   };
 
-
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
@@ -185,7 +185,7 @@ const Tasks = ({ board, task }: any) => {
                 handleCompleteTask={completeTask}
                 handleSubmitEditedTask={submitEditedTask}
                 boardId={board._id}
-                cardClass="md:py-3.5 px-4 flex justify-between border-transparent bg-transparent"
+                cardClass="md:py-3 px-4 flex justify-between border-transparent bg-transparent"
                 isSubTask={false}
               />
             ))}
