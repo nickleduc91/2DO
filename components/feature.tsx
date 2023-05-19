@@ -30,10 +30,10 @@ const Feature = () => {
     <div className="bg-gray-100 dark:bg-slate-900 py-20 sm:py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mx-auto max-w-2xl lg:text-center">
-          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-4xl">
+          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
             How does <span className="text-cyan-500">TwoDue</span> benefit you?
           </p>
-          <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
+          <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-200">
             Being able to organize and keep track of your busy day is so
             important. Below are just a few ways TwoDue can satisfy that!
           </p>
@@ -42,13 +42,13 @@ const Feature = () => {
           <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
             {features.map((feature) => (
               <div key={feature.name} className="relative pl-16">
-                <dt className="text-base font-semibold leading-7 text-gray-900 dark:text-gray-200">
+                <dt className="text-base font-semibold leading-7 text-gray-900 dark:text-gray-100">
                   <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg">
                     <i className={`${feature.icon} ri-3x text-cyan-500`}></i>
                   </div>
                   {feature.name}
                 </dt>
-                <dd className="mt-2 text-base leading-7 text-gray-600 dark:text-gray-300">
+                <dd className="mt-2 text-base leading-7 text-gray-600 dark:text-gray-200">
                   {feature.description}
                 </dd>
               </div>
