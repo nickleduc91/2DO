@@ -125,7 +125,7 @@ const Sidebar = ({ board, task }: any) => {
     setShowSidebar(false);
     setTimeout(() => {
       router.replace(`/boards/${board._id}`);
-    }, 500);
+    }, 400);
   };
 
   const sensors = useSensors(
