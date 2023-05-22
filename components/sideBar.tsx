@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Transition, Dialog } from "@headlessui/react";
+import { Transition } from "@headlessui/react";
 import { useRouter } from "next/router";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
@@ -124,7 +124,6 @@ const Sidebar = ({ board, task }: any) => {
   const close = () => {
     setShowSidebar(false);
     router.replace(`/boards/${board._id}`);
-
   };
 
   const sensors = useSensors(

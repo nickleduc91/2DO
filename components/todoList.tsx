@@ -3,6 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import TodoCard from "./Cards/todoCard";
 import Sidebar from "./sideBar";
+import { Transition } from "@headlessui/react";
 
 import {
   DndContext,
@@ -185,7 +186,7 @@ const Tasks = ({ board, task }: any) => {
                 handleCompleteTask={completeTask}
                 handleSubmitEditedTask={submitEditedTask}
                 boardId={board._id}
-                cardClass="md:py-3 px-4 flex justify-between border-transparent bg-transparent"
+                cardClass="md:py-1 px-4 flex justify-between border-transparent bg-transparent"
                 isSubTask={false}
               />
             ))}

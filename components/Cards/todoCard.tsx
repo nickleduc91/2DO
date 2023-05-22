@@ -21,8 +21,10 @@ const TodoCard = ({
   handleCompleteTask,
   cardClass,
   isSubTask,
+  boardId,
 }: any) => {
   const router = useRouter();
+  const [effect, setEffect] = useState(false);
 
   const { setNodeRef, attributes, listeners, transition, transform } =
     useSortable({ id: task.id });
@@ -55,8 +57,6 @@ const TodoCard = ({
               className={classNames(
                 task.completed
                   ? "text-cyan-500 hover:text-black dark:hover:text-white ri-checkbox-circle-line"
-                  : task.edit
-                  ? ""
                   : "hover:text-cyan-500 dark:hover:text-cyan-500 ri-checkbox-blank-circle-line text-black dark:text-white",
                 "ri-xl mr-4 flex pt-3.5 md:pt-0"
               )}
@@ -78,7 +78,7 @@ const TodoCard = ({
                 </p>
               </div>
             ) : (
-              <a className="w-full" href={`${router.asPath}/${task.id}`}>
+              <Link className="w-full" href={`/boards/${boardId}/${task.id}`}>
                 <p
                   className={classNames(
                     task.completed
@@ -89,7 +89,7 @@ const TodoCard = ({
                 >
                   {task.name}
                 </p>
-              </a>
+              </Link>
             )}
           </div>
 
@@ -102,7 +102,7 @@ const TodoCard = ({
                     : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
                   "ri-git-merge-line ri-lg mr-2 md:mr-4"
                 )}
-                href={`${router.asPath}/${task.id}`}
+                href={`/boards/${boardId}/${task.id}`}
               ></Link>
             ) : null}
 
