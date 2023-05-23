@@ -24,7 +24,6 @@ const TodoCard = ({
   boardId,
 }: any) => {
   const router = useRouter();
-  const [effect, setEffect] = useState(false);
 
   const { setNodeRef, attributes, listeners, transition, transform } =
     useSortable({ id: task.id });
@@ -120,9 +119,6 @@ const TodoCard = ({
                 task.completed
                   ? "text-cyan-500 hover:text-black dark:hover:text-white"
                   : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
-                task.edit
-                  ? "text-cyan-500 hover:text-black dark:hover:text-white"
-                  : "",
                 "ri-drag-move-2-fill ri-xl mr-2 md:mr-4"
               )}
               {...attributes}
