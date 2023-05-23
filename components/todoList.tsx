@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import TodoCard from "./Cards/todoCard";
 import Sidebar from "./sideBar";
-import { Transition } from "@headlessui/react";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 import {
   DndContext,
@@ -11,7 +11,6 @@ import {
   useSensor,
   useSensors,
   PointerSensor,
-  DragOverlay
 } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -178,18 +177,26 @@ const Tasks = ({ board, task }: any) => {
           strategy={verticalListSortingStrategy}
         >
           <ul className="flex flex-col">
-            {tasks.map((task: any) => (
-              <TodoCard
-                key={task.id}
-                task={task}
-                handleRemoveTask={removeTask}
-                handleCompleteTask={completeTask}
-                handleSubmitEditedTask={submitEditedTask}
-                boardId={board._id}
-                cardClass="md:py-1 px-4 flex justify-between border-transparent bg-transparent"
-                isSubTask={false}
-              />
-            ))}
+            <TransitionGroup>
+              {tasks.map((task: any) => (
+                <CSSTransition
+                  key={task.id}
+                  timeout={200}
+                  classNames={"example"}
+                >
+                  <TodoCard
+                    key={task.id}
+                    task={task}
+                    handleRemoveTask={removeTask}
+                    handleCompleteTask={completeTask}
+                    handleSubmitEditedTask={submitEditedTask}
+                    boardId={board._id}
+                    cardClass="md:py-1 px-4 flex justify-between border-transparent bg-transparent"
+                    isSubTask={false}
+                  />
+                </CSSTransition>
+              ))}
+            </TransitionGroup>
           </ul>
         </SortableContext>
       </DndContext>
