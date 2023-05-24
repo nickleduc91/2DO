@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import BoardCard from "./Cards/boardCard";
 import Spinner from "./spinner";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -56,10 +57,7 @@ const BoardsTable = ({ userId, boards }: any) => {
         <h1 className="font-semibold text-4xl text-cyan-500 text-center mt-5 md:mr-12 md:mt-0">
           My Boards
         </h1>
-        <form
-          className="flex"
-          onSubmit={handleSubmit(onSubmit)}
-        >
+        <form className="flex" onSubmit={handleSubmit(onSubmit)}>
           <Spinner
             display={processing}
             bgColour="text-white"
@@ -87,8 +85,7 @@ const BoardsTable = ({ userId, boards }: any) => {
           </div>
         </form>
       </div>
-
-      <div
+      <TransitionGroup
         className={classNames(
           boardsData.length == 1
             ? "flex justify-center"
@@ -97,13 +94,15 @@ const BoardsTable = ({ userId, boards }: any) => {
         )}
       >
         {boardsData.map((board: any, index: any) => (
-          <BoardCard
-            key={index}
-            board={board}
-            handleRemoveBoard={removeBoard}
-          />
+          <CSSTransition key={board._id} timeout={200} classNames={"board"}>
+            <BoardCard
+              key={index}
+              board={board}
+              handleRemoveBoard={removeBoard}
+            />
+          </CSSTransition>
         ))}
-      </div>
+      </TransitionGroup>
     </div>
   );
 };

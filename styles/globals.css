@@ -20,3 +20,22 @@
   transform:translateX(-100%);
   transition: opacity 300ms, transform 300ms;
 }
+
+.board-enter {
+  opacity: 0;
+  transform:translateY(-100%);
+}
+.board-enter-active {
+  opacity: 1;
+  transform:translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.board-exit {
+  opacity: 1;
+  transform:translateY(0);
+}
+.board-exit-active {
+  opacity: 0;
+  transform:translateY(-100%);
+  transition: opacity 300ms, transform 300ms;
+}
