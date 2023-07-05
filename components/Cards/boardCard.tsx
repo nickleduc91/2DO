@@ -40,7 +40,7 @@ const BoardCard = ({ board, handleRemoveBoard }: any) => {
         <div className="flex items-center justify-between text-gray-800">
           <div className="shadow-slate-200 rounded-lg w-1/3">
             <div className="pr-1 flex items-center justify-between">
-              <span className="text-slate-400 dark:text-white text-sm text-slate-500">
+              <span className="dark:text-white text-sm text-slate-500">
                 Completion
               </span>
               <span

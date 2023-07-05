@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Transition } from "@headlessui/react";
+import { Transition, Dialog } from "@headlessui/react";
 import { useRouter } from "next/router";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
@@ -157,6 +157,7 @@ const Sidebar = ({ board, task }: any) => {
 
   return (
     <>
+    <Dialog open={true} onClose={close}>
       <Transition
         appear={true}
         show={showSidebar}
@@ -236,7 +237,7 @@ const Sidebar = ({ board, task }: any) => {
                         task={task}
                         handleRemoveTask={removeTask}
                         handleCompleteTask={completeTask}
-                        cardClass="px-2 flex justify-between border-transparent bg-transparent"
+                        cardClass="px-2 pb-3 flex justify-between border-transparent bg-transparent"
                         isSubTask={true}
                       />
                     ))}
@@ -247,6 +248,7 @@ const Sidebar = ({ board, task }: any) => {
           </div>
         </div>
       </Transition>
+      </Dialog>
     </>
   );
 };
