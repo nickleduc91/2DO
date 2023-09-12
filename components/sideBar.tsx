@@ -177,10 +177,14 @@ const Sidebar = ({ board, task }: any) => {
               data-mdb-ripple-color="light"
               role="button"
               onClick={
-                submitModal
+                task.name != taskName || task.description != taskDescription 
+                  ? submitModal
+                  : close
               }
             >
-              Save & Close
+              {task.name != taskName || task.description != taskDescription || task.subTasks != subTasks
+                  ? 'save'
+                  : 'close'}
             </button>
           </div>
           <textarea
