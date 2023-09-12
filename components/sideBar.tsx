@@ -161,35 +161,32 @@ const Sidebar = ({ board, task }: any) => {
       <Transition
         appear={true}
         show={showSidebar}
-        className={` max-w-4xl top-0 right-0 w-[95vw] md:w-[55vw] bg-white dark:bg-slate-800 border-l-8 border-gray-200 dark:border-gray-700 px-8 pt-4  text-white fixed h-full z-40`}
-        enter="transform transition ease-in-out duration-670 "
+        className='max-w-7xl top-0 right-0 w-[95vw] md:w-[65vw] bg-white dark:bg-slate-800 border-l-8 border-gray-200 dark:border-gray-700 px-8 pt-4  text-white fixed h-full z-40'
+        enter="transform transition ease-in-out duration-0"
         enterFrom="translate-x-full"
         enterTo="translate-x-0"
-        leave="transform transition ease-in-out duration-670"
+        leave="transform transition ease-in-out duration-0"
         leaveFrom="translate-x-0"
         leaveTo="translate-x-full"
       >
         <div className="overflow-y-auto h-full">
           <div className="group relative inline-flex pb-3">
             <button
-              className="inline-block px-6 py-2.5 mr-2 bg-cyan-500 text-white font-medium text-md leading-snug rounded shadow-md hover:bg-cyan-800 hover:shadow-lg focus:bg-cyan-800 focus:shadow-lg focus:outline-none focus:ring-0 active:cyan-800 active:shadow-lg transition duration-150 ease-in-out"
+              className="inline-block px-6 py-2.5 mr-2 bg-cyan-500 text-white font-medium text-md leading-snug rounded shadow-md hover:bg-cyan-800 hover:shadow-lg  focus:shadow-lg focus:outline-none focus:ring-0 active:cyan-800 active:shadow-lg transition duration-150 ease-in-out"
               data-mdb-ripple="true"
               data-mdb-ripple-color="light"
               role="button"
               onClick={
-                task.name != taskName || task.description != taskDescription
-                  ? submitModal
-                  : close
+                submitModal
               }
             >
-              {task.name != taskName || task.description != taskDescription
-                ? "Save & Close"
-                : "Close"}
+              Save & Close
             </button>
           </div>
-          <input
+          <textarea
             className="resize-none text-center text-cyan-500 font-semibold text-3xl w-full rounded-3xl bg-clip-padding transition ease-in-out bg-transparent focus:outline-none focus:border-cyan-500 border-2 border-transparent hover:border-cyan-500 py-4"
             placeholder="Task Name"
+            rows={2}
             defaultValue={taskName}
             onChange={handleTaskNameChange}
           />
@@ -199,7 +196,7 @@ const Sidebar = ({ board, task }: any) => {
               defaultValue={taskDescription}
               onChange={handleDescriptionChange}
               rows={5}
-              className="resize-none text-center pt-6 text-lg bg-transparent text-gray-600 dark:text-white form-control block w-full py-2 text-lg bg-clip-padding transition ease-in-out m-0 dark:focus:border-cyan-500 focus:outline-none border-2 rounded-3xl"
+              className="hover:border-cyan-500 focus:border-cyan-500 resize-none text-center pt-6 bg-transparent text-gray-600 dark:text-white form-control block w-full py-2 text-lg bg-clip-padding transition ease-in-out m-0 dark:focus:border-cyan-500 focus:outline-none border-2 rounded-3xl"
             />
           </div>
           <div className="w-full">
