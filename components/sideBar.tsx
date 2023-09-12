@@ -183,8 +183,8 @@ const Sidebar = ({ board, task }: any) => {
               }
             >
               {task.name != taskName || task.description != taskDescription || task.subTasks != subTasks
-                  ? 'save'
-                  : 'close'}
+                  ? 'Save & Close'
+                  : 'Close'}
             </button>
           </div>
           <textarea
