@@ -42,7 +42,11 @@ const Sidebar = ({ board, task }: any) => {
   };
 
   const handleDescriptionChange = (event: any) => {
-    setTaskDescription(event.target.value);
+    if(event.target.value == "") {
+      setTaskDescription(null);
+    } else {
+      setTaskDescription(event.target.value)
+    }
   };
 
   const onSubmit: SubmitHandler<IFormInput> = async ({ newTask }) => {
@@ -157,98 +161,100 @@ const Sidebar = ({ board, task }: any) => {
 
   return (
     <>
-    <Dialog open={true} onClose={close}>
-      <Transition
-        appear={true}
-        show={showSidebar}
-        className='max-w-7xl top-0 right-0 w-[95vw] md:w-[65vw] bg-white dark:bg-slate-800 border-l-8 border-gray-200 dark:border-gray-700 px-8 pt-4  text-white fixed h-full z-40'
-        enter="transform transition ease-in-out duration-0"
-        enterFrom="translate-x-full"
-        enterTo="translate-x-0"
-        leave="transform transition ease-in-out duration-0"
-        leaveFrom="translate-x-0"
-        leaveTo="translate-x-full"
-      >
-        <div className="overflow-y-auto h-full">
-          <div className="group relative inline-flex pb-3">
-            <button
-              className="inline-block px-6 py-2.5 mr-2 bg-cyan-500 text-white font-medium text-md leading-snug rounded shadow-md hover:bg-cyan-800 hover:shadow-lg  focus:shadow-lg focus:outline-none focus:ring-0 active:cyan-800 active:shadow-lg transition duration-150 ease-in-out"
-              data-mdb-ripple="true"
-              data-mdb-ripple-color="light"
-              role="button"
-              onClick={
-                task.name != taskName || task.description != taskDescription 
-                  ? submitModal
-                  : close
-              }
-            >
-              {task.name != taskName || task.description != taskDescription || task.subTasks != subTasks
-                  ? 'Save & Close'
-                  : 'Close'}
-            </button>
-          </div>
-          <textarea
-            className="resize-none text-center text-cyan-500 font-semibold text-3xl w-full rounded-3xl bg-clip-padding transition ease-in-out bg-transparent focus:outline-none focus:border-cyan-500 border-2 border-transparent hover:border-cyan-500 py-4"
-            placeholder="Task Name"
-            rows={2}
-            defaultValue={taskName}
-            onChange={handleTaskNameChange}
-          />
-          <div className="pt-8">
-            <textarea
-              placeholder="add a description here ..."
-              defaultValue={taskDescription}
-              onChange={handleDescriptionChange}
-              rows={5}
-              className="hover:border-cyan-500 focus:border-cyan-500 resize-none text-center pt-6 bg-transparent text-gray-600 dark:text-white form-control block w-full py-2 text-lg bg-clip-padding transition ease-in-out m-0 dark:focus:border-cyan-500 focus:outline-none border-2 rounded-3xl"
-            />
-          </div>
-          <div className="w-full">
-            <div className="pb-4">
-              <div className="pl-4 py-8 flex justify-between border-transparent bg-transparent">
-                <form
-                  className="pr-8 flex sm:items-center w-full"
-                  onSubmit={handleSubmit(onSubmit)}
-                >
-                  <button
-                    className="ri-add-line ri-xl hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white"
-                    type="submit"
-                  ></button>
-                  <input
-                    type="text"
-                    {...register("newTask")}
-                    className="text-base bg-transparent text-black dark:text-white border-b-2 border-black dark:border-white form-control block w-full px-4 py-1 text-lg bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
-                    placeholder="New sub-task"
-                  />
-                </form>
-              </div>
-              <DndContext
-                sensors={sensors}
-                collisionDetection={closestCenter}
-                onDragEnd={handleDragEnd}
+      <Dialog open={true} onClose={close}>
+        <Transition
+          appear={true}
+          show={showSidebar}
+          className="max-w-7xl top-0 right-0 w-[95vw] md:w-[65vw] bg-white dark:bg-slate-800 border-l-8 border-gray-200 dark:border-gray-700 px-8 pt-4  text-white fixed h-full z-40"
+          enter="transform transition ease-in-out duration-0"
+          enterFrom="translate-x-full"
+          enterTo="translate-x-0"
+          leave="transform transition ease-in-out duration-0"
+          leaveFrom="translate-x-0"
+          leaveTo="translate-x-full"
+        >
+          <div className="overflow-y-auto h-full">
+            <div className="group relative inline-flex pb-3">
+              <button
+                className="inline-block px-6 py-2.5 mr-2 bg-cyan-500 text-white font-medium text-md leading-snug rounded shadow-md hover:bg-cyan-800 hover:shadow-lg  focus:shadow-lg focus:outline-none focus:ring-0 active:cyan-800 active:shadow-lg transition duration-150 ease-in-out"
+                data-mdb-ripple="true"
+                data-mdb-ripple-color="light"
+                role="button"
+                onClick={
+                  task.name != taskName || task.description != taskDescription
+                    ? submitModal
+                    : close
+                }
               >
-                <SortableContext
-                  items={subTasks.map((task: any) => task.id)}
-                  strategy={verticalListSortingStrategy}
+                {task.name != taskName ||
+                task.description != taskDescription ||
+                task.subTasks != subTasks
+                  ? "Save & Close"
+                  : "Close"}
+              </button>
+            </div>
+            <textarea
+              className="resize-none text-center text-cyan-500 font-semibold text-3xl w-full rounded-3xl bg-clip-padding transition ease-in-out bg-transparent focus:outline-none focus:border-cyan-500 border-2 border-transparent hover:border-cyan-500 py-4"
+              placeholder="Task Name"
+              rows={2}
+              defaultValue={taskName}
+              onChange={handleTaskNameChange}
+            />
+            <div className="pt-8">
+              <textarea
+                placeholder="add a description here ..."
+                defaultValue={taskDescription}
+                onChange={handleDescriptionChange}
+                rows={5}
+                className="hover:border-cyan-500 focus:border-cyan-500 resize-none text-center pt-6 bg-transparent text-gray-600 dark:text-white form-control block w-full py-2 text-lg bg-clip-padding transition ease-in-out m-0 dark:focus:border-cyan-500 focus:outline-none border-2 rounded-3xl"
+              />
+            </div>
+            <div className="w-full">
+              <div className="pb-4">
+                <div className="pl-4 py-8 flex justify-between border-transparent bg-transparent">
+                  <form
+                    className="pr-8 flex sm:items-center w-full"
+                    onSubmit={handleSubmit(onSubmit)}
+                  >
+                    <button
+                      className="ri-add-line ri-xl hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white"
+                      type="submit"
+                    ></button>
+                    <input
+                      type="text"
+                      {...register("newTask")}
+                      className="text-base bg-transparent text-black dark:text-white border-b-2 border-black dark:border-white form-control block w-full px-4 py-1 text-lg bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
+                      placeholder="New sub-task"
+                    />
+                  </form>
+                </div>
+                <DndContext
+                  sensors={sensors}
+                  collisionDetection={closestCenter}
+                  onDragEnd={handleDragEnd}
                 >
-                  <ul className="flex flex-col">
-                    {subTasks.map((task: any) => (
-                      <TodoCard
-                        key={task.id}
-                        task={task}
-                        handleRemoveTask={removeTask}
-                        handleCompleteTask={completeTask}
-                        cardClass="px-2 pb-3 flex justify-between border-transparent bg-transparent"
-                        isSubTask={true}
-                      />
-                    ))}
-                  </ul>
-                </SortableContext>
-              </DndContext>
+                  <SortableContext
+                    items={subTasks.map((task: any) => task.id)}
+                    strategy={verticalListSortingStrategy}
+                  >
+                    <ul className="flex flex-col">
+                      {subTasks.map((task: any) => (
+                        <TodoCard
+                          key={task.id}
+                          task={task}
+                          handleRemoveTask={removeTask}
+                          handleCompleteTask={completeTask}
+                          cardClass="px-2 pb-3 flex justify-between border-transparent bg-transparent"
+                          isSubTask={true}
+                        />
+                      ))}
+                    </ul>
+                  </SortableContext>
+                </DndContext>
+              </div>
             </div>
           </div>
-        </div>
-      </Transition>
+        </Transition>
       </Dialog>
     </>
   );

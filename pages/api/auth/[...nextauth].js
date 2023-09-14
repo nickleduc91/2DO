@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
-import { connectToDatabase } from "../../../lib/mongodb";
+import connectToDatabase from "../../../lib/mongodb";
+import User from "../../../models/User";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions = {
@@ -14,36 +15,38 @@ export const authOptions = {
     CredentialsProvider({
       name: "Credentials",
       async authorize(credentials, req) {
-        // Add logic here to look up the user from the credentials supplied
-        const { db } = await connectToDatabase();
-        if (!credentials.register) {
-          const user = await db.collection("users").findOne({
-            username: credentials.username,
-            password: credentials.password,
-          });
+        await connectToDatabase();
 
-          if (user) {
-            return user;
+        if (!credentials.register) {
+          const user = await User.findOne({
+            username: credentials.username,
+          });
+          if (!user) {
+            return null;
           }
-          return null;
+          const isMatch = await user.matchPassword(credentials.password);
+          if (!isMatch) {
+            return null;
+          }
+          return user;
         } else {
-          const find = await db.collection("users").findOne({
+          const find = await User.findOne({
             username: credentials.username,
           });
           if (find) {
             return null;
           }
           //Create the user in the DB
-          const user = await db.collection("users").insertOne({
+          const createdUser = new User({
             username: credentials.username,
             password: credentials.password,
-            profile: {
-              firstName: credentials.firstName,
-              lastName: credentials.lastName,
-            },
-            theme: "dark"
+            firstName: credentials.firstName,
+            lastName: credentials.lastName,
+            theme: "light",
           });
-          return user.ops[0];
+
+          await createdUser.save();
+          return createdUser;
         }
       },
     }),
@@ -58,6 +61,6 @@ export const authOptions = {
       return session;
     },
   },
-  secret: process.env.NEXTAUTH_SECRET // SECRET env variable 
+  secret: process.env.NEXTAUTH_SECRET, // SECRET env variable
 };
 export default NextAuth(authOptions);

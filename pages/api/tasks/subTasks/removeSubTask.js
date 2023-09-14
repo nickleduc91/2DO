@@ -1,18 +1,17 @@
-import { connectToDatabase } from "../../../../lib/mongodb";
-import { ObjectId } from "mongodb";
+import connectToDatabase from "../../../../lib/mongodb";
+import Boards from "../../../../models/Boards";
 
 export default async function handler(req, res) {
-  const { db } = await connectToDatabase();
+  await connectToDatabase();
   let bodyObject = req.body;
-
-  await db.collection("boards").updateOne(
+  await Boards.updateOne(
     {
-      _id: ObjectId(bodyObject.boardId),
+      _id: bodyObject.boardId,
       "tasks.id": bodyObject.parentId,
     },
     {
       $set: {
-        "tasks.$.subTasks": bodyObject.tasks
+        "tasks.$.subTasks": bodyObject.tasks,
       },
     }
   );
