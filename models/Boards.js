@@ -7,6 +7,7 @@ const boardsSchema = new Schema({
   description: { type: String },
   tasks: [
     {
+      _id: false,
       name: {
         type: String,
         required: true,
@@ -21,10 +22,11 @@ const boardsSchema = new Schema({
       },
       description: {
         type: String,
-        required: true
+        required: true,
       },
       subTasks: [
         {
+          _id: false,
           name: {
             type: String,
             required: true,
