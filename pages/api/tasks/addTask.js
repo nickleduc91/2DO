@@ -1,14 +1,11 @@
-import { connectToDatabase } from "../../../lib/mongodb";
-import { ObjectId } from "mongodb";
+import connectToDatabase from "../../../lib/mongodb";
+import Boards from "../../../models/Boards";
 
 export default async function handler(req, res) {
-  const { db } = await connectToDatabase();
+  await connectToDatabase();
   let bodyObject = req.body;
-  await db
-    .collection("boards")
-    .updateOne(
-      { _id: ObjectId(bodyObject.boardId) },
-      { $push: { tasks: bodyObject.newTask } }
-    );
+  await Boards.findByIdAndUpdate(bodyObject.boardId, {
+    $push: { tasks: bodyObject.newTask },
+  });
   res.json("Added new task");
 }

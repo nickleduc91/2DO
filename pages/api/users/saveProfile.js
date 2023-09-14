@@ -1,8 +1,8 @@
-import { connectToDatabase } from "../../../lib/mongodb";
-import { ObjectId } from "mongodb";
+import connectToDatabase from "../../../lib/mongodb";
+import User from "../../../models/User";
 
 export default async function handler(req, res) {
-  const { db } = await connectToDatabase();
+  await connectToDatabase();
   let bodyObject = req.body;
   let update = {};
 
@@ -13,14 +13,12 @@ export default async function handler(req, res) {
     update["password"] = bodyObject.password;
   }
   if (bodyObject.firstName) {
-    update["profile.firstName"] = bodyObject.firstName;
+    update["firstName"] = bodyObject.firstName;
   }
   if (bodyObject.lastName) {
-    update["profile.lastName"] = bodyObject.lastName;
+    update["lastName"] = bodyObject.lastName;
   }
 
-  await db
-    .collection("users")
-    .updateOne({ _id: ObjectId(bodyObject.userId) }, { $set: update });
+  await User.updateOne({ _id: bodyObject.userId }, { $set: update });
   res.json("Updated User");
 }

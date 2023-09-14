@@ -1,8 +1,10 @@
-import { connectToDatabase } from "../../../lib/mongodb";
+import connectToDatabase from "../../../lib/mongodb";
+import Boards from "../../../models/Boards";
 
 export default async function handler(req, res) {
-  const {db} = await connectToDatabase()
+  await connectToDatabase();
   let bodyObject = req.body;
-  const board = await db.collection("boards").insertOne(bodyObject.newBoard);
-  res.json(board.ops[0]);
+  const newBoard = new Boards(bodyObject.newBoard);
+  await newBoard.save();
+  res.json(newBoard)
 }

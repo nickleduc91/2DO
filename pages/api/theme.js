@@ -1,11 +1,9 @@
-import { connectToDatabase } from "../../lib/mongodb";
-import { ObjectId } from "mongodb";
+import connectToDatabase from "../../lib/mongodb";
+import User from "../../models/User";
 
 export default async function handler(req, res) {
-  const { db } = await connectToDatabase();
+  await connectToDatabase();
   let bodyObject = req.body;
-  await db
-    .collection("users")
-    .updateOne({ _id: ObjectId(bodyObject.userId) }, { $set: {theme: bodyObject.theme} });
+  await User.findByIdAndUpdate(bodyObject.userId, {theme: bodyObject.theme})
   res.json("Updated User");
 }

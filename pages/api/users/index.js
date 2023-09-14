@@ -1,19 +1,20 @@
-import { connectToDatabase } from "../../../lib/mongodb";
+import connectToDatabase from "../../../lib/mongodb";
+import User from "../../../models/User";
 
 export default async (req, res) => {
   try {
-    const {db} = await connectToDatabase()
+    await connectToDatabase();
     const query = req.query;
     const { username } = query;
     let users;
     if (username) {
-      users = await db.collection("users").findOne({
-        username
+      users = await User.findOne({
+        username,
       });
     } else {
-      users = await db.collection("users").find({}).toArray();
+      users = await User.find({});
     }
-    res.json({ data: users });;
+    res.json({ data: users });
   } catch (e) {
     throw new Error(e).message;
   }

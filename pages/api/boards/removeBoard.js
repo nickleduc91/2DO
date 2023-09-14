@@ -1,12 +1,23 @@
-import { connectToDatabase } from "../../../lib/mongodb";
-import { ObjectId } from "mongodb";
+import connectToDatabase from "../../../lib/mongodb";
+import Boards from "../../../models/Boards";
 
 export default async function handler(req, res) {
-  const { db } = await connectToDatabase();
+  await connectToDatabase();
   let bodyObject = req.body;
   const { id } = bodyObject;
-  const board = await db.collection("boards").deleteOne({
-    _id: ObjectId(id),
-  });
-  res.json("Removed board");
+
+  try {
+    // Use findOneAndDelete to find and delete the board
+    const deletedBoard = await Boards.findOneAndDelete({ _id: id });
+    if (!deletedBoard) {
+      // If no board was found with the specified ID, send a 404 Not Found response
+      return res.status(404).json({ message: "Board not found" });
+    }
+    // Send a success response
+    res.status(200).json({ message: "Board deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    // Handle any errors and send an appropriate error response
+    res.status(500).json({ error: "Internal server error" });
+  }
 }

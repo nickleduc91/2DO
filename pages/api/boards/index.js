@@ -1,17 +1,13 @@
-import { connectToDatabase } from "../../../lib/mongodb";
+import connectToDatabase from "../../../lib/mongodb";
+import Boards from "../../../models/Boards";
 
 export default async (req, res) => {
   try {
-    const { db } = await connectToDatabase();
+    await connectToDatabase();
     const query = req.query;
     const { userId } = query;
-    const boards = await db
-      .collection("boards")
-      .find({
-        userId,
-      })
-      .toArray();
-    res.json({ data: boards });
+    const boards = await Boards.find({ userId });
+    res.status(200).json(boards);
   } catch (e) {
     throw new Error(e).message;
   }
