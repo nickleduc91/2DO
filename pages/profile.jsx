@@ -37,7 +37,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       user: userData,
-      boards: boardsData.data,
+      boards: boardsData,
     },
   };
 }

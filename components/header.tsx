@@ -11,10 +11,10 @@ const headers = [
     name: "Boards",
     href: "/boards",
   },
-  {
-    name: "Profile",
-    href: "/profile",
-  },
+  // {
+  //   name: "Profile",
+  //   href: "/profile",
+  // },
   {
     name: "About",
     href: "/about",
@@ -82,7 +82,7 @@ export default function Header({ isSession, user }: any) {
               >
                 Boards
               </a>
-              <a
+              {/* <a
                 href="/profile"
                 className={classNames(
                   router.pathname == "/profile"
@@ -92,7 +92,7 @@ export default function Header({ isSession, user }: any) {
                 )}
               >
                 Profile
-              </a>
+              </a> */}
               <a
                 href="/about"
                 className={classNames(

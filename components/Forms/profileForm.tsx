@@ -6,14 +6,13 @@ const ProfileForm = ({ user, boards }: any) => {
   const { register, handleSubmit } = useForm();
   const [fields, setFields] = useState([
     { placeholder: user.username, register: "username", header: "Username" },
-    { placeholder: user.password, register: "password", header: "Password" },
     {
-      placeholder: user.profile.firstName,
+      placeholder: user.firstName,
       register: "firstName",
       header: "First Name",
     },
     {
-      placeholder: user.profile.lastName,
+      placeholder: user.lastName,
       register: "lastName",
       header: "Last Name",
     },
@@ -74,7 +73,7 @@ const ProfileForm = ({ user, boards }: any) => {
   };
 
   return (
-    <div className="flex justify-center mx-auto w-full max-w-5xl pt-12 pb-12 grid grid-cols-2 text-black dark:text-white">
+    <div className="justify-center mx-auto w-full max-w-5xl pt-12 pb-12 grid grid-cols-2 text-black dark:text-white">
       <div className="ml-12">
         <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
           {fields.map((field: any, index: number) => (

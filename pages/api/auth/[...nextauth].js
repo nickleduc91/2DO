@@ -20,13 +20,15 @@ export const authOptions = {
         if (!credentials.register) {
           const user = await User.findOne({
             username: credentials.username,
-            password: credentials.password,
           });
-
-          if (user) {
-            return user;
+          if (!user) {
+            return null;
           }
-          return null;
+          const isMatch = await user.matchPassword(credentials.password);
+          if (!isMatch) {
+            return null;
+          }
+          return user;
         } else {
           const find = await User.findOne({
             username: credentials.username,
