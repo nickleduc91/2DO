@@ -127,7 +127,7 @@ const Sidebar = ({ board, task }: any) => {
 
   const close = () => {
     setShowSidebar(false);
-    router.replace(`/boards/${board._id}`);
+    router.push(`/boards/${board._id}`)
   };
 
   const sensors = useSensors(
