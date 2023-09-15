@@ -25,21 +25,12 @@ export async function getServerSideProps(context) {
   let isSession;
   session ? (isSession = true) : (isSession = false);
 
-  //fetch user
-  let userData = {}
-  if(isSession) {
-    const user = await fetch(`${process.env.URL}/api/users/${session.user.id}`);
-    userData = await user.json();
-  }
-
   return {
     props: {
       isSession,
-      user: userData,
+      user: isSession ? session.user : {},
     },
   };
 }
 
 export default Home;
-
-// Remove the theme value from session and fetch the user data instead.

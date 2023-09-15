@@ -26,17 +26,13 @@ export async function getServerSideProps(context) {
   }
   //fetch for boards based off id
   const boards = await fetch(
-    `${process.env.URL}/api/boards?userId=${session.user.id}`
+    `${process.env.URL}/api/boards?userId=${session.user._id}`
   );
   const boardsData = await boards.json();
 
-  //fetch user
-  const user = await fetch(`${process.env.URL}/api/users/${session.user?.id}`);
-  const userData = await user.json();
-
   return {
     props: {
-      user: userData,
+      user: session.user,
       boards: boardsData,
     },
   };

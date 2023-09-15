@@ -17,12 +17,9 @@ export default Login;
 export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions);
   if (session) {
-    //fetch user
-    const user = await fetch(`${process.env.URL}/api/users/${session.user.id}`);
-    const userData = await user.json();
     return {
       props: {
-        user: userData,
+        user: session.user,
       },
       redirect: {
         destination: "/boards",

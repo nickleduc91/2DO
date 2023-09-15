@@ -30,13 +30,9 @@ export async function getServerSideProps(context) {
   );
   const boardsData = await boards.json();
 
-  //fetch user
-  const user = await fetch(`${process.env.URL}/api/users/${session.user.id}`);
-  const userData = await user.json();
-
   return {
     props: {
-      user: userData,
+      user: session.user,
       boards: boardsData,
     },
   };
