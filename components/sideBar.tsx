@@ -165,10 +165,10 @@ const Sidebar = ({ board, task }: any) => {
           appear={true}
           show={showSidebar}
           className="max-w-7xl top-0 right-0 w-[95vw] md:w-[65vw] bg-white dark:bg-slate-800 border-l-8 border-gray-200 dark:border-gray-700 px-8 pt-4  text-white fixed h-full z-40"
-          enter="transform transition ease-in-out duration-0"
+          enter="transform transition ease-in-out duration-150"
           enterFrom="translate-x-full"
           enterTo="translate-x-0"
-          leave="transform transition ease-in-out duration-0"
+          leave="transform transition ease-in-out duration-150"
           leaveFrom="translate-x-0"
           leaveTo="translate-x-full"
         >

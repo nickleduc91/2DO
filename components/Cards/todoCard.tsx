@@ -1,6 +1,5 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import React, { useState } from "react";
 import { Fragment } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
