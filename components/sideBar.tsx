@@ -83,8 +83,7 @@ const Sidebar = ({ board, task }: any) => {
         taskName,
         taskDescription,
       },
-    });
-    close();
+    }).then(close);
   };
 
   const removeTask = (id: any) => {
