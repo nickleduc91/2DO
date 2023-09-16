@@ -92,7 +92,7 @@ const TodoCard = ({
             )}
           </div>
 
-          <div className="border-l-2 border-gray-500 md:pr-4 flex flex-row justify-between items-end pb-3 pl-2 md:pl-6 h-11 hidden md:flex">
+          <div className="border-l-2 border-gray-500 md:pr-4 flex-row justify-between items-end pb-3 pl-2 md:pl-6 h-11 hidden md:flex">
             {!isSubTask ? (
               <Link
                 className={classNames(

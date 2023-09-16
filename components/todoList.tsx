@@ -91,29 +91,6 @@ const Tasks = ({ board, task }: any) => {
     setTask(updatedTasks);
   };
 
-  const submitEditedTask: SubmitHandler<IFormInput> = async (data, id) => {
-    if (!data.editedTask || /^\s*$/.test(data.editedTask)) {
-      return;
-    }
-    const updatedTasks = tasks.map((task: any) => {
-      if (task.id == id) {
-        task["edit"] = false;
-        task["name"] = data.editedTask;
-      }
-      return task;
-    });
-    axios({
-      method: "post",
-      url: "/api/tasks/editTask",
-      data: {
-        taskId: id,
-        boardId: board._id,
-        newName: data.editedTask,
-      },
-    });
-    setTask(updatedTasks);
-  };
-
   const handleDragEnd = ({ active, over }: any) => {
     let updatedTasks;
     if (active.id !== over.id) {
@@ -189,7 +166,6 @@ const Tasks = ({ board, task }: any) => {
                     task={task}
                     handleRemoveTask={removeTask}
                     handleCompleteTask={completeTask}
-                    handleSubmitEditedTask={submitEditedTask}
                     boardId={board._id}
                     cardClass="md:py-1 px-4 flex justify-between border-transparent bg-transparent"
                     isSubTask={false}
