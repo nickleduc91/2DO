@@ -1,54 +1,53 @@
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import React, { useState } from "react";
+import { useSession } from "next-auth/react";
 
 const ProfileForm = ({ user, boards }: any) => {
   const { register, handleSubmit } = useForm();
-  const [fields, setFields] = useState([
-    { placeholder: user.username, register: "username", header: "Username" },
-    {
-      placeholder: user.firstName,
-      register: "firstName",
-      header: "First Name",
-    },
-    {
-      placeholder: user.lastName,
-      register: "lastName",
-      header: "Last Name",
-    },
-  ]);
-  const [disable, setDisable] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
+  const { data: session, update } = useSession();
 
-  const onSubmit = async ({ username, password, firstName, lastName }: any) => {
-    if (!username && !password && !firstName && !lastName) {
-      return;
-    }
+  const [firstName, setFirstName] = useState(user.firstName);
+  const [lastName, setlastName] = useState(user.lastName);
+  const [username, setUsername] = useState(user.username);
+
+  const handleFirstNameChange = (event: any) => {
+    setFirstName(event.target.value);
+    console.log(user.firstName);
+  };
+
+  const handleLastNameChange = (event: any) => {
+    setlastName(event.target.value);
+  };
+
+  const handleUsernameChange = (event: any) => {
+    setUsername(event.target.value);
+  };
+
+  const onSubmit = async () => {
     await axios({
       method: "post",
       url: "/api/users/saveProfile",
       data: {
         username,
-        password,
         firstName,
         lastName,
         userId: user._id,
       },
     });
-    if (username) {
-      fields[0].placeholder = username;
-    }
-    if (password) {
-      fields[1].placeholder = password;
-    }
-    if (firstName) {
-      fields[2].placeholder = firstName;
-    }
-    if (lastName) {
-      fields[3].placeholder = lastName;
-    }
-    setFields(fields);
+    updateSession();
   };
+
+  const updateSession = async () => {
+    await update({
+      user: {
+        firstName: firstName,
+        lastName: lastName,
+        username: username,
+      },
+    });
+  };
+
   const getTotalTasks = () => {
     let total = 0;
     boards.map((board: any) => {
@@ -74,29 +73,54 @@ const ProfileForm = ({ user, boards }: any) => {
 
   return (
     <div className="justify-center mx-auto w-full max-w-5xl pt-12 pb-12 grid grid-cols-2 text-black dark:text-white">
-      <div className="ml-12">
-        <form className="flex flex-col" onSubmit={handleSubmit(onSubmit)}>
-          {fields.map((field: any, index: number) => (
-            <div key={index}>
-              <p className="font-semibold text-xl text-cyan-500">
-                {field.header}
-              </p>
-              <input
-                {...register(field.register)}
-                className="font-medium bg-transparent w-64 placeholder-black dark:placeholder-white mb-12 text-black dark:text-white border-b-2 border-black dark:border-white ml-4 form-control block w-full px-4 py-2 text-xl bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
-                placeholder={field.placeholder}
-              />
-            </div>
-          ))}
-          <button
-            type="submit"
-            className="w-24 ml-20 cursor-pointer ml-8 inline-flex items-center justify-center whitespace-nowrap rounded-md border border-transparent bg-cyan-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-cyan-800"
-            disabled={disable}
-          >
-            Save
-          </button>
+      <div className="mt-20">
+        <form className="flex flex-col" >
+          <div>
+            <p className="font-semibold text-xl text-cyan-500">Username</p>
+            <input
+              {...register("username")}
+              className="hover:border-cyan-500 font-medium bg-transparent w-64 placeholder-black dark:placeholder-white mb-12 text-black dark:text-white border-b-2 border-black dark:border-white ml-4 form-control block px-4 py-2 text-xl bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
+              defaultValue={user.username}
+              onChange={handleUsernameChange}
+            />
+            <p className="font-semibold text-xl text-cyan-500">First Name</p>
+            <input
+              {...register("firstName")}
+              className="hover:border-cyan-500 font-medium bg-transparent w-64 placeholder-black dark:placeholder-white mb-12 text-black dark:text-white border-b-2 border-black dark:border-white ml-4 form-control block px-4 py-2 text-xl bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
+              defaultValue={user.firstName}
+              onChange={handleFirstNameChange}
+            />
+            <p className="font-semibold text-xl text-cyan-500">Last Name</p>
+            <input
+              {...register("lastName")}
+              className="hover:border-cyan-500 font-medium bg-transparent w-64 placeholder-black dark:placeholder-white mb-12 text-black dark:text-white border-b-2 border-black dark:border-white ml-4 form-control block px-4 py-2 text-xl bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
+              defaultValue={user.lastName}
+              onChange={handleLastNameChange}
+            />
+          </div>
+
+          {/* {firstName != user.firstName ||
+          lastName != user.lastName ||
+          username != user.username ? (
+            <button
+              type="submit"
+              className="-mt-3 w-1/2 ml-4 flex items-center justify-center cursor-pointer rounded-md border border-transparent bg-cyan-500 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-cyan-800"
+              onClick={onSubmit}
+            >
+              Update Profile
+            </button>
+          ) : (
+            <button
+              type="submit"
+              className="-mt-3 w-1/2 ml-4 flex items-center justify-center  rounded-md border border-transparent bg-cyan-800 px-4 py-2 text-base font-medium text-white shadow-sm"
+              disabled={true}
+            >
+              Update Profile
+            </button>
+          )} */}
         </form>
       </div>
+
       <div className="ml-24">
         <section className="mb-32 text-center">
           <div className="pt-24 grid lg:gap-x-20 md:grid-cols-2">
@@ -107,7 +131,9 @@ const ProfileForm = ({ user, boards }: any) => {
               <h3 className="text-2xl font-bold text-cyan-500 mb-4">
                 {boards.length}
               </h3>
-              <h5 className="text-lg font-medium text-black dark:text-white">Total Boards</h5>
+              <h5 className="text-lg font-medium text-black dark:text-white">
+                Total Boards
+              </h5>
             </div>
 
             <div className="mb-12 md:mb-0">
@@ -117,7 +143,9 @@ const ProfileForm = ({ user, boards }: any) => {
               <h3 className="text-2xl font-bold text-cyan-500 mb-4">
                 {getTotalTasks()}
               </h3>
-              <h5 className="text-lg font-medium text-black dark:text-white">Total Tasks</h5>
+              <h5 className="text-lg font-medium text-black dark:text-white">
+                Total Tasks
+              </h5>
             </div>
 
             <div className="mt-12 mb-12 md:mb-0">

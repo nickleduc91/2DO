@@ -16,6 +16,7 @@ const Profile = ({ user, boards }) => {
 
 export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions);
+
   if (!session) {
     return {
       redirect: {
@@ -26,7 +27,7 @@ export async function getServerSideProps(context) {
   }
 
   const boards = await fetch(
-    `${process.env.URL}/api/boards?userId=${session.user.id}`
+    `${process.env.URL}/api/boards?userId=${session.user._id}`
   );
   const boardsData = await boards.json();
 
