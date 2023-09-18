@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import TodoCard from "./Cards/todoCard";
+import { restrictToFirstScrollableAncestor } from "@dnd-kit/modifiers";
 
 import {
   DndContext,
@@ -231,6 +232,7 @@ const Sidebar = ({ board, task }: any) => {
                   sensors={sensors}
                   collisionDetection={closestCenter}
                   onDragEnd={handleDragEnd}
+                  modifiers={[restrictToFirstScrollableAncestor]}
                 >
                   <SortableContext
                     items={subTasks.map((task: any) => task.id)}

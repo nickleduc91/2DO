@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import TodoCard from "./Cards/todoCard";
 import Sidebar from "./sideBar";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { restrictToFirstScrollableAncestor } from "@dnd-kit/modifiers";
 
 import {
   DndContext,
@@ -148,33 +148,26 @@ const Tasks = ({ board, task }: any) => {
         sensors={sensors}
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
+        modifiers={[restrictToFirstScrollableAncestor]}
       >
-        <SortableContext
-          items={tasks.map((task: any) => task.id)}
-          strategy={verticalListSortingStrategy}
-        >
-          <ul className="flex flex-col">
-            <TransitionGroup>
-              {tasks.map((task: any) => (
-                <CSSTransition
-                  key={task.id}
-                  timeout={200}
-                  classNames={"example"}
-                >
-                  <TodoCard
-                    key={task.id}
-                    task={task}
-                    handleRemoveTask={removeTask}
-                    handleCompleteTask={completeTask}
-                    boardId={board._id}
-                    cardClass="md:py-1 px-4 flex justify-between border-transparent bg-transparent"
-                    isSubTask={false}
-                  />
-                </CSSTransition>
-              ))}
-            </TransitionGroup>
-          </ul>
-        </SortableContext>
+        <ul className="flex flex-col">
+          <SortableContext
+            items={tasks.map((task: any) => task.id)}
+            strategy={verticalListSortingStrategy}
+          >
+            {tasks.map((task: any) => (
+              <TodoCard
+                key={task.id}
+                task={task}
+                handleRemoveTask={removeTask}
+                handleCompleteTask={completeTask}
+                boardId={board._id}
+                cardClass="md:py-1 px-4 flex justify-between border-transparent bg-transparent"
+                isSubTask={false}
+              />
+            ))}
+          </SortableContext>
+        </ul>
       </DndContext>
     </div>
   );
