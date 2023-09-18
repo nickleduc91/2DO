@@ -5,11 +5,6 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { Transition, Menu } from "@headlessui/react";
 
-interface IFormInput {
-  newTask: string;
-  editedTask: string;
-}
-
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -22,7 +17,6 @@ const TodoCard = ({
   isSubTask,
   boardId,
 }: any) => {
-  const router = useRouter();
 
   const { setNodeRef, attributes, listeners, transition, transform } =
     useSortable({ id: task.id });
@@ -30,6 +24,12 @@ const TodoCard = ({
     transition,
     transform: CSS.Transform.toString(transform),
   };
+  let numSubLists
+  if(!isSubTask) {
+    numSubLists = task?.subTasks?.length
+  } else {
+    numSubLists = 0
+  }
 
   return (
     <div>
@@ -91,17 +91,20 @@ const TodoCard = ({
             )}
           </div>
 
-          <div className="border-l-2 border-gray-500 md:pr-4 flex-row justify-between items-end pb-3 pl-2 md:pl-6 h-11 hidden md:flex">
+          <div className="border-l-2 border-gray-500 md:pr-4 flex-row justify-between items-end pb-3 pl-2 md:pl-6 h-14 hidden md:flex">
             {!isSubTask ? (
               <Link
                 className={classNames(
                   task.completed
                     ? "text-cyan-500 hover:text-black dark:hover:text-white"
                     : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
-                  "ri-git-merge-line ri-lg mr-2 md:mr-4"
+                  "mr-2 md:mr-4 mb-0.5"
                 )}
                 href={`/boards/${boardId}/${task.id}`}
-              ></Link>
+              >
+                <i className="ri-git-merge-line ri-lg"></i>
+                <sub className="font-bold">{numSubLists}</sub>
+              </Link>
             ) : null}
 
             <i
@@ -109,7 +112,7 @@ const TodoCard = ({
                 task.completed
                   ? "text-cyan-500 hover:text-black dark:hover:text-white"
                   : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
-                "ri-delete-bin-2-line ri-xl mr-2 md:mr-4"
+                "ri-delete-bin-2-line ri-xl mr-2 md:mr-4 mb-1.5"
               )}
               onClick={() => handleRemoveTask(task.id)}
             ></i>
@@ -118,7 +121,7 @@ const TodoCard = ({
                 task.completed
                   ? "text-cyan-500 hover:text-black dark:hover:text-white"
                   : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
-                "ri-drag-move-2-fill ri-xl mr-2 md:mr-4"
+                "ri-drag-move-2-fill ri-xl mr-2 md:mr-4 mb-1.5"
               )}
               {...attributes}
               {...listeners}
@@ -148,18 +151,25 @@ const TodoCard = ({
                   leaveFrom="opacity-100 translate-y-0"
                   leaveTo="opacity-0 translate-y-1"
                 >
-                  <Menu.Items className="absolute right-0 w-28 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-40">
+                  <Menu.Items className="absolute right-0 w-28 origin-top-right rounded-md bg-white shadow-lg ring-2 ring-cyan-500 ring-opacity-40 focus:outline-none z-40">
                     <Menu.Item>
                       <Link
-                        className="font-medium group flex w-full items-center rounded-md px-2 py-2 text-sm"
-                        href={`${router.asPath}/${task.id}`}
+                        className={classNames(
+                          task.completed
+                            ? "text-cyan-500 hover:text-black dark:hover:text-white"
+                            : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
+                          "mr-2 md:mr-4 mb-0.5 font-medium group flex w-full items-center rounded-md px-2 py-1 text-sm"
+                        )}
+                        href={`/boards/${boardId}/${task.id}`}
                       >
-                        Open
+                        <p className="mr-1">Open</p>
+                        <i className="ri-git-merge-line ri-lg"></i>
+                        <sub className="font-bold">{numSubLists}</sub>
                       </Link>
                     </Menu.Item>
                     <Menu.Item>
                       <button
-                        className="font-medium group flex w-full items-center rounded-md px-2 py-2 text-sm"
+                        className="font-medium group flex w-full items-center rounded-md px-2 py-1 text-sm"
                         onClick={() => handleRemoveTask(task.id)}
                       >
                         Delete

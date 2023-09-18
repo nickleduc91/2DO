@@ -4,6 +4,7 @@ import axios from "axios";
 import TodoCard from "./Cards/todoCard";
 import Sidebar from "./sideBar";
 import { restrictToFirstScrollableAncestor } from "@dnd-kit/modifiers";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 import {
   DndContext,
@@ -138,7 +139,7 @@ const Tasks = ({ board, task }: any) => {
             <input
               type="text"
               {...register("newTask")}
-              className="bg-transparent text-black dark:text-white border-b-2 border-black dark:border-white ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
+              className="bg-transparent hover:border-cyan-500 text-black dark:text-white border-b-2 border-black dark:border-white ml-4 form-control block w-full px-4 py-2 text-lg bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
               placeholder="New task"
             />
           </form>
@@ -155,17 +156,25 @@ const Tasks = ({ board, task }: any) => {
             items={tasks.map((task: any) => task.id)}
             strategy={verticalListSortingStrategy}
           >
-            {tasks.map((task: any) => (
-              <TodoCard
-                key={task.id}
-                task={task}
-                handleRemoveTask={removeTask}
-                handleCompleteTask={completeTask}
-                boardId={board._id}
-                cardClass="md:py-1 px-4 flex justify-between border-transparent bg-transparent"
-                isSubTask={false}
-              />
-            ))}
+            <TransitionGroup>
+              {tasks.map((task: any) => (
+                <CSSTransition
+                  key={task.id}
+                  timeout={150}
+                  classNames={"example"}
+                >
+                  <TodoCard
+                    key={task.id}
+                    task={task}
+                    handleRemoveTask={removeTask}
+                    handleCompleteTask={completeTask}
+                    boardId={board._id}
+                    cardClass="md:py-1 px-4 flex justify-between border-transparent bg-transparent"
+                    isSubTask={false}
+                  />
+                </CSSTransition>
+              ))}
+            </TransitionGroup>
           </SortableContext>
         </ul>
       </DndContext>

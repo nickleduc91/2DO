@@ -72,14 +72,14 @@ const BoardsTable = ({ userId, boards }: any) => {
             <input
               type="text"
               {...register("boardName")}
-              className="bg-transparent text-black dark:text-white border-b-2 border-black dark:border-white ml-4 form-control block w-44 md:w-60 px-4 py-2 text-lg transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
+              className="bg-transparent text-black hover:border-cyan-500 dark:text-white border-b-2 border-black dark:border-white ml-4 form-control block w-44 md:w-60 px-4 py-2 text-lg transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
               placeholder={"Board name"}
             />
 
             <input
               type="text"
               {...register("boardDescription")}
-              className="bg-transparent md:ml-12 border-b-2 border-black dark:border-white ml-4 form-control block w-44 md:w-48 md:w-60 px-4 py-2 text-lg text-black dark:text-white bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
+              className="bg-transparent md:ml-12 border-b-2 border-black dark:border-white ml-4 form-control block w-44 md:w-60 hover:border-cyan-500 px-4 py-2 text-lg text-black dark:text-white bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
               placeholder={"Board description"}
             />
           </div>

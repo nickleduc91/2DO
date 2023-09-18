@@ -193,10 +193,9 @@ const Sidebar = ({ board, task }: any) => {
                   : "Close"}
               </button>
             </div>
-            <textarea
-              className="resize-none text-center text-cyan-500 font-semibold text-3xl w-full rounded-3xl bg-clip-padding transition ease-in-out bg-transparent focus:outline-none focus:border-cyan-500 border-2 border-transparent hover:border-cyan-500 py-4"
+            <input
+              className="text-center text-cyan-500 font-semibold text-4xl w-full bg-clip-padding transition ease-in-out bg-transparent focus:outline-none focus:border-cyan-500 border-b-2 border-transparent hover:border-cyan-500 py-2"
               placeholder="Task Name"
-              rows={2}
               defaultValue={taskName}
               onChange={handleTaskNameChange}
             />
@@ -206,7 +205,7 @@ const Sidebar = ({ board, task }: any) => {
                 defaultValue={taskDescription}
                 onChange={handleDescriptionChange}
                 rows={5}
-                className="hover:border-cyan-500 focus:border-cyan-500 resize-none text-center pt-6 bg-transparent text-gray-600 dark:text-white form-control block w-full py-2 text-lg bg-clip-padding transition ease-in-out m-0 dark:focus:border-cyan-500 focus:outline-none border-2 rounded-3xl"
+                className="hover:border-cyan-500 focus:border-cyan-500 resize-none text-center pt-6 bg-transparent text-gray-900 dark:text-white form-control block w-full py-2 text-lg bg-clip-padding transition ease-in-out m-0 dark:focus:border-cyan-500 focus:outline-none border-2 rounded-xl"
               />
             </div>
             <div className="w-full">
@@ -223,7 +222,7 @@ const Sidebar = ({ board, task }: any) => {
                     <input
                       type="text"
                       {...register("newTask")}
-                      className="bg-transparent text-black dark:text-white border-b-2 border-black dark:border-white form-control block w-full px-4 py-1 text-lg bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
+                      className="bg-transparent text-black dark:text-white border-b-2 border-black dark:border-white form-control block w-full px-4 py-1 text-lg bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 hover:border-cyan-500 focus:outline-none"
                       placeholder="New sub-task"
                     />
                   </form>
