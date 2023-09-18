@@ -10,26 +10,30 @@ const About = ({ isSession, user }) => {
   return (
     <div className="bg-gray-100 dark:bg-slate-900 min-h-screen">
       <Header isSession={isSession} user={user} />
-      <section className="-mb-4 font-medium">
-        <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-8 lg:px-6">
-          <div className="tracking-tight">
+      <section className=" font-base">
+        <div className="gap-32 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-3 lg:py-8 lg:px-6">
+          <div className="tracking-tight col-span-2">
             <h2 className="mb-4 text-4xl tracking-tight font-bold text-cyan-500">
               Why TwoDue?
             </h2>
             <p className="bg-white dark:bg-slate-800 rounded-3xl mb-4 text-2xl text-black dark:text-white py-6 px-6">
-              This website was created as a little side project during my hunt
-              for a co-op placement within my third year of university. I ended
-              up being really hooked onto this idea and started to create a full
-              website out of it. I hope you guys enjoy and find this useful!
+              I developed this website as a personal side project while
+              searching for a co-op placement during my third year at
+              university. I became deeply passionate about the concept and
+              decided to transform it into a complete website. I sincerely hope
+              you all find it enjoyable and valuable!
             </p>
             <p className="mb-4 text-2xl text-black dark:text-white bg-white dark:bg-slate-800 rounded-3xl py-6 px-6">
-              As a user, you can create different boards which relate to
-              different tasks in your every day life, such as for school. And
-              then within these boards, you can create different tasks that
-              relate to that subject. You can then move, complete, edit, or
-              delete the task when ever you feel like it! And guess what, all
-              your info gets saved automatically so you won't have to worry
-              about losing any information!
+              As a user, you can create different boards, each dedicated to
+              various tasks or subjects. Within these boards, you can easily
+              generate tasks related to the specific topic. Furthermore, you're
+              free to perform actions like moving, completing, editing, or
+              deleting tasks as you see fit. You can even create subtasks for
+              those tasks. Your data is automatically saved, so you don't have
+              to worry about losing any information. Importantly, I do not have
+              access to sensitive information like passwords. When you create an
+              account, your password is securely hashed, ensuring it remains
+              safe and irreversible.
             </p>
             <p className="text-2xl text-black dark:text-white mb-4 bg-white dark:bg-slate-800 rounded-3xl py-6 px-6">
               If you have any tips or ideas to improve on this project, don't
@@ -45,13 +49,7 @@ const About = ({ isSession, user }) => {
               <span className="text-cyan-500 ri-links-line hover:text-cyan-700"></span>
             </a>
           </div>
-          <div className="grid grid-cols-2 gap-4 mt-8">
-            <Image
-              className="w-full rounded-lg"
-              src={Org}
-              alt="office content 1"
-              width={600}
-            />
+          <div>
             <Image
               className="mt-4 w-full lg:mt-10 rounded-lg"
               src={DisOrg}
@@ -71,7 +69,6 @@ export async function getServerSideProps(context) {
 
   let isSession;
   session ? (isSession = true) : (isSession = false);
-  
 
   return {
     props: {
