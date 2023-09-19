@@ -1,8 +1,8 @@
 const Hero = ({ isSession }: any) => {
   return (
     <div className="overflow-x-hidden">
-      <div className="relative py-12 sm:py-16 lg:pt-20 xl:pb-0">
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className=" py-12 sm:py-16 lg:pt-20 xl:pb-0">
+        <div className=" mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className=" mx-auto max-w-3xl text-center">
             <div className="">
               <h1 className="mt-5 text-4xl font-light leading-tight text-gray-900 dark:text-white sm:text-5xl sm:leading-tight lg:text-6xl lg:leading-tight">

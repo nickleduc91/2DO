@@ -49,7 +49,6 @@ export default function Header({ isSession, user }: any) {
     });
   };
 
-
   return (
     <div className="mx-auto max-w-7xl px-6 sticky">
       <div className="flex items-center justify-between py-4 md:justify-start md:space-x-10">
@@ -167,21 +166,86 @@ export default function Header({ isSession, user }: any) {
               leaveFrom="opacity-100 translate-y-0"
               leaveTo="opacity-0 translate-y-1"
             >
-              <Menu.Items className="absolute right-0 mt-2 w-28 origin-top-right rounded-md bg-zinc-900 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                {headers.map((item: any) => (
-                  <Menu.Item key={item.href}>
-                    {({ active }) => (
-                      <a
-                        href={item.href}
-                        className={`${
-                          active ? "bg-cyan-500 text-white" : "text-white"
-                        } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                      >
-                        {item.name}
-                      </a>
-                    )}
-                  </Menu.Item>
-                ))}
+              <Menu.Items className="absolute right-0 mt-2 w-28 origin-top-right rounded-md bg-white shadow-lg ring-2 ring-cyan-500 ring-opacity-40 focus:outline-none z-40">
+                {isSession ? (
+                  <div className="">
+                    <Menu.Item>
+                      {({ active }) => (
+                        <a
+                          href={"/boards"}
+                          className={`${
+                            active ? "bg-cyan-500 text-black" : "text-black"
+                          } group flex w-full items-center rounded-md px-2 py-2 text-sm font-semibold`}
+                        >
+                          Boards
+                        </a>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <a
+                          href={"/about"}
+                          className={`${
+                            active ? "bg-cyan-500 text-black" : "text-black"
+                          } group flex w-full items-center rounded-md px-2 py-2 text-sm font-semibold`}
+                        >
+                          About
+                        </a>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <span
+                          onClick={() => signOut()}
+                          className={`${
+                            active ? "bg-cyan-500 text-black" : "text-black"
+                          } group flex w-full items-center rounded-md px-2 py-2 text-sm font-semibold`}
+                        >
+                          Sign Out
+                        </span>
+                      )}
+                    </Menu.Item>
+                  </div>
+                ) : (
+                  <div className="">
+                    <Menu.Item>
+                      {({ active }) => (
+                        <a
+                          href={"/about"}
+                          className={`${
+                            active ? "bg-cyan-500 text-black" : "text-black"
+                          } group flex w-full items-center rounded-md px-2 py-2 text-sm font-semibold`}
+                        >
+                          About
+                        </a>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <a
+                          href={"/login"}
+                          className={`${
+                            active ? "bg-cyan-500 text-black" : "text-black"
+                          } group flex w-full items-center rounded-md px-2 py-2 text-sm font-semibold`}
+                        >
+                          Sign In
+                        </a>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <a
+                          href={"/register"}
+                          className={`${
+                            active ? "bg-cyan-500 text-black" : "text-black"
+                          } group flex w-full items-center rounded-md px-2 py-2 text-sm font-semibold`}
+                        >
+                          Sign Up
+                        </a>
+                      )}
+                    </Menu.Item>
+                  </div>
+                )}
               </Menu.Items>
             </Transition>
           </Menu>
