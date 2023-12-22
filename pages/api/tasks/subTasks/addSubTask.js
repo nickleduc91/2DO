@@ -12,9 +12,8 @@ export default async function handler(req, res) {
     {
       $push: {
         "tasks.$.subTasks": {
-          name: bodyObject.newTask.name,
-          completed: false,
-          id: bodyObject.newTask.id,
+          $each: [bodyObject.newTask],
+          $position: 0, // Add to the front of the array
         },
       },
     }
