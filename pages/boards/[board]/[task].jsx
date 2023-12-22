@@ -34,10 +34,15 @@ export async function getServerSideProps(context) {
 
   //Get specific task
   const task = boardData.tasks.filter(task => task.id == taskId);
+
+  //fetch user
+  const user = await fetch(`${process.env.URL}/api/users/${session.user.id}`);
+  let userData = await user.json();
+  
   return {
     props: {
       board: boardData,
-      user: session.user,
+      user: userData,
       task: task[0]
     },
   };

@@ -24,15 +24,20 @@ export async function getServerSideProps(context) {
       },
     };
   }
+
+  //fetch user
+  const user = await fetch(`${process.env.URL}/api/users/${session.user.id}`);
+  let userData = await user.json();
+  
   //fetch for boards based off id
   const boards = await fetch(
-    `${process.env.URL}/api/boards?userId=${session.user._id}`
+    `${process.env.URL}/api/boards?userId=${userData._id}`
   );
   const boardsData = await boards.json();
 
   return {
     props: {
-      user: session.user,
+      user: userData,
       boards: boardsData,
     },
   };
