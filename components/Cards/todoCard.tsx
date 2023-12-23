@@ -138,7 +138,7 @@ const TodoCard = ({
                   "tracking-tight text-md mb-0.5 bg-clip-padding transition ease-in-out  hover:border-accent focus:border-accent focus:outline-none w-[7rem] bg-transparent font-medium dark:text-white"
                 )}
                 toggleClassName={
-                  "hover:text-cyan-500 absolute right-0 h-full px-3 focus:outline-none dark:text-white dark:hover:text-cyan-500"
+                  "hover:text-cyan-500 absolute right-0 h-full px-2.5 focus:outline-none dark:text-white dark:hover:text-cyan-500"
                 }
                 placeholder="Due Date"
               />
