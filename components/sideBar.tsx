@@ -223,10 +223,10 @@ const Sidebar = ({ board, task }: any) => {
                   useRange={false}
                   onChange={handleDateChange}
                   inputClassName={classNames(
-                    "tracking-tight text-md bg-clip-padding transition ease-in-out  hover:border-accent focus:border-accent focus:outline-none w-[5rem] bg-transparent font-medium dark:text-white"
+                    "tracking-tight text-md bg-clip-padding transition ease-in-out  hover:border-accent focus:border-accent focus:outline-none md:w-[5rem] w-[6rem] bg-transparent font-medium dark:text-white"
                   )}
                   toggleClassName={
-                    "hover:text-cyan-500 px-3 focus:outline-none dark:text-white dark:hover:text-cyan-500"
+                    "hover:text-cyan-500 md:px-3 focus:outline-none dark:text-white dark:hover:text-cyan-500"
                   }
                   placeholder="Due Date"
                 />
