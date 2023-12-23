@@ -5,6 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import axios from "axios";
 import TodoCard from "./Cards/todoCard";
 import { restrictToFirstScrollableAncestor } from "@dnd-kit/modifiers";
+import Datepicker from "react-tailwindcss-datepicker";
 
 import {
   DndContext,
@@ -38,15 +39,20 @@ const Sidebar = ({ board, task }: any) => {
   const [taskName, setTaskName] = useState(task.name);
   const [taskDescription, setTaskDescription] = useState(task.description);
 
+  const [dateValue, setDateValue] = useState({
+    startDate: task.dueDate,
+    endDate: task.dueDate,
+  });
+
   const handleTaskNameChange = (event: any) => {
     setTaskName(event.target.value);
   };
 
   const handleDescriptionChange = (event: any) => {
-    if(event.target.value == "") {
+    if (event.target.value == "") {
       setTaskDescription(null);
     } else {
-      setTaskDescription(event.target.value)
+      setTaskDescription(event.target.value);
     }
   };
 
@@ -127,7 +133,7 @@ const Sidebar = ({ board, task }: any) => {
 
   const close = () => {
     setShowSidebar(false);
-    router.push(`/boards/${board._id}`)
+    router.push(`/boards/${board._id}`);
   };
 
   const sensors = useSensors(
@@ -137,6 +143,19 @@ const Sidebar = ({ board, task }: any) => {
       },
     })
   );
+
+  const handleDateChange = (newValue: any) => {
+    setDateValue(newValue);
+    axios({
+      method: "post",
+      url: "/api/tasks/updateDueDate",
+      data: {
+        dueDate: newValue.endDate,
+        boardId: board._id,
+        taskId: task.id,
+      },
+    });
+  };
 
   const handleDragEnd = ({ active, over }: any) => {
     let updatedTasks;
@@ -174,25 +193,46 @@ const Sidebar = ({ board, task }: any) => {
           leaveTo="translate-x-full"
         >
           <div className="overflow-y-auto h-full">
-            <div className="group relative inline-flex pb-3">
+            <div className="group relative flex items-center justify-between pb-3">
               <button
-                className="inline-block px-6 py-2.5 mr-2 bg-cyan-500 text-white font-medium text-md leading-snug rounded shadow-md hover:bg-cyan-800 hover:shadow-lg  focus:shadow-lg focus:outline-none focus:ring-0 active:cyan-800 active:shadow-lg transition duration-150 ease-in-out"
+                className="inline-block px-6 py-2.5 mr-2 bg-cyan-500 text-white font-medium text-md leading-snug rounded shadow-md hover:bg-cyan-800 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:cyan-800 active:shadow-lg transition duration-150 ease-in-out"
                 data-mdb-ripple="true"
                 data-mdb-ripple-color="light"
                 role="button"
                 onClick={
-                  task.name != taskName || task.description != taskDescription
+                  task.name !== taskName || task.description !== taskDescription
                     ? submitModal
                     : close
                 }
               >
-                {task.name != taskName ||
-                task.description != taskDescription ||
-                task.subTasks != subTasks
+                {task.name !== taskName ||
+                task.description !== taskDescription ||
+                task.subTasks !== subTasks
                   ? "Save & Close"
                   : "Close"}
               </button>
+              <div className="ml-auto flex">
+                <Datepicker
+                  asSingle
+                  readOnly
+                  separator="to"
+                  aria-label="date"
+                  minDate={new Date()}
+                  primaryColor={"cyan"}
+                  value={dateValue}
+                  useRange={false}
+                  onChange={handleDateChange}
+                  inputClassName={classNames(
+                    "tracking-tight text-md bg-clip-padding transition ease-in-out  hover:border-accent focus:border-accent focus:outline-none w-[5rem] bg-transparent font-medium dark:text-white"
+                  )}
+                  toggleClassName={
+                    "hover:text-cyan-500 px-3 focus:outline-none dark:text-white dark:hover:text-cyan-500"
+                  }
+                  placeholder="Due Date"
+                />
+              </div>
             </div>
+
             <input
               className="text-center text-cyan-500 font-semibold text-4xl w-full bg-clip-padding transition ease-in-out bg-transparent focus:outline-none focus:border-cyan-500 border-b-2 border-transparent hover:border-cyan-500 py-2"
               placeholder="Task Name"
@@ -246,6 +286,7 @@ const Sidebar = ({ board, task }: any) => {
                           handleCompleteTask={completeTask}
                           cardClass="px-2 pb-3 flex justify-between border-transparent bg-transparent"
                           isSubTask={true}
+                          boardId={board._id}
                         />
                       ))}
                     </ul>

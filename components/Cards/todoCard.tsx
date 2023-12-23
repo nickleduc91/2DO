@@ -1,9 +1,11 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Fragment } from "react";
-import { useRouter } from "next/router";
+import Datepicker from "react-tailwindcss-datepicker";
 import Link from "next/link";
 import { Transition, Menu } from "@headlessui/react";
+import React, { useState } from "react";
+import axios from "axios";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -17,19 +19,48 @@ const TodoCard = ({
   isSubTask,
   boardId,
 }: any) => {
-
   const { setNodeRef, attributes, listeners, transition, transform } =
     useSortable({ id: task.id });
   const style = {
     transition,
     transform: CSS.Transform.toString(transform),
   };
-  let numSubLists
-  if(!isSubTask) {
-    numSubLists = task?.subTasks?.length
+  let numSubLists;
+  if (!isSubTask) {
+    numSubLists = task?.subTasks?.length;
   } else {
-    numSubLists = 0
+    numSubLists = 0;
   }
+
+  const [dateValue, setDateValue] = useState({
+    startDate: task.dueDate,
+    endDate: task.dueDate,
+  });
+
+  const handleDateChange = (newValue: any) => {
+    setDateValue(newValue);
+    if (!isSubTask) {
+      axios({
+        method: "post",
+        url: "/api/tasks/updateDueDate",
+        data: {
+          dueDate: newValue.endDate,
+          boardId: boardId,
+          taskId: task.id,
+        },
+      });
+    } else {
+      axios({
+        method: "post",
+        url: "/api/tasks/subTasks/updateSubTaskDueDate",
+        data: {
+          dueDate: newValue.endDate,
+          boardId: boardId,
+          taskId: task.id,
+        },
+      });
+    }
+  };
 
   return (
     <div>
@@ -91,7 +122,28 @@ const TodoCard = ({
             )}
           </div>
 
-          <div className="border-l-2 border-gray-500 md:pr-4 flex-row justify-between items-end pb-3 pl-2 md:pl-6 h-14 hidden md:flex">
+          <div className="border-l-2 border-gray-500 md:pr-1 flex-row justify-between items-end pb-3 pl-2 md:pl-6 h-14 hidden md:flex">
+            <div className="pr-2">
+              <Datepicker
+                asSingle
+                readOnly
+                separator="to"
+                aria-label="date"
+                minDate={new Date()}
+                primaryColor={"cyan"}
+                value={dateValue}
+                useRange={false}
+                onChange={handleDateChange}
+                inputClassName={classNames(
+                  "tracking-tight text-md mb-0.5 bg-clip-padding transition ease-in-out  hover:border-accent focus:border-accent focus:outline-none w-[7rem] bg-transparent font-medium dark:text-white"
+                )}
+                toggleClassName={
+                  "hover:text-cyan-500 absolute right-0 h-full px-3 focus:outline-none dark:text-white dark:hover:text-cyan-500"
+                }
+                placeholder="Due Date"
+              />
+            </div>
+
             {!isSubTask ? (
               <Link
                 className={classNames(
@@ -166,6 +218,28 @@ const TodoCard = ({
                         <i className="ri-git-merge-line ri-lg"></i>
                         <sub className="font-bold">{numSubLists}</sub>
                       </Link>
+                    </Menu.Item>
+                    <Menu.Item>
+                      <div className="">
+                        <Datepicker
+                          asSingle
+                          readOnly
+                          separator="to"
+                          aria-label="date"
+                          minDate={new Date()}
+                          primaryColor={"cyan"}
+                          value={dateValue}
+                          useRange={false}
+                          onChange={handleDateChange}
+                          inputClassName={classNames(
+                            "tracking-tight font-medium text-md mb-0.5 bg-clip-padding transition ease-in-out text-black text-sm hover:border-accent focus:border-accent focus:outline-none w-[7rem] bg-transparent dark:text-white pl-2"
+                          )}
+                          toggleClassName={
+                            "hover:text-cyan-500 absolute right-0 h-full px-3 focus:outline-none dark:text-white dark:hover:text-cyan-500"
+                          }
+                          placeholder="Due Date"
+                        />
+                      </div>
                     </Menu.Item>
                     <Menu.Item>
                       <button

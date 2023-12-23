@@ -24,6 +24,10 @@ const boardsSchema = new Schema({
         type: String,
         required: true,
       },
+      dueDate: {
+        type: String,
+        required: false,
+      },
       subTasks: [
         {
           _id: false,
@@ -38,6 +42,10 @@ const boardsSchema = new Schema({
           id: {
             type: Number,
             required: true,
+          },
+          dueDate: {
+            type: String,
+            required: false,
           },
         },
       ],

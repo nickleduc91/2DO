@@ -46,6 +46,7 @@ const Tasks = ({ board, task }: any) => {
           id: Date.now(),
           description: null,
           subTasks: [],
+          dueDate: null
         },
         boardId: board._id,
       },

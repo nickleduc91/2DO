@@ -9,7 +9,7 @@ const Hero = ({ isSession }: any) => {
                 The Best Tool for {""}
                 <span className="relative inline-flex justify-center whitespace-nowrap font-bold">
                   <svg
-                    className="pb-4 md:pb-0 absolute -bottom-8 w-2/3 sm:pb-4 md:pb-0 text-cyan-500 sm:block"
+                    className="pb-4 absolute -bottom-8 w-2/3 sm:pb-4 md:pb-0 text-cyan-500 sm:block"
                     viewBox="0 0 490 42"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
