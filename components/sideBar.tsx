@@ -211,7 +211,7 @@ const Sidebar = ({ board, task }: any) => {
                   ? "Save & Close"
                   : "Close"}
               </button>
-              <div className="ml-auto flex">
+              <div className="">
                 <Datepicker
                   asSingle
                   readOnly

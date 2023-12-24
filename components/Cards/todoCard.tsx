@@ -203,7 +203,7 @@ const TodoCard = ({
                   leaveFrom="opacity-100 translate-y-0"
                   leaveTo="opacity-0 translate-y-1"
                 >
-                  <Menu.Items className="absolute right-0 w-28 origin-top-right rounded-md bg-white shadow-lg ring-2 ring-cyan-500 ring-opacity-40 focus:outline-none z-40">
+                  <Menu.Items className="absolute right-0 w-32 origin-top-right rounded-md bg-white shadow-lg ring-2 ring-cyan-500 ring-opacity-40 focus:outline-none z-40">
                     <Menu.Item>
                       <Link
                         className={classNames(
@@ -220,6 +220,14 @@ const TodoCard = ({
                       </Link>
                     </Menu.Item>
                     <Menu.Item>
+                      <button
+                        className="font-medium group flex w-full items-center rounded-md px-2 py-1 text-sm"
+                        onClick={() => handleRemoveTask(task.id)}
+                      >
+                        Delete
+                      </button>
+                    </Menu.Item>
+                    <Menu.Item>
                       <div className="">
                         <Datepicker
                           asSingle
@@ -232,22 +240,14 @@ const TodoCard = ({
                           useRange={false}
                           onChange={handleDateChange}
                           inputClassName={classNames(
-                            "tracking-tight font-medium text-md mb-0.5 bg-clip-padding transition ease-in-out text-black text-sm hover:border-accent focus:border-accent focus:outline-none w-[7rem] bg-transparent dark:text-white pl-2"
+                            "tracking-tight font-medium text-md mb-1 bg-clip-padding transition ease-in-out text-black text-sm hover:border-accent focus:border-accent focus:outline-none w-[7rem] bg-transparent dark:text-white pl-2"
                           )}
                           toggleClassName={
-                            "hover:text-cyan-500 absolute right-0 h-full px-3 focus:outline-none dark:text-white dark:hover:text-cyan-500"
+                            "hover:text-cyan-500 absolute right-0 h-full px-5 focus:outline-none dark:text-white dark:hover:text-cyan-500"
                           }
                           placeholder="Due Date"
                         />
                       </div>
-                    </Menu.Item>
-                    <Menu.Item>
-                      <button
-                        className="font-medium group flex w-full items-center rounded-md px-2 py-1 text-sm"
-                        onClick={() => handleRemoveTask(task.id)}
-                      >
-                        Delete
-                      </button>
                     </Menu.Item>
                   </Menu.Items>
                 </Transition>
