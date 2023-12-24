@@ -44,6 +44,22 @@ const Sidebar = ({ board, task }: any) => {
     endDate: task.dueDate,
   });
 
+  const formatDate = (newValue: any) => {
+    if (newValue.endDate) {
+      const newValueYear = newValue.endDate.split("-")[0];
+      const currentYear = new Date().getFullYear();
+
+      if (currentYear == newValueYear) {
+        return "MMM D";
+      } else {
+        return "MMM D, YYYY";
+      }
+    }
+    return "MMM D, YYYY";
+  };
+
+  const [displayFormat, setDisplayFormat] = useState(formatDate(dateValue));
+
   const handleTaskNameChange = (event: any) => {
     setTaskName(event.target.value);
   };
@@ -145,6 +161,7 @@ const Sidebar = ({ board, task }: any) => {
   );
 
   const handleDateChange = (newValue: any) => {
+    setDisplayFormat(formatDate(newValue));
     setDateValue(newValue);
     axios({
       method: "post",
@@ -222,6 +239,7 @@ const Sidebar = ({ board, task }: any) => {
                   value={dateValue}
                   useRange={false}
                   onChange={handleDateChange}
+                  displayFormat={displayFormat}
                   inputClassName={classNames(
                     "text-lg h-12 border shadow rounded-full px-4 w-[10rem] bg-clip-padding transition ease-in-out m-0 hover:border-accent focus:border-accent focus:outline-none bg-transparent dark:text-white text-black"
                   )}

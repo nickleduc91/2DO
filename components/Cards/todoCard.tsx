@@ -37,20 +37,24 @@ const TodoCard = ({
     endDate: task.dueDate,
   });
 
-  const [displayFormat, setDisplayFormat] = useState("MMM D");
-
-  const handleDateChange = (newValue: any) => {
+  const formatDate = (newValue: any) => {
     if (newValue.endDate) {
       const newValueYear = newValue.endDate.split("-")[0];
       const currentYear = new Date().getFullYear();
 
       if (currentYear == newValueYear) {
-        setDisplayFormat("MMM D");
+        return "MMM D";
       } else {
-        setDisplayFormat("MMM D, YYYY");
+        return "MMM D, YYYY";
       }
     }
+    return "MMM D, YYYY";
+  };
 
+  const [displayFormat, setDisplayFormat] = useState(formatDate(dateValue));
+
+  const handleDateChange = (newValue: any) => {
+    setDisplayFormat(formatDate(newValue));
     setDateValue(newValue);
     if (!isSubTask) {
       axios({
@@ -256,6 +260,7 @@ const TodoCard = ({
                           inputClassName={classNames(
                             "tracking-tight text-sm font-medium h-8 border shadow rounded-full px-4 w-[8.9rem] bg-clip-padding transition ease-in-out focus:outline-none bg-transparent text-black dark:text-white"
                           )}
+                          displayFormat={displayFormat}
                           toggleClassName={
                             "hover:text-cyan-500 absolute right-0 h-full px-2 focus:outline-none dark:text-white dark:hover:text-cyan-500"
                           }
