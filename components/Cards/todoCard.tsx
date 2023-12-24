@@ -122,8 +122,8 @@ const TodoCard = ({
             )}
           </div>
 
-          <div className="border-l-2 border-gray-500 md:pr-1 flex-row justify-between items-end pb-3 pl-2 md:pl-6 h-14 hidden md:flex">
-            <div className="pr-2">
+          <div className="border-l-2 border-gray-500 md:pr-0 flex-row justify-between items-end pb-2 pl-2 md:pl-3 h-14 hidden md:flex">
+            <div className="pr-3.5 -mb-[0.1rem]">
               <Datepicker
                 asSingle
                 readOnly
@@ -135,10 +135,10 @@ const TodoCard = ({
                 useRange={false}
                 onChange={handleDateChange}
                 inputClassName={classNames(
-                  "tracking-tight text-md mb-0.5 bg-clip-padding transition ease-in-out  hover:border-accent focus:border-accent focus:outline-none w-[7rem] bg-transparent font-medium dark:text-white"
+                  "tracking-tight text-md h-10 border shadow rounded-full px-4 w-[8.75rem] bg-clip-padding transition ease-in-out focus:outline-none bg-transparent text-black dark:text-white"
                 )}
                 toggleClassName={
-                  "hover:text-cyan-500 absolute right-0 h-full px-2.5 focus:outline-none dark:text-white dark:hover:text-cyan-500"
+                  "hover:text-cyan-500 absolute right-0 h-full px-3 focus:outline-none dark:text-white text-black mt-[0.09rem]"
                 }
                 placeholder="Due Date"
               />
@@ -150,7 +150,7 @@ const TodoCard = ({
                   task.completed
                     ? "text-cyan-500 hover:text-black dark:hover:text-white"
                     : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
-                  "mr-2 md:mr-4 mb-0.5"
+                  "mr-2 md:mr-4 mb-1.5"
                 )}
                 href={`/boards/${boardId}/${task.id}`}
               >
@@ -164,7 +164,7 @@ const TodoCard = ({
                 task.completed
                   ? "text-cyan-500 hover:text-black dark:hover:text-white"
                   : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
-                "ri-delete-bin-2-line ri-xl mr-2 md:mr-4 mb-1.5"
+                "ri-delete-bin-2-line ri-xl mr-2 md:mr-4 mb-2.5"
               )}
               onClick={() => handleRemoveTask(task.id)}
             ></i>
@@ -173,7 +173,7 @@ const TodoCard = ({
                 task.completed
                   ? "text-cyan-500 hover:text-black dark:hover:text-white"
                   : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
-                "ri-drag-move-2-fill ri-xl mr-2 md:mr-4 mb-1.5"
+                "ri-drag-move-2-fill ri-xl mr-2 md:mr-4 mb-2.5"
               )}
               {...attributes}
               {...listeners}
@@ -203,7 +203,7 @@ const TodoCard = ({
                   leaveFrom="opacity-100 translate-y-0"
                   leaveTo="opacity-0 translate-y-1"
                 >
-                  <Menu.Items className="absolute right-0 w-32 origin-top-right rounded-md bg-white shadow-lg ring-2 ring-cyan-500 ring-opacity-40 focus:outline-none z-40">
+                  <Menu.Items className="absolute right-0 w-36 origin-top-right rounded-md bg-white shadow-lg ring-2 ring-cyan-500 ring-opacity-40 focus:outline-none z-40">
                     <Menu.Item>
                       <Link
                         className={classNames(
@@ -228,7 +228,7 @@ const TodoCard = ({
                       </button>
                     </Menu.Item>
                     <Menu.Item>
-                      <div className="">
+                      <div className="pb-3 pt-1.5">
                         <Datepicker
                           asSingle
                           readOnly
@@ -240,10 +240,10 @@ const TodoCard = ({
                           useRange={false}
                           onChange={handleDateChange}
                           inputClassName={classNames(
-                            "tracking-tight font-medium text-md mb-1 bg-clip-padding transition ease-in-out text-black text-sm hover:border-accent focus:border-accent focus:outline-none w-[7rem] bg-transparent dark:text-white pl-2"
+                            "tracking-tight text-sm font-medium h-8 border shadow rounded-full px-4 w-[8.9rem] bg-clip-padding transition ease-in-out focus:outline-none bg-transparent text-black dark:text-white"
                           )}
                           toggleClassName={
-                            "hover:text-cyan-500 absolute right-0 h-full px-5 focus:outline-none dark:text-white dark:hover:text-cyan-500"
+                            "hover:text-cyan-500 absolute right-0 h-full px-2 focus:outline-none dark:text-white dark:hover:text-cyan-500"
                           }
                           placeholder="Due Date"
                         />
