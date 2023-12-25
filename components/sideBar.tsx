@@ -6,6 +6,7 @@ import axios from "axios";
 import TodoCard from "./Cards/todoCard";
 import { restrictToFirstScrollableAncestor } from "@dnd-kit/modifiers";
 import Datepicker from "react-tailwindcss-datepicker";
+import dayjs from "dayjs";
 
 import {
   DndContext,
@@ -46,11 +47,15 @@ const Sidebar = ({ board, task }: any) => {
 
   const formatDate = (newValue: any) => {
     if (newValue.endDate) {
-      const newValueYear = newValue.endDate.split("-")[0];
-      const currentYear = new Date().getFullYear();
-
-      if (currentYear == newValueYear) {
-        return "MMM D";
+      const endDate = dayjs(newValue.endDate);
+      // Check if the year is the same
+      if (dayjs().isSame(endDate, "year")) {
+        // Check if the date is within the current week
+        if (dayjs().isSame(endDate, "week")) {
+          return "dddd";
+        } else {
+          return "MMM D";
+        }
       } else {
         return "MMM D, YYYY";
       }

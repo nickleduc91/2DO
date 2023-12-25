@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Transition, Menu } from "@headlessui/react";
 import React, { useState } from "react";
 import axios from "axios";
+import dayjs from "dayjs";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -39,11 +40,15 @@ const TodoCard = ({
 
   const formatDate = (newValue: any) => {
     if (newValue.endDate) {
-      const newValueYear = newValue.endDate.split("-")[0];
-      const currentYear = new Date().getFullYear();
-
-      if (currentYear == newValueYear) {
-        return "MMM D";
+      const endDate = dayjs(newValue.endDate);
+      // Check if the year is the same
+      if (dayjs().isSame(endDate, "year")) {
+        // Check if the date is within the current week
+        if (dayjs().isSame(endDate, "week")) {
+          return "dddd";
+        } else {
+          return "MMM D";
+        }
       } else {
         return "MMM D, YYYY";
       }
