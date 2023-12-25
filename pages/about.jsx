@@ -1,14 +1,30 @@
 import Header from "../components/header";
 import Image from "next/image";
-import Org from "../public/org.jpg";
 import DisOrg from "../public/disorg.jpg";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
 import Footer from "../components/footer";
+import Head from "next/head";
 
 const About = ({ isSession, user }) => {
   return (
     <div className="bg-gray-100 dark:bg-slate-900 min-h-screen">
+      <Head>
+        <title>About Us - TwoDue</title>
+        <meta property="og:title" content="About Us - TwoDue"></meta>
+        <meta
+          name="description"
+          content="Discover TwoDue: Your free task organization app. Sign up to create boards, add and edit tasks effortlessly. Boost productivity with ease."
+        />
+        <meta
+          property="og:description"
+          content="Discover TwoDue: Your free task organization app. Sign up to create boards, add and edit tasks effortlessly. Boost productivity with ease."
+        />
+        <meta
+          property="og:url"
+          content="https://twodue.vercel.app/about"
+        ></meta>
+      </Head>
       <Header isSession={isSession} user={user} />
       <section className=" font-base">
         <div className="gap-32 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-3 lg:py-8 lg:px-6">
@@ -69,8 +85,8 @@ export async function getServerSideProps(context) {
 
   let isSession;
   session ? (isSession = true) : (isSession = false);
-  let userData = {}
-  if(isSession) {
+  let userData = {};
+  if (isSession) {
     //fetch user
     const user = await fetch(`${process.env.URL}/api/users/${session.user.id}`);
     userData = await user.json();
