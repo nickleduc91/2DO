@@ -5,7 +5,7 @@ import { authOptions } from "pages/api/auth/[...nextauth]";
 import Hero from "../components/hero";
 import BestUses from "../components/BestUses";
 import Feature from "../components/feature";
-import Head from 'next/head'
+import Head from "next/head";
 
 const Home = ({ isSession, user }) => {
   return (
@@ -30,7 +30,7 @@ const Home = ({ isSession, user }) => {
         />
         <meta
           name="google-site-verification"
-          content="UWIDe8EIynQ3jxS_GM6q3gqs_7_hyRdx8hKSqbYt0Gw"
+          content="zjpbTDtoVskaGkpSU8Z80QKLGvfL7sAQ5zZ-XEj4Y5E"
         />
       </Head>
       <Header isSession={isSession} user={user} />
