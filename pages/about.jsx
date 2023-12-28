@@ -1,12 +1,35 @@
 import Header from "../components/header";
 import Image from "next/image";
 import DisOrg from "../public/disorg.jpg";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "pages/api/auth/[...nextauth]";
 import Footer from "../components/footer";
 import Head from "next/head";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
-const About = ({ isSession, user }) => {
+const About = () => {
+  const { data: session, status } = useSession();
+  const [user, setUserData] = useState({});
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (session) {
+        // Fetch user data only if there is an active session
+        try {
+          const userResponse = await fetch(
+            `${process.env.URL}/api/users/${session.user.id}`
+          );
+          const userData = await userResponse.json();
+          setUserData(userData);
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, [session]);
+
+  const isSession = !!session;
   return (
     <div className="bg-gray-100 dark:bg-slate-900 min-h-screen">
       <Head>
@@ -79,25 +102,5 @@ const About = ({ isSession, user }) => {
     </div>
   );
 };
-
-export async function getServerSideProps(context) {
-  const session = await getServerSession(context.req, context.res, authOptions);
-
-  let isSession;
-  session ? (isSession = true) : (isSession = false);
-  let userData = {};
-  if (isSession) {
-    //fetch user
-    const user = await fetch(`${process.env.URL}/api/users/${session.user.id}`);
-    userData = await user.json();
-  }
-
-  return {
-    props: {
-      isSession,
-      user: userData,
-    },
-  };
-}
 
 export default About;
