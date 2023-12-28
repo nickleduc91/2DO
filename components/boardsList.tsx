@@ -72,14 +72,14 @@ const BoardsTable = ({ userId, boards }: any) => {
             <input
               type="text"
               {...register("boardName")}
-              className="bg-transparent text-black hover:border-cyan-500 dark:text-white border-b-2 border-black dark:border-white ml-4 form-control block w-44 md:w-60 px-4 py-2 text-lg transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
+              className="mb-4 ml-1 md:mb-0 w-44 md:w-60 px-4 py-2 text-lg tracking-tight text-md h-12 border shadow-md rounded-full bg-clip-padding transition ease-in-out dark:text-white focus:border-cyan-500 hover:border-cyan-500 focus:outline-none bg-white dark:bg-slate-800 dark:border-slate-800 dark:focus:border-cyan-500 dark:hover:border-cyan-500"
               placeholder={"Board name"}
             />
 
             <input
               type="text"
               {...register("boardDescription")}
-              className="bg-transparent md:ml-12 border-b-2 border-black dark:border-white ml-4 form-control block w-44 md:w-60 hover:border-cyan-500 px-4 py-2 text-lg text-black dark:text-white bg-clip-padding transition ease-in-out m-0 focus:border-cyan-500 dark:focus:border-cyan-500 focus:outline-none"
+              className=" md:ml-5 ml-1 w-44 md:w-60  px-4 py-2 text-lg tracking-tight text-md h-12 border shadow-md rounded-full bg-clip-padding transition ease-in-out dark:text-white focus:border-cyan-500 hover:border-cyan-500 focus:outline-none bg-white dark:bg-slate-800 dark:border-slate-800 dark:focus:border-cyan-500 dark:hover:border-cyan-500"
               placeholder={"Board description"}
             />
           </div>

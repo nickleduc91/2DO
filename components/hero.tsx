@@ -49,7 +49,7 @@ const Hero = ({ isSession }: any) => {
                   href="/about"
                   role="button"
                 >
-                  Learn more
+                  Learn more about us
                 </a>
                 <div className="-scale-x-100 absolute left-0 -bottom-10 h-10 w-10 -rotate-12 text-cyan-500 md:inline-flex">
                   <svg

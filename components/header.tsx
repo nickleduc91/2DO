@@ -148,6 +148,7 @@ export default function Header({ isSession, user }: any) {
               theme == "light" ? "ri-moon-line" : "ri-sun-line",
               "hover:text-cyan-500 dark:hover:text-cyan-500 ri-xl ml-4 text-xl font-medium text-black dark:text-white transition duration-200 ease-in-out "
             )}
+            aria-label="Change Theme"
           ></button>
         </div>
         <div className="visible md:invisible flex-row">
