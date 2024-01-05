@@ -1,23 +1,24 @@
 import connectToDatabase from "../../../lib/mongodb";
-import Boards from "../../../models/Boards";
+import Task from "../../../models/Task";
 
 export default async function handler(req, res) {
   await connectToDatabase();
   let bodyObject = req.body;
 
-  await Boards.findOneAndUpdate(
-    {
-      _id: bodyObject.boardId,
-      'tasks.id': bodyObject.taskId,
-    },
-    {
-      $set: {
-        'tasks.$.dueDate': bodyObject.dueDate,
-      },
-    },
-    { new: true } // to return the modified document
-  );
-  res.json("Completed task");
-}
+  try {
+    const updatedTask = await Task.findByIdAndUpdate(
+      bodyObject.taskId,
+      { dueDate: bodyObject.dueDate },
+      { new: true }
+    );
 
-//finish this and finish the default value of the due date to be equal to the value from db
+    if (!updatedTask) {
+      return res.status(404).json({ error: "Task not found" });
+    }
+
+    res.json({ message: "Updated dueDate for task", task: updatedTask });
+  } catch (error) {
+    console.error("Error updating task dueDate:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+}

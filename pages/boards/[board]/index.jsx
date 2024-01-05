@@ -4,11 +4,11 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
 import Footer from "../../../components/footer";
 
-const Board = ({ board, user }) => {
+const Board = ({ board, user, boardTasks }) => {
   return (
     <div className="bg-gray-100 dark:bg-slate-900 min-h-screen">
       <Header isSession={true} user={user} />
-      <TodoList board={board} task={null} />
+      <TodoList board={board} selectedTask={null} boardTasks={boardTasks} />
       <Footer />
     </div>
   );
@@ -40,10 +40,21 @@ export async function getServerSideProps(context) {
   const user = await fetch(`${process.env.URL}/api/users/${session.user.id}`);
   let userData = await user.json();
 
+  //fetch for tasks
+  let tasksData = [];
+  if (boardData.tasks.length > 0) {
+    const idsString = boardData.tasks.join(",");
+    const tasks = await fetch(
+      `${process.env.URL}/api/tasks?taskIds=${idsString}`
+    );
+    tasksData = await tasks.json();
+  }
+
   return {
     props: {
       board: boardData,
       user: userData,
+      boardTasks: tasksData,
     },
   };
 }

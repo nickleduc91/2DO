@@ -24,70 +24,67 @@ interface IFormInput {
   editedTask: string;
 }
 
-const Tasks = ({ board, task }: any) => {
+const Tasks = ({ board, selectedTask, boardTasks, subTasks }: any) => {
+
   const { register, handleSubmit, reset } = useForm<IFormInput>();
-  const [tasks, setTask] = useState(board.tasks);
+  const [tasks, setTask] = useState(boardTasks);
 
   const onSubmit: SubmitHandler<IFormInput> = async ({ newTask }) => {
     if (!newTask || /^\s*$/.test(newTask)) {
       return;
     }
-    setTask([
-      { name: newTask, completed: false, id: Date.now(), subTasks: [] },
-      ...tasks,
-    ]);
-    axios({
+    const task = await axios({
       method: "post",
       url: "/api/tasks/addTask",
       data: {
         newTask: {
           name: newTask,
           completed: false,
-          id: Date.now(),
           description: null,
           subTasks: [],
-          dueDate: null
+          dueDate: null,
+          userId: board.userId,
+          boardId: board._id,
+          isSubTask: false,
         },
-        boardId: board._id,
       },
     });
+    setTask([task.data, ...tasks]);
     reset();
   };
 
   const removeTask = (id: any) => {
-    const updatedTasks = tasks.filter((task: any) => task.id != id);
+    const updatedTasks = tasks.filter((task: any) => task._id != id);
     axios({
       method: "post",
       url: "/api/tasks/removeTask",
       data: {
         taskId: id,
         boardId: board._id,
-        tasks: updatedTasks,
+        isSubTask: false,
+
       },
     });
     setTask(updatedTasks);
   };
 
-  const completeTask = (id: any, completed: boolean, edit: boolean) => {
-    if (edit) return;
+  const completeTask = (id: any, completed: boolean) => {
     let index = 0;
     const updatedTasks = tasks.map((task: any, idx: number) => {
-      if (task.id == id) {
+      if (task._id == id) {
         index = idx;
         completed ? (task.completed = false) : (task.completed = true);
       }
       return task;
     });
 
-    if (!completed) {
-      updatedTasks.push(updatedTasks.splice(index, 1)[0]);
-    }
     axios({
       method: "post",
       url: "/api/tasks/completeTask",
       data: {
+        taskId: id,
+        status: completed,
         boardId: board._id,
-        tasks: updatedTasks,
       },
     });
     setTask(updatedTasks);
@@ -97,12 +94,12 @@ const Tasks = ({ board, task }: any) => {
     let updatedTasks;
     if (active.id !== over.id) {
       setTask((items: any) => {
-        const oldIndex = items.findIndex((item: any) => item.id === active.id);
-        const newIndex = items.findIndex((item: any) => item.id === over.id);
+        const oldIndex = items.findIndex((item: any) => item._id === active.id);
+        const newIndex = items.findIndex((item: any) => item._id === over.id);
         updatedTasks = arrayMove(items, oldIndex, newIndex);
         axios({
           method: "post",
-          url: "/api/tasks/completeTask",
+          url: "/api/tasks/setOrder",
           data: {
             boardId: board._id,
             tasks: updatedTasks,
@@ -123,7 +120,13 @@ const Tasks = ({ board, task }: any) => {
 
   return (
     <div className="mx-auto w-full max-w-5xl">
-      {task ? <Sidebar board={board} task={task} /> : null}
+      {selectedTask ? (
+        <Sidebar
+          board={board}
+          selectedTask={selectedTask}
+          subTasksData={subTasks}
+        />
+      ) : null}
       <h1 className="pt-5 pb-4 font-semibold text-4xl text-cyan-500 text-center">
         {board.name}
       </h1>
@@ -154,18 +157,18 @@ const Tasks = ({ board, task }: any) => {
       >
         <ul className="flex flex-col">
           <SortableContext
-            items={tasks.map((task: any) => task.id)}
+            items={tasks.map((task: any) => task._id)}
             strategy={verticalListSortingStrategy}
           >
             <TransitionGroup>
               {tasks.map((task: any) => (
                 <CSSTransition
-                  key={task.id}
+                  key={task._id}
                   timeout={150}
                   classNames={"example"}
                 >
                   <TodoCard
-                    key={task.id}
+                    key={task._id}
                     task={task}
                     handleRemoveTask={removeTask}
                     handleCompleteTask={completeTask}
