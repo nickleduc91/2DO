@@ -85,7 +85,7 @@ const BoardsTable = ({ userId, boards }: any) => {
           </div>
         </form>
       </div>
-      <TransitionGroup
+      <div
         className={classNames(
           boardsData.length == 1
             ? "flex justify-center"
@@ -94,15 +94,13 @@ const BoardsTable = ({ userId, boards }: any) => {
         )}
       >
         {boardsData.map((board: any, index: any) => (
-          <CSSTransition key={board._id} timeout={200} classNames={"board"}>
-            <BoardCard
-              key={index}
-              board={board}
-              handleRemoveBoard={removeBoard}
-            />
-          </CSSTransition>
+          <BoardCard
+            key={index}
+            board={board}
+            handleRemoveBoard={removeBoard}
+          />
         ))}
-      </TransitionGroup>
+      </div>
     </div>
   );
 };

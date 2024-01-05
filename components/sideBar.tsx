@@ -31,18 +31,18 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-const Sidebar = ({ board, task }: any) => {
+const Sidebar = ({ board, selectedTask, subTasksData }: any) => {
   const [showSidebar, setShowSidebar] = useState(true);
   const router = useRouter();
 
   const { register, handleSubmit, reset } = useForm<IFormInput>();
-  const [subTasks, setSubTasks] = useState(task.subTasks ?? []);
-  const [taskName, setTaskName] = useState(task.name);
-  const [taskDescription, setTaskDescription] = useState(task.description);
+  const [subTasks, setSubTasks] = useState(subTasksData);
+  const [taskName, setTaskName] = useState(selectedTask.name);
+  const [taskDescription, setTaskDescription] = useState(selectedTask.description);
 
   const [dateValue, setDateValue] = useState({
-    startDate: task.dueDate,
-    endDate: task.dueDate,
+    startDate: selectedTask.dueDate,
+    endDate: selectedTask.dueDate,
   });
 
   const formatDate = (newValue: any) => {
@@ -81,23 +81,27 @@ const Sidebar = ({ board, task }: any) => {
     if (!newTask || /^\s*$/.test(newTask)) {
       return;
     }
-    setSubTasks([
-      { name: newTask, completed: false, id: Date.now() },
-      ...subTasks,
-    ]);
-    axios({
+    const task = await axios({
       method: "post",
-      url: "/api/tasks/subTasks/addSubTask",
+      url: "/api/tasks/addTask",
       data: {
         newTask: {
           name: newTask,
           completed: false,
-          id: Date.now(),
+          description: null,
+          subTasks: [],
+          dueDate: null,
+          userId: board.userId,
+          boardId: board._id,
+          isSubTask: true
         },
-        boardId: board._id,
-        parentId: task.id,
+        parentId: selectedTask._id
       },
     });
+    setSubTasks([
+      task.data,
+      ...subTasks,
+    ]);
     reset();
   };
 
@@ -106,7 +110,7 @@ const Sidebar = ({ board, task }: any) => {
       method: "post",
       url: "/api/tasks/editTask",
       data: {
-        taskId: task.id,
+        taskId: selectedTask._id,
         boardId: board._id,
         taskName,
         taskDescription,
@@ -115,14 +119,16 @@ const Sidebar = ({ board, task }: any) => {
   };
 
   const removeTask = (id: any) => {
-    const updatedTasks = subTasks.filter((task: any) => task.id != id);
+    const updatedTasks = subTasks.filter((task: any) => task._id != id);
+    console.log(id)
     axios({
       method: "post",
-      url: "/api/tasks/subTasks/removeSubTask",
+      url: "/api/tasks/removeTask",
       data: {
-        parentId: task.id,
+        taskId: id,
         boardId: board._id,
-        tasks: updatedTasks,
+        isSubTask: true,
+        parentId: selectedTask._id
       },
     });
     setSubTasks(updatedTasks);
@@ -131,7 +137,7 @@ const Sidebar = ({ board, task }: any) => {
   const completeTask = (id: any, completed: boolean) => {
     let index = 0;
     const updatedTasks = subTasks.map((task: any, idx: number) => {
-      if (task.id == id) {
+      if (task._id == id) {
         index = idx;
         completed ? (task.completed = false) : (task.completed = true);
       }
@@ -142,12 +148,12 @@ const Sidebar = ({ board, task }: any) => {
     }
     axios({
       method: "post",
-      url: "/api/tasks/subTasks/completeSubTask",
+      url: "/api/tasks/completeTask",
       data: {
-        parentId: task.id,
-        boardId: board._id,
-        tasks: updatedTasks,
-      },
+        taskId: id,
+        status: completed,
+        boardId: board._id
+      }
     });
     setSubTasks(updatedTasks);
   };
@@ -174,7 +180,7 @@ const Sidebar = ({ board, task }: any) => {
       data: {
         dueDate: newValue.endDate,
         boardId: board._id,
-        taskId: task.id,
+        taskId: selectedTask._id,
       },
     });
   };
@@ -183,14 +189,13 @@ const Sidebar = ({ board, task }: any) => {
     let updatedTasks;
     if (active.id !== over.id) {
       setSubTasks((items: any) => {
-        const oldIndex = items.findIndex((item: any) => item.id === active.id);
-        const newIndex = items.findIndex((item: any) => item.id === over.id);
+        const oldIndex = items.findIndex((item: any) => item._id === active.id);
+        const newIndex = items.findIndex((item: any) => item._id === over.id);
         updatedTasks = arrayMove(items, oldIndex, newIndex);
         axios({
           method: "post",
-          url: "/api/tasks/subTasks/completeSubTask",
+          url: "/api/tasks/setOrder",
           data: {
-            parentId: task.id,
             boardId: board._id,
             tasks: updatedTasks,
           },
@@ -202,11 +207,11 @@ const Sidebar = ({ board, task }: any) => {
 
   return (
     <>
-      <Dialog open={true} onClose={close}>
+      <Dialog open={true} onClose={() => null} >
         <Transition
           appear={true}
           show={showSidebar}
-          className="max-w-7xl top-0 right-0 w-[95vw] md:w-[65vw] bg-white dark:bg-slate-800 border-l-8 border-gray-200 dark:border-gray-700 px-8 pt-4  text-white fixed h-full z-40"
+          className="max-w-7xl top-0 right-0 w-[95vw] md:w-[70vw] bg-white dark:bg-slate-800 border-l-8 border-gray-200 dark:border-gray-700 px-8 pt-4  text-white fixed h-full z-40"
           enter="transform transition ease-in-out duration-150"
           enterFrom="translate-x-full"
           enterTo="translate-x-0"
@@ -222,14 +227,14 @@ const Sidebar = ({ board, task }: any) => {
                 data-mdb-ripple-color="light"
                 role="button"
                 onClick={
-                  task.name !== taskName || task.description !== taskDescription
+                  selectedTask.name !== taskName || selectedTask.description !== taskDescription
                     ? submitModal
                     : close
                 }
               >
-                {task.name !== taskName ||
-                task.description !== taskDescription ||
-                task.subTasks !== subTasks
+                {selectedTask.name !== taskName ||
+                selectedTask.description !== taskDescription 
+                
                   ? "Save & Close"
                   : "Close"}
               </button>
@@ -297,13 +302,13 @@ const Sidebar = ({ board, task }: any) => {
                   modifiers={[restrictToFirstScrollableAncestor]}
                 >
                   <SortableContext
-                    items={subTasks.map((task: any) => task.id)}
+                    items={subTasks.map((task: any) => task._id)}
                     strategy={verticalListSortingStrategy}
                   >
                     <ul className="flex flex-col">
                       {subTasks.map((task: any) => (
                         <TodoCard
-                          key={task.id}
+                          key={task._id}
                           task={task}
                           handleRemoveTask={removeTask}
                           handleCompleteTask={completeTask}

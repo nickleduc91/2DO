@@ -21,17 +21,12 @@ const TodoCard = ({
   boardId,
 }: any) => {
   const { setNodeRef, attributes, listeners, transition, transform } =
-    useSortable({ id: task.id });
+    useSortable({ id: task._id });
   const style = {
     transition,
     transform: CSS.Transform.toString(transform),
   };
-  let numSubLists;
-  if (!isSubTask) {
-    numSubLists = task?.subTasks?.length;
-  } else {
-    numSubLists = 0;
-  }
+  let numSubLists = task?.subTasks?.length;
 
   const [dateValue, setDateValue] = useState({
     startDate: task.dueDate,
@@ -67,8 +62,7 @@ const TodoCard = ({
         url: "/api/tasks/updateDueDate",
         data: {
           dueDate: newValue.endDate,
-          boardId: boardId,
-          taskId: task.id,
+          taskId: task._id,
         },
       });
     } else {
@@ -78,7 +72,7 @@ const TodoCard = ({
         data: {
           dueDate: newValue.endDate,
           boardId: boardId,
-          taskId: task.id,
+          taskId: task._id,
         },
       });
     }
@@ -111,25 +105,28 @@ const TodoCard = ({
                   : "hover:text-cyan-500 dark:hover:text-cyan-500 ri-checkbox-blank-circle-line text-black dark:text-white",
                 "ri-xl mr-4 flex pt-3.5 md:pt-0"
               )}
-              onClick={() =>
-                handleCompleteTask(task.id, task.completed, task.edit)
-              }
+              onClick={() => handleCompleteTask(task._id, task.completed)}
             ></i>
             {isSubTask ? (
               <div className="w-full">
-                <p
-                  className={classNames(
-                    task.completed
-                      ? "text-cyan-500"
-                      : "text-black dark:text-white",
-                    "text-md tracking-tight pl-4 truncate mt-2 md:mt-0 font-normal"
-                  )}
+                <a
+                  className="w-full"
+                  href={`/boards/${boardId}/${task._id}`}
                 >
-                  {task.name}
-                </p>
+                  <p
+                    className={classNames(
+                      task.completed
+                        ? "text-cyan-500"
+                        : "text-black dark:text-white",
+                      "text-md tracking-tight pl-4 truncate mt-2 md:mt-0 font-normal border-b-2 border-transparent hover:border-cyan-500 cursor-pointer"
+                    )}
+                  >
+                    {task.name}
+                  </p>
+                </a>
               </div>
             ) : (
-              <Link className="w-full" href={`/boards/${boardId}/${task.id}`}>
+              <Link className="w-full" href={`/boards/${boardId}/${task._id}`}>
                 <p
                   className={classNames(
                     task.completed
@@ -167,20 +164,18 @@ const TodoCard = ({
               />
             </div>
 
-            {!isSubTask ? (
-              <Link
-                className={classNames(
-                  task.completed
-                    ? "text-cyan-500 hover:text-black dark:hover:text-white"
-                    : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
-                  "mr-2 md:mr-4 mb-1.5"
-                )}
-                href={`/boards/${boardId}/${task.id}`}
-              >
-                <i className="ri-git-merge-line ri-lg"></i>
-                <sub className="font-bold">{numSubLists}</sub>
-              </Link>
-            ) : null}
+            <a
+              className={classNames(
+                task.completed
+                  ? "text-cyan-500 hover:text-black dark:hover:text-white"
+                  : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
+                "mr-2 md:mr-4 mb-1.5"
+              )}
+              href={`/boards/${boardId}/${task._id}`}
+            >
+              <i className="ri-git-merge-line ri-lg"></i>
+              <sub className="font-bold">{numSubLists}</sub>
+            </a>
 
             <i
               className={classNames(
@@ -189,7 +184,7 @@ const TodoCard = ({
                   : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
                 "ri-delete-bin-2-line ri-xl mr-2 md:mr-4 mb-2.5"
               )}
-              onClick={() => handleRemoveTask(task.id)}
+              onClick={() => handleRemoveTask(task._id)}
             ></i>
             <i
               className={classNames(
@@ -235,7 +230,7 @@ const TodoCard = ({
                             : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
                           "mr-2 md:mr-4 mb-0.5 font-medium group flex w-full items-center rounded-md px-2 py-1 text-sm"
                         )}
-                        href={`/boards/${boardId}/${task.id}`}
+                        href={`/boards/${boardId}/${task._id}`}
                       >
                         <p className="mr-1">Open</p>
                         <i className="ri-git-merge-line ri-lg"></i>
@@ -245,7 +240,7 @@ const TodoCard = ({
                     <Menu.Item>
                       <button
                         className="font-medium group flex w-full items-center rounded-md px-2 py-1 text-sm"
-                        onClick={() => handleRemoveTask(task.id)}
+                        onClick={() => handleRemoveTask(task._id)}
                       >
                         Delete
                       </button>
@@ -284,7 +279,7 @@ const TodoCard = ({
                     : "hover:text-cyan-500 dark:hover:text-cyan-500 text-black dark:text-white",
                   "ri-delete-bin-2-line ri-xl pr-1 pb-2 pl-2"
                 )}
-                onClick={() => handleRemoveTask(task.id)}
+                onClick={() => handleRemoveTask(task._id)}
               ></i>
             )}
           </div>
