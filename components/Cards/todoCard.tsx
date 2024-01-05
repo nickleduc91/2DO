@@ -54,28 +54,18 @@ const TodoCard = ({
   const [displayFormat, setDisplayFormat] = useState(formatDate(dateValue));
 
   const handleDateChange = (newValue: any) => {
+    console.log("here");
     setDisplayFormat(formatDate(newValue));
     setDateValue(newValue);
-    if (!isSubTask) {
-      axios({
-        method: "post",
-        url: "/api/tasks/updateDueDate",
-        data: {
-          dueDate: newValue.endDate,
-          taskId: task._id,
-        },
-      });
-    } else {
-      axios({
-        method: "post",
-        url: "/api/tasks/subTasks/updateSubTaskDueDate",
-        data: {
-          dueDate: newValue.endDate,
-          boardId: boardId,
-          taskId: task._id,
-        },
-      });
-    }
+
+    axios({
+      method: "post",
+      url: "/api/tasks/updateDueDate",
+      data: {
+        dueDate: newValue.endDate,
+        taskId: task._id,
+      },
+    });
   };
 
   return (
@@ -109,10 +99,7 @@ const TodoCard = ({
             ></i>
             {isSubTask ? (
               <div className="w-full">
-                <a
-                  className="w-full"
-                  href={`/boards/${boardId}/${task._id}`}
-                >
+                <a className="w-full" href={`/boards/${boardId}/${task._id}`}>
                   <p
                     className={classNames(
                       task.completed
