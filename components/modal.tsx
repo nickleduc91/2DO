@@ -238,7 +238,7 @@ const Modal = ({ board, selectedTask, subTasksData }: any) => {
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-6xl">
-                <div className="bg-white w-full h-[80vh] overflow-y-auto px-4">
+                <div className="bg-white dark:bg-slate-800 w-full h-[80vh] overflow-y-auto px-4">
                   <button />
                   <div className="flex items-center justify-center -mt-3">
                     <input
@@ -305,7 +305,7 @@ const Modal = ({ board, selectedTask, subTasksData }: any) => {
                     </div>
                   </div>
                 </div>
-                <div className="bg-gray-50 px-4 py-3 flex flex-row">
+                <div className="bg-gray-50 dark:bg-slate-900 px-4 py-3 flex flex-row">
                   
                   <div className="md:mr-auto flex">
                     <Datepicker
