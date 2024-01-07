@@ -38,7 +38,9 @@ const Sidebar = ({ board, selectedTask, subTasksData }: any) => {
   const { register, handleSubmit, reset } = useForm<IFormInput>();
   const [subTasks, setSubTasks] = useState(subTasksData);
   const [taskName, setTaskName] = useState(selectedTask.name);
-  const [taskDescription, setTaskDescription] = useState(selectedTask.description);
+  const [taskDescription, setTaskDescription] = useState(
+    selectedTask.description
+  );
 
   const [dateValue, setDateValue] = useState({
     startDate: selectedTask.dueDate,
@@ -93,15 +95,12 @@ const Sidebar = ({ board, selectedTask, subTasksData }: any) => {
           dueDate: null,
           userId: board.userId,
           boardId: board._id,
-          isSubTask: true
+          isSubTask: true,
         },
-        parentId: selectedTask._id
+        parentId: selectedTask._id,
       },
     });
-    setSubTasks([
-      task.data,
-      ...subTasks,
-    ]);
+    setSubTasks([task.data, ...subTasks]);
     reset();
   };
 
@@ -120,7 +119,7 @@ const Sidebar = ({ board, selectedTask, subTasksData }: any) => {
 
   const removeTask = (id: any) => {
     const updatedTasks = subTasks.filter((task: any) => task._id != id);
-    console.log(id)
+    console.log(id);
     axios({
       method: "post",
       url: "/api/tasks/removeTask",
@@ -128,7 +127,7 @@ const Sidebar = ({ board, selectedTask, subTasksData }: any) => {
         taskId: id,
         boardId: board._id,
         isSubTask: true,
-        parentId: selectedTask._id
+        parentId: selectedTask._id,
       },
     });
     setSubTasks(updatedTasks);
@@ -152,8 +151,8 @@ const Sidebar = ({ board, selectedTask, subTasksData }: any) => {
       data: {
         taskId: id,
         status: completed,
-        boardId: board._id
-      }
+        boardId: board._id,
+      },
     });
     setSubTasks(updatedTasks);
   };
@@ -207,7 +206,7 @@ const Sidebar = ({ board, selectedTask, subTasksData }: any) => {
 
   return (
     <>
-      <Dialog open={true} onClose={() => null} >
+      <Dialog open={true} onClose={() => null}>
         <Transition
           appear={true}
           show={showSidebar}
@@ -227,14 +226,14 @@ const Sidebar = ({ board, selectedTask, subTasksData }: any) => {
                 data-mdb-ripple-color="light"
                 role="button"
                 onClick={
-                  selectedTask.name !== taskName || selectedTask.description !== taskDescription
+                  selectedTask.name !== taskName ||
+                  selectedTask.description !== taskDescription
                     ? submitModal
                     : close
                 }
               >
                 {selectedTask.name !== taskName ||
-                selectedTask.description !== taskDescription 
-                
+                selectedTask.description !== taskDescription
                   ? "Save & Close"
                   : "Close"}
               </button>

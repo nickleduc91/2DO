@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
@@ -13,7 +15,10 @@ const BoardCard = ({ board, handleRemoveBoard }: any) => {
   return (
     <div className="mx-auto w-full max-w-md py-4 px-4 justify-center items-center">
       <div className="h-44 flex flex-col justify-between rounded-3xl bg-white dark:bg-slate-800 shadow-xl mb-6 py-5 px-4">
-        <div className="flex flex-col justify-between h-full">
+        <Link
+          className="flex flex-col justify-between h-full"
+          href={`/boards/${board._id}`}
+        >
           <div>
             <h4 className="truncate text-cyan-500 text-3xl font-medium leading-tight flex items-center text-center justify-center">
               {board.name}
@@ -51,7 +56,7 @@ const BoardCard = ({ board, handleRemoveBoard }: any) => {
               ></div>
             </div>
           </div>
-        </div>
+        </Link>
 
         {/* Icons at the bottom right of the card */}
         <div className="flex items-end justify-end">

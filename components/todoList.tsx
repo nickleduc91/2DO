@@ -5,6 +5,7 @@ import TodoCard from "./Cards/todoCard";
 import Sidebar from "./sideBar";
 import { restrictToFirstScrollableAncestor } from "@dnd-kit/modifiers";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import Modal from "./modal";
 
 import {
   DndContext,
@@ -25,9 +26,9 @@ interface IFormInput {
 }
 
 const Tasks = ({ board, selectedTask, boardTasks, subTasks }: any) => {
-
   const { register, handleSubmit, reset } = useForm<IFormInput>();
   const [tasks, setTask] = useState(boardTasks);
+  const [boardName, setBoardName] = useState(board.name);
 
   const onSubmit: SubmitHandler<IFormInput> = async ({ newTask }) => {
     if (!newTask || /^\s*$/.test(newTask)) {
@@ -62,7 +63,6 @@ const Tasks = ({ board, selectedTask, boardTasks, subTasks }: any) => {
         taskId: id,
         boardId: board._id,
         isSubTask: false,
-
       },
     });
     setTask(updatedTasks);
@@ -118,18 +118,35 @@ const Tasks = ({ board, selectedTask, boardTasks, subTasks }: any) => {
     })
   );
 
+  const handleBoardNameChange = (event: any) => {
+    axios({
+      method: "post",
+      url: "/api/boards/editBoard",
+      data: {
+        boardName: event.target.value,
+        boardId: board._id,
+      },
+    });
+    setBoardName(event.target.value);
+  };
+
   return (
     <div className="mx-auto w-full max-w-5xl">
       {selectedTask ? (
-        <Sidebar
+        <Modal
           board={board}
           selectedTask={selectedTask}
           subTasksData={subTasks}
         />
       ) : null}
-      <h1 className="pt-5 pb-4 font-semibold text-4xl text-cyan-500 text-center">
-        {board.name}
-      </h1>
+      <div>
+        <input
+          className="mb-4 pt-5 pb-1 font-semibold text-4xl text-cyan-500 text-center w-full bg-transparent focus:outline-none focus:border-cyan-500 border-b-2 border-transparent hover:border-cyan-500"
+          placeholder="Board Name"
+          defaultValue={boardName}
+          onChange={handleBoardNameChange}
+        />
+      </div>
       <div className="rounded-xl shadow-xl bg-white dark:bg-slate-800 mb-8">
         <div className="py-4 px-4 flex justify-between border-l-4 border-transparent bg-transparent">
           <form

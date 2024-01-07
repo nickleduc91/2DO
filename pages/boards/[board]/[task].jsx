@@ -2,7 +2,8 @@ import Header from "../../../components/header";
 import TodoList from "../../../components/todoList";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "pages/api/auth/[...nextauth]";
-import Footer from "../../../components/footer";
+import Footer from "../../../components/footer"
+import Modal from "../../../components/modal"
 
 const Task = ({ board, user, boardTasks, selectedTask, subTasks }) => {
   return (
