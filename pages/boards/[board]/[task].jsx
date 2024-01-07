@@ -5,11 +5,11 @@ import { authOptions } from "pages/api/auth/[...nextauth]";
 import Footer from "../../../components/footer"
 import Modal from "../../../components/modal"
 
-const Task = ({ board, user, boardTasks, selectedTask, subTasks }) => {
+const Task = ({ board, user, boardTasks, selectedTask, subTasks, parentTasks }) => {
   return (
     <div className="bg-gray-100 dark:bg-slate-900 min-h-screen">
       <Header isSession={true} user={user} />
-      <TodoList board={board} selectedTask={selectedTask} boardTasks={boardTasks} subTasks={subTasks}/>
+      <TodoList board={board} selectedTask={selectedTask} boardTasks={boardTasks} subTasks={subTasks} parentTasksData={parentTasks}/>
       <Footer />
     </div>
   );
@@ -69,6 +69,12 @@ export async function getServerSideProps(context) {
     subTasksData = await subTasks.json();
   }
 
+  //fetch for all parent tasks
+  const parentTasks = await fetch(
+    `${process.env.URL}/api/tasks/getAllParentTasks?taskId=${taskData._id}`
+  );
+  const parentTasksData = await parentTasks.json();
+
   return {
     props: {
       board: boardData,
@@ -76,6 +82,7 @@ export async function getServerSideProps(context) {
       boardTasks: tasksData,
       subTasks: subTasksData,
       selectedTask: taskData,
+      parentTasks: parentTasksData
     },
   };
 }

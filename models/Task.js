@@ -5,6 +5,7 @@ const ObjectId = Schema.Types.ObjectId;
 const taskSchema = new Schema({
   name: { type: String, required: true },
   completed: { type: Boolean, default: false, required: true },
+  parentTask: { type: Schema.Types.ObjectId, ref: "Task" },
   subTasks: [
     {
       type: Schema.Types.ObjectId,
@@ -16,7 +17,7 @@ const taskSchema = new Schema({
   boardId: { type: ObjectId, required: true },
   userId: { type: ObjectId, required: true },
   created: { type: Date, default: Date.now },
-  isSubTask: { type: Boolean, default: false }
+  isSubTask: { type: Boolean, default: false },
 });
 
 const Task = models.Task || model("Task", taskSchema);

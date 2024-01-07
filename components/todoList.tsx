@@ -25,7 +25,7 @@ interface IFormInput {
   editedTask: string;
 }
 
-const Tasks = ({ board, selectedTask, boardTasks, subTasks }: any) => {
+const Tasks = ({ board, selectedTask, boardTasks, subTasks, parentTasksData }: any) => {
   const { register, handleSubmit, reset } = useForm<IFormInput>();
   const [tasks, setTask] = useState(boardTasks);
   const [boardName, setBoardName] = useState(board.name);
@@ -137,6 +137,7 @@ const Tasks = ({ board, selectedTask, boardTasks, subTasks }: any) => {
           board={board}
           selectedTask={selectedTask}
           subTasksData={subTasks}
+          parentTasksData={parentTasksData}
         />
       ) : null}
       <div>

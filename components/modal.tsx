@@ -31,7 +31,7 @@ interface IFormInput {
   name: string;
 }
 
-const Modal = ({ board, selectedTask, subTasksData }: any) => {
+const Modal = ({ board, selectedTask, subTasksData, parentTasksData }: any) => {
   const router = useRouter();
   const [open, setOpen] = useState(true);
   const [dateValue, setDateValue] = useState({
@@ -87,9 +87,8 @@ const Modal = ({ board, selectedTask, subTasksData }: any) => {
     router.push(`/boards/${board._id}`);
   };
 
-
   const handleDescriptionChange = (event: any) => {
-    console.log(event.target.value)
+    console.log(event.target.value);
     axios({
       method: "post",
       url: "/api/tasks/editTaskDescription",
@@ -118,6 +117,7 @@ const Modal = ({ board, selectedTask, subTasksData }: any) => {
           userId: board.userId,
           boardId: board._id,
           isSubTask: true,
+          parentTask: selectedTask._id,
         },
         parentId: selectedTask._id,
       },
@@ -240,7 +240,25 @@ const Modal = ({ board, selectedTask, subTasksData }: any) => {
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-6xl">
                 <div className="bg-white dark:bg-slate-800 w-full h-[80vh] overflow-y-auto px-4">
                   <button />
-                  <div className="flex items-center justify-center -mt-3">
+                  <div className="flex flex-row -mt-4">
+                    {parentTasksData.map((task: any, index: number) => (
+                      <div className="text-md font-medium" key={task._id}>
+                        <a
+                          className="cursor-pointer hover:text-cyan-500 dark:hover:text-cyan-500 text-gray-600 dark:text-white"
+                          href={`/boards/${board._id}/${task._id}`}
+                        >
+                          {task.name}
+                        </a>
+                        {index !== parentTasksData.length - 1 && (
+                          <i className="ri-arrow-right-s-line px-1 font-semibold dark:text-white"></i>
+                        )}
+                      </div>
+                    ))}
+                    {parentTasksData.length === 1 && (
+                      <i className="ri-arrow-right-s-line px-1 font-semibold dark:text-white"></i>
+                    )}
+                  </div>
+                  <div className="flex items-center justify-center">
                     <input
                       className="text-center text-cyan-500 font-semibold text-4xl w-2/3 bg-clip-padding transition ease-in-out bg-transparent focus:outline-none focus:border-cyan-500 border-b-2 border-transparent hover:border-cyan-500 py-2"
                       placeholder="Task Name"
@@ -306,7 +324,6 @@ const Modal = ({ board, selectedTask, subTasksData }: any) => {
                   </div>
                 </div>
                 <div className="bg-gray-50 dark:bg-slate-900 px-4 py-3 flex flex-row">
-                  
                   <div className="md:mr-auto flex">
                     <Datepicker
                       popoverDirection="up"
@@ -324,7 +341,7 @@ const Modal = ({ board, selectedTask, subTasksData }: any) => {
                         "text-lg h-12 border shadow rounded-full px-4 md:w-[10rem] w-[8.25rem] bg-clip-padding transition ease-in-out m-0 hover:border-accent focus:border-accent focus:outline-none bg-white dark:bg-slate-800 dark:text-white text-black"
                       )}
                       toggleClassName={
-                        "hover:text-cyan-500 absolute right-0 h-full md:px-5 px-2 focus:outline-none dark:text-white text-black"
+                        "hover:text-cyan-500 absolute right-0 h-full md:px-5 focus:outline-none dark:text-white text-black"
                       }
                       placeholder="Due Date"
                     />
