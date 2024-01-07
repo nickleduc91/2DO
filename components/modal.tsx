@@ -244,18 +244,18 @@ const Modal = ({ board, selectedTask, subTasksData, parentTasksData }: any) => {
                     {parentTasksData.map((task: any, index: number) => (
                       <div className="text-md font-medium" key={task._id}>
                         <a
-                          className="cursor-pointer hover:text-cyan-500 dark:hover:text-cyan-500 text-gray-600 dark:text-white"
+                          className="cursor-pointer hover:text-cyan-500 dark:hover:text-cyan-500 dark:text-white"
                           href={`/boards/${board._id}/${task._id}`}
                         >
                           {task.name}
                         </a>
                         {index !== parentTasksData.length - 1 && (
-                          <i className="ri-arrow-right-s-line px-1 font-semibold dark:text-white"></i>
+                          <i className="ri-arrow-right-s-line px-1 font-semibold dark:text-white text-gray-500"></i>
                         )}
                       </div>
                     ))}
                     {parentTasksData.length === 1 && (
-                      <i className="ri-arrow-right-s-line px-1 font-semibold dark:text-white"></i>
+                      <i className="ri-arrow-right-s-line px-1 font-semibold dark:text-white text-gray-500"></i>
                     )}
                   </div>
                   <div className="flex items-center justify-center">
