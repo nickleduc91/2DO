@@ -212,7 +212,7 @@ const Modal = ({ board, selectedTask, subTasksData, parentTasksData }: any) => {
         as="div"
         className="relative z-10"
         initialFocus={cancelButtonRef}
-        onClose={() => null}
+        onClose={() => close()}
       >
         <Transition.Child
           as={Fragment}
