@@ -61,19 +61,13 @@ export async function getServerSideProps(context) {
 
   //fetch subtasks based on ids in task.subTasks
   let subTasksData = [];
-  if (taskData.subTasks.length > 0) {
-    const idsString = taskData.subTasks.join(",");
+  if (taskData.task.subTasks.length > 0) {
+    const idsString = taskData.task.subTasks.join(",");
     const subTasks = await fetch(
       `${process.env.URL}/api/tasks?subTaskIds=${idsString}`
     );
     subTasksData = await subTasks.json();
   }
-
-  //fetch for all parent tasks
-  const parentTasks = await fetch(
-    `${process.env.URL}/api/tasks/getAllParentTasks?taskId=${taskData._id}`
-  );
-  const parentTasksData = await parentTasks.json();
 
   return {
     props: {
@@ -81,8 +75,8 @@ export async function getServerSideProps(context) {
       user: userData,
       boardTasks: tasksData,
       subTasks: subTasksData,
-      selectedTask: taskData,
-      parentTasks: parentTasksData
+      selectedTask: taskData.task,
+      parentTasks: taskData.parentTasks
     },
   };
 }
