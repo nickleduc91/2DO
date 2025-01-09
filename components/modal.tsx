@@ -31,13 +31,14 @@ interface IFormInput {
   name: string;
 }
 
-const Modal = ({ board, selectedTask, subTasksData, parentTasksData }: any) => {
+const Modal = ({ board, selectedTask, subTasksData, parentTasksData, handleSetTask, tasks }: any) => {
   const router = useRouter();
   const [open, setOpen] = useState(true);
   const [dateValue, setDateValue] = useState({
     startDate: selectedTask.dueDate,
     endDate: selectedTask.dueDate,
   });
+  const cancelButtonRef = useRef(null);
 
   const formatDate = (newValue: any) => {
     if (newValue.endDate) {
@@ -80,9 +81,19 @@ const Modal = ({ board, selectedTask, subTasksData, parentTasksData }: any) => {
     selectedTask.description
   );
 
-  const cancelButtonRef = useRef(null);
-
   const close = () => {
+    const updatedTasks = tasks.map((task: any) => {
+      if (task._id === selectedTask._id) {
+        return {
+          ...task,
+          subTasks: subTasks,
+          name: taskName,
+          dueDate: dateValue.endDate,
+        };
+      }
+      return task;
+    });
+    handleSetTask(updatedTasks);
     setOpen(false);
     router.push(`/boards/${board._id}`);
   };

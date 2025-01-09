@@ -14,13 +14,13 @@ const BoardCard = ({ board, handleRemoveBoard }: any) => {
 
   return (
     <div className="mx-auto w-full max-w-md py-4 px-4 justify-center items-center">
-      <div className="h-44 flex flex-col justify-between rounded-3xl bg-white dark:bg-slate-800 shadow-xl mb-6 py-5 px-4">
+      <div className="h-44 flex flex-col justify-between rounded-3xl bg-white hover:bg-gray-50 dark:bg-slate-800 shadow-xl mb-6 py-5 px-4">
         <Link
           className="flex flex-col justify-between h-full"
           href={`/boards/${board._id}`}
         >
           <div>
-            <h4 className="truncate text-cyan-500 text-3xl font-medium leading-tight flex items-center text-center justify-center">
+            <h4 className="truncate text-cyan-500 text-3xl font-medium leading-tight flex items-center text-center justify-center underline">
               {board.name}
             </h4>
             <p className="text-gray-400 dark:text-white text-md flex items-center text-center justify-center">

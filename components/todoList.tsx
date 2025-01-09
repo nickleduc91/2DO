@@ -138,6 +138,8 @@ const Tasks = ({ board, selectedTask, boardTasks, subTasks, parentTasksData }: a
           selectedTask={selectedTask}
           subTasksData={subTasks}
           parentTasksData={parentTasksData}
+          handleSetTask={setTask}
+          tasks={tasks}
         />
       ) : null}
       <div>

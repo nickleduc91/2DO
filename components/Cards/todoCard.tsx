@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import Datepicker from "react-tailwindcss-datepicker";
 import Link from "next/link";
 import { Transition, Menu } from "@headlessui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import dayjs from "dayjs";
 
@@ -20,18 +20,24 @@ const TodoCard = ({
   isSubTask,
   boardId,
 }: any) => {
-  const { setNodeRef, attributes, listeners, transition, transform } =
-    useSortable({ id: task._id });
+
+  const { setNodeRef, attributes, listeners, transition, transform } = useSortable({ id: task._id });
   const style = {
     transition,
     transform: CSS.Transform.toString(transform),
   };
   let numSubLists = task?.subTasks?.length;
-
   const [dateValue, setDateValue] = useState({
     startDate: task.dueDate,
     endDate: task.dueDate,
   });
+
+  useEffect(() => {
+    setDateValue({
+      startDate: task.dueDate,
+      endDate: task.dueDate,
+    });
+  }, [task]);
 
   const formatDate = (newValue: any) => {
     if (newValue.endDate) {
@@ -54,7 +60,6 @@ const TodoCard = ({
   const [displayFormat, setDisplayFormat] = useState(formatDate(dateValue));
 
   const handleDateChange = (newValue: any) => {
-    console.log("here");
     setDisplayFormat(formatDate(newValue));
     setDateValue(newValue);
 
